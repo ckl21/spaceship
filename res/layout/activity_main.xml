@@ -41,6 +41,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/sound" />
-
+        android:textOn="" 
+		android:textOff="" 
+	    android:text=""
+        android:background="@drawable/toggle_selector" /> 
+      
+        
+    
 </RelativeLayout>
