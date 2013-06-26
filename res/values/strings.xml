@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SpaceshipHunter</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="missions">Missions</string>
+    <string name="hanger">Hanger</string>
+    <string name="sound">Sound</string>
+
+</resources>
