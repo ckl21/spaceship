@@ -32,31 +32,46 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_vertical_margin=0x7f060001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int mission_bg=0x7f020001;
-        public static final int off=0x7f020002;
-        public static final int on=0x7f020003;
-        public static final int toggle_selector=0x7f020004;
+        public static final int blue_mission=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int mission_down=0x7f020002;
+        public static final int mission_screen=0x7f020003;
+        public static final int mission_screen_blue=0x7f020004;
+        public static final int mission_screen_hotspots=0x7f020005;
+        public static final int mission_screen_red=0x7f020006;
+        public static final int red_mission=0x7f020007;
+        public static final int soundmuted=0x7f020008;
+        public static final int soundunmuted=0x7f020009;
+        public static final int toggle_selector=0x7f02000a;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0006;
-        public static final int center=0x7f0a0000;
-        public static final int hangerButton=0x7f0a0001;
-        public static final int imageButton1=0x7f0a0005;
-        public static final int missionButton=0x7f0a0002;
-        public static final int soundToggle=0x7f0a0003;
-        public static final int space=0x7f0a0004;
+        public static final int action_settings=0x7f0a0008;
+        public static final int center=0x7f0a0001;
+        public static final int hangerButton=0x7f0a0002;
+        public static final int hangerLayout=0x7f0a0000;
+        public static final int image=0x7f0a0007;
+        public static final int image_areas=0x7f0a0006;
+        public static final int missionButton=0x7f0a0003;
+        public static final int my_frame=0x7f0a0005;
+        public static final int soundToggle=0x7f0a0004;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int activity_mission=0x7f030001;
+        public static final int activity_game=0x7f030000;
+        public static final int activity_hanger=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_mission=0x7f030003;
+        public static final int activity_score=0x7f030004;
     }
     public static final class menu {
-        public static final int main=0x7f090000;
-        public static final int mission=0x7f090001;
+        public static final int game=0x7f090000;
+        public static final int hanger=0x7f090001;
+        public static final int main=0x7f090002;
+        public static final int mission=0x7f090003;
+        public static final int score=0x7f090004;
     }
     public static final class raw {
         public static final int arpanauts=0x7f040000;
+        public static final int hhavok=0x7f040001;
     }
     public static final class string {
         public static final int action_settings=0x7f070001;
@@ -67,7 +82,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int hello_world=0x7f070002;
         public static final int missions=0x7f070003;
         public static final int sound=0x7f070005;
+        public static final int title_activity_game=0x7f07000a;
+        public static final int title_activity_hanger=0x7f070009;
         public static final int title_activity_mission=0x7f070006;
+        public static final int title_activity_score=0x7f07000b;
     }
     public static final class style {
         /** 
