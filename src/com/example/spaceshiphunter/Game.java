@@ -22,6 +22,7 @@ public class Game extends Activity {
    
    ScrollableImageView scrollImageView;
    private GestureDetector myDetector;
+   Bitmap player;
    
    @Override
    public void onCreate(Bundle savedInstanceState) {
@@ -34,9 +35,14 @@ public class Game extends Activity {
       d.getSize(point);
       scrollImageView = new ScrollableImageView(this,BitmapFactory.decodeResource(getResources(), R.drawable.space_bg), point.x, point.y, null);
       setContentView(scrollImageView);
+      player = (BitmapFactory.decodeResource(getResources(), R.drawable.player));
+      
       
       myDetector = new GestureDetector(this, gestureListener);
    }
+   
+   
+
    
    OnGestureListener gestureListener = new OnGestureListener() {
 	
@@ -164,6 +170,7 @@ public class Game extends Activity {
       @Override
       protected void onDraw(Canvas canvas) {
          canvas.drawBitmap(bufferImage, 0, 0, paint);
+         canvas.drawBitmap(player, 50, 50, paint);
       }
 
       public void handleScroll(float distX, float distY) {
