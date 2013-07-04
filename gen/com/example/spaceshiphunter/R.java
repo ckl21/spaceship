@@ -32,17 +32,23 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_vertical_margin=0x7f060001;
     }
     public static final class drawable {
-        public static final int blue_mission=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int mission_down=0x7f020002;
-        public static final int mission_screen=0x7f020003;
-        public static final int mission_screen_blue=0x7f020004;
-        public static final int mission_screen_hotspots=0x7f020005;
-        public static final int mission_screen_red=0x7f020006;
-        public static final int red_mission=0x7f020007;
-        public static final int soundmuted=0x7f020008;
-        public static final int soundunmuted=0x7f020009;
-        public static final int toggle_selector=0x7f02000a;
+        public static final int attack_one=0x7f020000;
+        public static final int health_shield=0x7f020001;
+        public static final int hp=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int missile=0x7f020004;
+        public static final int mission_screen=0x7f020005;
+        public static final int mission_screen_blue=0x7f020006;
+        public static final int mission_screen_hotspots=0x7f020007;
+        public static final int mission_screen_red=0x7f020008;
+        public static final int soundmuted=0x7f020009;
+        public static final int soundunmuted=0x7f02000a;
+        public static final int sp=0x7f02000b;
+        public static final int space_bg=0x7f02000c;
+        public static final int spaceship=0x7f02000d;
+        public static final int splash=0x7f02000e;
+        public static final int testimg=0x7f02000f;
+        public static final int toggle_selector=0x7f020010;
     }
     public static final class id {
         public static final int action_settings=0x7f0a0008;

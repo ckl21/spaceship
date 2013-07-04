@@ -15,7 +15,7 @@ import android.widget.ImageView;
 
 public class Mission extends Activity implements OnTouchListener{
 
-	int nextActivity = 0;
+	int nextActivity;
 	public static final String PREFS_NAME = "MyPrefsFile";
 	boolean silent;
 	MediaPlayer mp;
@@ -27,12 +27,11 @@ public class Mission extends Activity implements OnTouchListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mission);
 	
-		ImageView iv = (ImageView) findViewById (R.id.image);
-		iv.setOnTouchListener (this);
 		
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 	    silent = settings.getBoolean("silentMode", false);
 	    imageView = (ImageView) findViewById (R.id.image);
+	    imageView.setOnTouchListener(this);
 	    
 	   
 		
@@ -46,6 +45,7 @@ public class Mission extends Activity implements OnTouchListener{
 				mp.setLooping(true);
 				mp.start();
 		 }
+		 nextActivity = 0;
 		 super.onResume();
 	}
 	
