@@ -26,11 +26,11 @@ public class Hanger extends Activity implements OnClickListener {
 		      String prevAct = getIntent().getExtras().getString("FROM");
 		      if (prevAct.equals("mission")){
 		    	  //replace with launch button
-		      btn.setBackgroundResource(R.drawable.soundunmuted);
+		      btn.setBackgroundResource(R.drawable.launch);
 		      btn.setId(1);
 		      }else{
 		    	  //replace with choose mission button
-		    	  btn.setBackgroundResource(R.drawable.soundmuted);
+		    	  btn.setBackgroundResource(R.drawable.mission_select);
 			      btn.setId(2);
 		      }
 		         

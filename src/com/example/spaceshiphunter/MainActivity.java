@@ -17,6 +17,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	MediaPlayer mp;
 	ToggleButton musicToggle;
 	Button missionButton;
+	Button hangerButton;
 	boolean silent;
 	float volume = 0.3f;
 
@@ -30,6 +31,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		
 		missionButton = (Button) findViewById(R.id.missionButton);
 		missionButton.setOnClickListener(this);
+		
+		hangerButton = (Button) findViewById(R.id.hangerButton);
+		hangerButton.setOnClickListener(this);
 				
 		//retrieve shared preferences for music state
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
