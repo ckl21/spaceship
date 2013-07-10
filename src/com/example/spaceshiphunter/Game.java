@@ -9,6 +9,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.GestureDetector;
@@ -18,11 +22,19 @@ import android.view.WindowManager;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.ViewGroup.LayoutParams;
 
-public class Game extends Activity {
+public class Game extends Activity implements SensorEventListener {
    
    ScrollableImageView scrollImageView;
    private GestureDetector myDetector;
+   private SensorManager mySensorManager = null;
+   private Sensor myAccelerometer = null;
+   float[] accel_vals = new float[3];
    Bitmap player;
+   float playerX = 50;
+   float playerY = 50;
+   float xSpeed = 0;
+   float ySpeed = 0;
+   float maxSpeed = 20;
    
    @Override
    public void onCreate(Bundle savedInstanceState) {
@@ -36,12 +48,24 @@ public class Game extends Activity {
       scrollImageView = new ScrollableImageView(this,BitmapFactory.decodeResource(getResources(), R.drawable.space_bg), point.x, point.y, null);
       setContentView(scrollImageView);
       player = (BitmapFactory.decodeResource(getResources(), R.drawable.player));
+      mySensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+      myAccelerometer = mySensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
       
       
       myDetector = new GestureDetector(this, gestureListener);
    }
    
-   
+   @Override
+	protected void onResume() {
+		super.onResume();
+		mySensorManager.registerListener(this, myAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+	}
+	
+	@Override
+	protected void onPause() {
+		mySensorManager.unregisterListener(this);
+		super.onPause();
+	}
 
    
    OnGestureListener gestureListener = new OnGestureListener() {
@@ -170,7 +194,7 @@ public class Game extends Activity {
       @Override
       protected void onDraw(Canvas canvas) {
          canvas.drawBitmap(bufferImage, 0, 0, paint);
-         canvas.drawBitmap(player, 50, 50, paint);
+         canvas.drawBitmap(player, playerX, playerY, paint);
       }
 
       public void handleScroll(float distX, float distY) {
@@ -229,4 +253,36 @@ public class Game extends Activity {
       }
      
    }
+
+@Override
+public void onAccuracyChanged(Sensor sensor, int accuracy) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void onSensorChanged(SensorEvent event) {
+	int type = event.sensor.getType();
+	if (type == Sensor.TYPE_ACCELEROMETER){
+		accel_vals = event.values;
+		if (xSpeed <= maxSpeed && xSpeed >= -(maxSpeed)){
+			xSpeed += accel_vals[1];
+		}else if (xSpeed > maxSpeed){
+			xSpeed = maxSpeed;
+		}else if (xSpeed < -(maxSpeed)){
+			xSpeed = -(maxSpeed);
+		}
+		if (ySpeed <= maxSpeed && ySpeed >= -(maxSpeed)){
+			ySpeed += accel_vals[0];
+		}else if (ySpeed > maxSpeed){
+			ySpeed = maxSpeed;
+		}else if (ySpeed < -(maxSpeed)){
+			ySpeed = -(maxSpeed);
+		}
+		playerX += xSpeed;
+		playerY += ySpeed;
+		scrollImageView.handleScroll(0,0);
+		
+	}
+}
 }
