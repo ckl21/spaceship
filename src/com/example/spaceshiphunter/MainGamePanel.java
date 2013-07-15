@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.ImageButton;
 
 
 public class MainGamePanel extends SurfaceView implements
@@ -56,6 +57,8 @@ public class MainGamePanel extends SurfaceView implements
 					thread.setRunning(true);
 					thread.start(); // Start a new thread
 					}
+		
+		
 	}
 
 	@Override

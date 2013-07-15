@@ -11,6 +11,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 
 
 public class Game extends Activity implements SensorEventListener {
@@ -22,15 +28,63 @@ public class Game extends Activity implements SensorEventListener {
 	float[] accel_vals = new float[3];
 	private float maxAccel = 8;
 	
+	MainGamePanel gamePanel;
+	FrameLayout game;
+	RelativeLayout weaponLayout;
+
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // requesting to turn the title OFF
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        // making it full screen
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        // set our MainGamePanel as the View
-        setContentView(new MainGamePanel(this));
+        super.onCreate(savedInstanceState);// requesting to turn the title OFF
+        requestWindowFeature(Window.FEATURE_NO_TITLE);// making it full screen
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);// set our MainGamePanel as the View
+        
+        gamePanel = new MainGamePanel(this);
+        game = new FrameLayout(this);
+       	weaponLayout = new RelativeLayout(this);
+       	
+        
+        
+        
+        //Weapon1
+        ImageButton weapon1 = new ImageButton(this);
+        weapon1.setBackgroundResource(R.drawable.weapon1);
+        weapon1.setId(99);        
+        RelativeLayout.LayoutParams b1 = new LayoutParams(
+        		RelativeLayout.LayoutParams.WRAP_CONTENT,
+        		RelativeLayout.LayoutParams.WRAP_CONTENT);
+      
+        b1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+        b1.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        b1.rightMargin = 25;
+        b1.bottomMargin = 25;
+        weapon1.setLayoutParams(b1);
+        
+        //Weapon2
+       ImageButton weapon2 = new ImageButton(this);
+       weapon2.setBackgroundResource(R.drawable.weapon2);
+       weapon2.setId(100);
+       RelativeLayout.LayoutParams b2 = new LayoutParams(
+       		RelativeLayout.LayoutParams.WRAP_CONTENT,
+       		RelativeLayout.LayoutParams.WRAP_CONTENT);
+       b2.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+       b2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+       b2.leftMargin = 25;
+       b2.bottomMargin = 25;
+       weapon2.setLayoutParams(b2);
+  
+       
+       
+       	weaponLayout.setLayoutParams(b1);  
+       	weaponLayout.addView(weapon1);
+       	weaponLayout.setLayoutParams(b2);  
+       	weaponLayout.addView(weapon2);
+    	
+    	
+        game.addView(gamePanel);
+        game.addView(weaponLayout);
+        
+        setContentView(game);
         Log.d(TAG, "View added");
         mySensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		myAccelerometer = mySensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -58,7 +112,7 @@ public class Game extends Activity implements SensorEventListener {
 	@Override
 	protected void onPause() {
 		mySensorManager.unregisterListener(this);
-	Log.d(TAG, "Pausing…");
+	Log.d(TAG, "Pausing");
 	MainThread.running=false;//this is the value for stop the loop in the run()
 	super.onPause();
 	}
