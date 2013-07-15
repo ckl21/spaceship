@@ -3,7 +3,11 @@ package com.example.spaceshiphunter;
 
 
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.util.Log;
@@ -25,6 +29,8 @@ public class Droid {
 	private float maxSpeed = 4;
 	private double accel = .2;
 	private float rotation;
+	Laser laser;
+	ArrayList lasers;
 
 	
 
@@ -110,8 +116,19 @@ public class Droid {
 			rotation = (float) Math.toDegrees(Math.atan2(accelY,accelX) + 90);
 			
 			rotatedbitmap = RotateBitmap(bitmap,rotation);
+			if (laser != null){
+				laser.update();
+			}
 	
 	}
 
 	
-}
+	public void fireLaser(Bitmap bitmapL){
+		laser = new Laser(bitmapL, x, y);
+		}
+	}
+	
+
+	
+
+

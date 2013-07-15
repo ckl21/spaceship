@@ -3,6 +3,7 @@ package com.example.spaceshiphunter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -19,14 +20,16 @@ public class MainGamePanel extends SurfaceView implements
 	
 	private MainThread thread;
 	private Droid droid;
+	Bitmap laser;
 
 	public MainGamePanel(Context context) {
-		super(context);
+		super(context);	
 		// adding the callback (this) to the surface holder to intercept events
 		getHolder().addCallback(this);
 
 		// create droid and load bitmap
 		droid = new Droid(BitmapFactory.decodeResource(getResources(), R.drawable.player), 50, 50);
+		laser = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one);
 		
 		// create the game loop thread
 		thread = new MainThread(getHolder(), this);
@@ -74,13 +77,11 @@ public class MainGamePanel extends SurfaceView implements
 	public void render(Canvas canvas) {
 		canvas.drawColor(Color.BLACK);
 		droid.draw(canvas);
+		if (droid.laser != null){
+		droid.laser.draw(canvas);
+		}
 	}
 
-	/**
-	 * This is the game update method. It iterates through all the objects
-	 * and calls their update method if they have one or calls specific
-	 * engine's update method.
-	 */
 	public void update() {
 		// check collision with right wall if heading right
 		if (droid.getX() + droid.getBitmap().getWidth() / 2 >= getWidth() && droid.getXSpeed() > 0) {
@@ -99,6 +100,9 @@ public class MainGamePanel extends SurfaceView implements
 		if (droid.getY() + droid.getBitmap().getHeight() / 2 >= getHeight() && droid.getYSpeed() > 0) {
 			droid.setY(getHeight()-droid.getBitmap().getHeight() / 2);
 			droid.setYSpeed(0);
+			if (droid.laser == null){
+			droid.fireLaser(laser);
+			}
 			
 		}
 		// check collision with top wall if heading up
