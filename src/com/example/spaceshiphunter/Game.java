@@ -9,6 +9,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -19,7 +23,7 @@ import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 
-public class Game extends Activity implements SensorEventListener {
+public class Game extends Activity implements SensorEventListener, OnTouchListener {
     /** Called when the activity is first created. */
 	
 	private static final String TAG = Game.class.getSimpleName();
@@ -42,10 +46,7 @@ public class Game extends Activity implements SensorEventListener {
         gamePanel = new MainGamePanel(this);
         game = new FrameLayout(this);
        	weaponLayout = new RelativeLayout(this);
-       	
-        
-        
-        
+       	  
         //Weapon1
         ImageButton weapon1 = new ImageButton(this);
         weapon1.setBackgroundResource(R.drawable.weapon1);
@@ -59,6 +60,7 @@ public class Game extends Activity implements SensorEventListener {
         b1.rightMargin = 25;
         b1.bottomMargin = 25;
         weapon1.setLayoutParams(b1);
+        weapon1.setOnTouchListener(this);
         
         //Weapon2
        ImageButton weapon2 = new ImageButton(this);
@@ -72,6 +74,7 @@ public class Game extends Activity implements SensorEventListener {
        b2.leftMargin = 25;
        b2.bottomMargin = 25;
        weapon2.setLayoutParams(b2);
+       weapon2.setOnTouchListener(this);
   
        
        
@@ -140,6 +143,17 @@ public class Game extends Activity implements SensorEventListener {
 		}
 		
 	}
-    
-    
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		if(v.getId()== 99){
+			if(event.getAction() == MotionEvent.ACTION_DOWN)
+			MainThread.getGamePanel().check1(true);			
+		else if(v.getId()== 99&& event.getAction() == MotionEvent.ACTION_UP)
+			MainThread.getGamePanel().check1(false);
+		}
+		return false;
+	}
+
+
 }

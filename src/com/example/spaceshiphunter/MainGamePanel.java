@@ -22,7 +22,7 @@ public class MainGamePanel extends SurfaceView implements
 	private MainThread thread;
 	private Droid droid;
 	Bitmap laser;
-	boolean firing = true;
+	boolean firing = false;
 	
 
 	public MainGamePanel(Context context) {
@@ -139,5 +139,14 @@ public class MainGamePanel extends SurfaceView implements
 		droid.accelY = accelY;
 	
 	}
-
+	
+	public void check1(boolean w1){
+		firing = w1;
+		
+	}
+	
+	public void check2(boolean w2){
+		
+	}
+	
 }
