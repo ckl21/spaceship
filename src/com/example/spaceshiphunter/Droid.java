@@ -24,6 +24,7 @@ public class Droid {
 	public float newY;
 	public float accelX;
 	public float accelY;
+	public int healthPoints = 50;
 	private double xSpeed;
 	private double ySpeed;
 	private double maxSpeed = 4;
@@ -143,8 +144,6 @@ public class Droid {
 				for ( int i = 0; i < lasers.size(); i++ ) {
 
 					lasers.get(i).update();
-
-					
 					
 				
 			}
@@ -153,18 +152,18 @@ public class Droid {
 
 	
 	public void fireLaser(Bitmap bitmapL){
+		Laser laser;
 		if (onCD == false){
-			Laser laser = new Laser(bitmapL, x, y);
+			if (firingSide == false){
+				laser = new Laser(bitmapL, x, y, 25, 0);
+				firingSide = true;
+			}else{
+				laser = new Laser(bitmapL, x, y, -25, 0);
+				firingSide = false;
+			}
 			laser.accelX = accelX;
 			laser.accelY = accelY;
 			laser.setRotation();
-			if (firingSide == false){
-				laser.setSide(0);
-				firingSide = true;
-			}else if (firingSide){
-				laser.setSide(1);
-				firingSide = false;
-			}
 			lasers.add(laser);
 			xRecoilHolder = recoil;
 			yRecoilHolder = recoil;

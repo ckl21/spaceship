@@ -119,6 +119,7 @@ public class MainGamePanel extends SurfaceView implements
 		// Update the lone droid
 		droid.update();
 		
+		//laser removal when out of bounds
 		for (int i = 0; i < droid.lasers.size(); i++){
 			if (droid.lasers.get(i).getX() > getWidth()+50 || droid.lasers.get(i).getX() < -50 || droid.lasers.get(i).getY() < -50 || droid.lasers.get(i).getY() > getHeight() + 50){
 				droid.removeLaser(i);

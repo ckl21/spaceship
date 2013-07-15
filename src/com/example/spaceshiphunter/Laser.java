@@ -22,7 +22,8 @@ public class Laser {
 	private double accel = 1.1;
 	private float rotation;
 	private double angle;
-	private double offset = 0;
+	private double offsetX = 0;
+	private double offsetR = 0;
 
 	
 
@@ -30,10 +31,12 @@ public class Laser {
 	
 
 	
-	public Laser(Bitmap bitmap, float x, float y) {
+	public Laser(Bitmap bitmap, float x, float y, double offsetX, double offsetR) {
 		this.bitmap = bitmap;
 		this.x = x;
 		this.y = y;
+		this.offsetX = offsetX;
+		this.offsetR = offsetR;
 
 	}
 	
@@ -75,7 +78,7 @@ public class Laser {
 	}
 	
 	public void draw(Canvas canvas) {
-		canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2) + (float) (offset * Math.cos(angle+1.57)), y - (rotatedbitmap.getHeight() / 2) + (float) (offset * Math.sin(angle+1.57)), null);
+		canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2) + (float) (offsetX * Math.cos(angle+1.57)), y - (rotatedbitmap.getHeight() / 2) + (float) (offsetX * Math.sin(angle+1.57)), null);
 	}
 
 	public static Bitmap RotateBitmap(Bitmap source, float angle)
@@ -92,9 +95,10 @@ public class Laser {
 		if (speed < maxSpeed){
 			speed = speed*accel;
 		}
-		 x += speed * Math.cos(angle);
+		
+		 x += speed * Math.cos(angle + Math.toRadians(offsetR));
 		 
-		 y += speed * Math.sin(angle);
+		 y += speed * Math.sin(angle + Math.toRadians(offsetR));
 
 
 			
@@ -104,17 +108,10 @@ public class Laser {
 	public void setRotation(){
 		angle = Math.atan2(accelY,accelX);
 		rotation = (float)Math.toDegrees(angle);
-		rotatedbitmap = RotateBitmap(bitmap,rotation + 90);
+		rotatedbitmap = RotateBitmap(bitmap,rotation + 90 + (float)offsetR);
 	}
 	
-	public void setSide(int side){
-		if (side == 0){
-			offset = -25;
-		}else if (side == 1){
-			offset = 25;
-		}
-	}
-
+	
 	
 	}
 	
