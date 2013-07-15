@@ -24,6 +24,7 @@ public class Laser {
 	private double angle;
 	private double offsetX = 0;
 	private double offsetR = 0;
+	
 
 	
 

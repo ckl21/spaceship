@@ -27,18 +27,23 @@ public class EDroid {
 	public int healthPoints = 50;
 	private double xSpeed;
 	private double ySpeed;
-	private double maxSpeed = 4;
+	private double maxSpeed = 10;
 	private double accel = .2;
 	private float rotation;
 	public ArrayList<Laser> lasers = new ArrayList<Laser>();
 	private long previousTime;
-	private long fireCooldown = 100;
+	private long fireCooldown = 800;
 	private boolean onCD = false;
 	private boolean firingSide = false;
-	private float recoil = 5;
+	private float recoil = 1;
 	private float xRecoilHolder = 0;
 	private float yRecoilHolder = 0;
 	private double angle;
+	public int state = 0;
+	private float destinationX = 800;
+	private float destinationY = 600;
+	private float destinationArea = 50;
+	private double deceleration = 0.8;
 
 	
 
@@ -111,22 +116,33 @@ public class EDroid {
 				onCD = false;
 			}
 	
+			if (state == 0){
+				if (destinationX > x+50 || destinationX < x-50){
+					if(xSpeed <= maxSpeed && xSpeed >= -maxSpeed){
+						xSpeed += (destinationX-x)*accel;
+					}if(xSpeed > maxSpeed){
+						xSpeed = maxSpeed;
+					}else if(xSpeed < -maxSpeed){
+						xSpeed = -maxSpeed;
+					}
+				}
+				if (destinationY > y+50 || destinationY < y-50){
+					if(ySpeed <= maxSpeed && ySpeed >= -maxSpeed){
+						ySpeed += (destinationY-y)*accel;
+					}if(ySpeed > maxSpeed){
+						ySpeed = maxSpeed;
+					}else if(ySpeed < -maxSpeed){
+						ySpeed = -maxSpeed;
+					}
+					
+				}
+				if ((Math.abs(destinationX-x)< 50  && Math.abs(destinationY-y)< 50)){
+					state = 1;
+				}
+			}
 			
-			if(xSpeed <= maxSpeed && xSpeed >= -maxSpeed){
-				
-				xSpeed += newX*accel;
-			}else if(xSpeed > maxSpeed){
-				xSpeed = maxSpeed;
-			}else if(xSpeed < -maxSpeed){
-				xSpeed = -maxSpeed;
-			}
-			if(ySpeed <= maxSpeed && ySpeed >= -maxSpeed){
-				ySpeed += newY*accel;
-			}else if(ySpeed > maxSpeed){
-				ySpeed = maxSpeed;
-			}else if(ySpeed < -maxSpeed){
-				ySpeed = -maxSpeed;
-			}
+			xSpeed = xSpeed*deceleration;
+			ySpeed = ySpeed*deceleration;
 			
 			xSpeed = xSpeed - (xRecoilHolder * Math.cos(angle));
 			x += xSpeed ;
@@ -135,10 +151,12 @@ public class EDroid {
 			y += ySpeed;
 			yRecoilHolder = 0;
 
-			angle = Math.atan2(accelY,accelX);
+			
+			angle = Math.atan2(destinationY-y,destinationX-x);
 			rotation = (float) Math.toDegrees(angle);
 			
 			rotatedbitmap = RotateBitmap(bitmap,rotation + 90);
+			
 			
 				
 				for ( int i = 0; i < lasers.size(); i++ ) {
@@ -153,18 +171,21 @@ public class EDroid {
 	
 	public void fireLaser(Bitmap bitmapL){
 		Laser laser;
+		Laser laser2;
 		if (onCD == false){
-			if (firingSide == false){
-				laser = new Laser(bitmapL, x, y, 25, 0);
-				firingSide = true;
-			}else{
-				laser = new Laser(bitmapL, x, y, -25, 0);
-				firingSide = false;
-			}
-			laser.accelX = accelX;
-			laser.accelY = accelY;
+			
+			laser = new Laser(bitmapL, x, y, 30, 0);
+		
+			laser2 = new Laser(bitmapL, x, y, -30, 0);
+	
+			laser.accelX = destinationX - x;
+			laser.accelY = destinationY - y;
+			laser2.accelX = destinationX - x;
+			laser2.accelY = destinationY - y;
 			laser.setRotation();
+			laser2.setRotation();
 			lasers.add(laser);
+			lasers.add(laser2);
 			xRecoilHolder = recoil;
 			yRecoilHolder = recoil;
 			onCD = true;
@@ -175,6 +196,11 @@ public class EDroid {
 	public void removeLaser(int index){
 			lasers.remove(index);
 		}
+	
+	public void setDestination(double x, double y){
+		destinationX = (float)x;
+		destinationY = (float)y;
+	}
 	}
 
 	

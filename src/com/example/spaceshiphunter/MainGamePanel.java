@@ -20,9 +20,14 @@ public class MainGamePanel extends SurfaceView implements
 	
 	private MainThread thread;
 	private Droid droid;
+	private EDroid eDroid;
 	Bitmap laser;
+	Bitmap missile;
 	boolean firing = true;
-	
+	long previousTime = 0;
+	long enemyDelay = 3000;
+	private double targetX = 0;
+	private double targetY;
 
 	public MainGamePanel(Context context) {
 		super(context);	
@@ -31,7 +36,9 @@ public class MainGamePanel extends SurfaceView implements
 
 		// create droid and load bitmap
 		droid = new Droid(BitmapFactory.decodeResource(getResources(), R.drawable.player), 50, 50);
+		eDroid = new EDroid(BitmapFactory.decodeResource(getResources(), R.drawable.spaceship), 600, 400);
 		laser = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one);
+		missile = BitmapFactory.decodeResource(getResources(), R.drawable.missile);
 		
 		// create the game loop thread
 		thread = new MainThread(getHolder(), this);
@@ -79,10 +86,32 @@ public class MainGamePanel extends SurfaceView implements
 	public void render(Canvas canvas) {
 		canvas.drawColor(Color.BLACK);
 		droid.draw(canvas);
+		eDroid.draw(canvas);
 	}
 
 	public void update() {
-		
+		if (eDroid.state == 0){
+				
+				while (Math.abs(targetX - droid.getX()) < 50 && Math.abs(targetY - droid.getY()) < 50 || targetX == 0){
+					targetX = Math.random()*(getWidth()-eDroid.getBitmap().getWidth()) + eDroid.getBitmap().getWidth()/2;
+					targetY = Math.random()*(getHeight()-eDroid.getBitmap().getHeight()) + eDroid.getBitmap().getHeight()/2;
+				}
+			eDroid.setDestination(targetX, targetY);
+			previousTime = System.currentTimeMillis();
+			eDroid.update();
+		}else if (eDroid.state == 1){
+			if(System.currentTimeMillis() < previousTime + enemyDelay){
+				targetX = droid.getX();
+				targetY = droid.getY();
+				eDroid.setDestination(targetX, targetY);
+				eDroid.fireLaser(missile);
+				eDroid.update();
+			}else{
+				targetX = Math.random()*(getWidth()-eDroid.getBitmap().getWidth()) + eDroid.getBitmap().getWidth()/2;
+				targetY = Math.random()*(getHeight()-eDroid.getBitmap().getHeight()) + eDroid.getBitmap().getHeight()/2;
+				eDroid.state = 0;
+			}
+		}
 		if (firing){
 			droid.fireLaser(laser);
 		}
@@ -118,6 +147,7 @@ public class MainGamePanel extends SurfaceView implements
 		}
 		// Update the lone droid
 		droid.update();
+		
 		
 		//laser removal when out of bounds
 		for (int i = 0; i < droid.lasers.size(); i++){
