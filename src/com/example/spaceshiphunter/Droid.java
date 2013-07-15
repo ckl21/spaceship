@@ -27,15 +27,15 @@ public class Droid {
 	public int healthPoints = 50;
 	private double xSpeed;
 	private double ySpeed;
-	private double maxSpeed = 4;
-	private double accel = .2;
+	private double maxSpeed = 6;
+	private double accel = .3;
 	private float rotation;
 	public ArrayList<Laser> lasers = new ArrayList<Laser>();
 	private long previousTime;
-	private long fireCooldown = 100;
+	private long fireCooldown = 150;
 	private boolean onCD = false;
 	private boolean firingSide = false;
-	private float recoil = 5;
+	private float recoil = 4;
 	private float xRecoilHolder = 0;
 	private float yRecoilHolder = 0;
 	private double angle;
@@ -115,14 +115,14 @@ public class Droid {
 			if(xSpeed <= maxSpeed && xSpeed >= -maxSpeed){
 				
 				xSpeed += newX*accel;
-			}else if(xSpeed > maxSpeed){
+			}if(xSpeed > maxSpeed){
 				xSpeed = maxSpeed;
 			}else if(xSpeed < -maxSpeed){
 				xSpeed = -maxSpeed;
 			}
 			if(ySpeed <= maxSpeed && ySpeed >= -maxSpeed){
 				ySpeed += newY*accel;
-			}else if(ySpeed > maxSpeed){
+			}if(ySpeed > maxSpeed){
 				ySpeed = maxSpeed;
 			}else if(ySpeed < -maxSpeed){
 				ySpeed = -maxSpeed;
@@ -155,10 +155,10 @@ public class Droid {
 		Laser laser;
 		if (onCD == false){
 			if (firingSide == false){
-				laser = new Laser(bitmapL, x, y, 25, 0);
+				laser = new Laser(bitmapL, x, y, 25, 0, 10, 5);
 				firingSide = true;
 			}else{
-				laser = new Laser(bitmapL, x, y, -25, 0);
+				laser = new Laser(bitmapL, x, y, -25, 0, 10, 5);
 				firingSide = false;
 			}
 			laser.accelX = accelX;

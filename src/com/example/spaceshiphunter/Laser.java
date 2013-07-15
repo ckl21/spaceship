@@ -32,12 +32,14 @@ public class Laser {
 	
 
 	
-	public Laser(Bitmap bitmap, float x, float y, double offsetX, double offsetR) {
+	public Laser(Bitmap bitmap, float x, float y, double offsetX, double offsetR, double speed, double iSpeed) {
 		this.bitmap = bitmap;
 		this.x = x;
 		this.y = y;
 		this.offsetX = offsetX;
 		this.offsetR = offsetR;
+		this.maxSpeed = speed;
+		this.speed = iSpeed;
 
 	}
 	

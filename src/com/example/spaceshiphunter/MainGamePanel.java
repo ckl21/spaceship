@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.ImageButton;
 
 
 public class MainGamePanel extends SurfaceView implements
@@ -23,11 +24,15 @@ public class MainGamePanel extends SurfaceView implements
 	private EDroid eDroid;
 	Bitmap laser;
 	Bitmap missile;
-	boolean firing = true;
 	long previousTime = 0;
 	long enemyDelay = 3000;
 	private double targetX = 0;
 	private double targetY;
+	boolean firing = false;
+	float offsetX = 0;
+	float offsetY = 3;
+	
+
 
 	public MainGamePanel(Context context) {
 		super(context);	
@@ -63,6 +68,8 @@ public class MainGamePanel extends SurfaceView implements
 					thread.setRunning(true);
 					thread.start(); // Start a new thread
 					}
+		
+		
 	}
 
 	@Override
@@ -160,11 +167,20 @@ public class MainGamePanel extends SurfaceView implements
 	
 	public void setNewXY(float newX, float newY, float accelX, float accelY){
 
-		droid.newX = newX;
-		droid.newY = newY;
-		droid.accelX = accelX;
-		droid.accelY = accelY;
+		droid.newX = newX - offsetX;
+		droid.newY = newY - offsetY;
+		droid.accelX = accelX - offsetX;
+		droid.accelY = accelY - offsetY;
 	
 	}
-
+	
+	public void check1(boolean w1){
+		firing = w1;
+		
+	}
+	
+	public void check2(boolean w2){
+		
+	}
+	
 }

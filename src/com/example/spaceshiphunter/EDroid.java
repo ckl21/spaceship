@@ -174,9 +174,9 @@ public class EDroid {
 		Laser laser2;
 		if (onCD == false){
 			
-			laser = new Laser(bitmapL, x, y, 30, 0);
+			laser = new Laser(bitmapL, x, y, 30, 0, 5, 2);
 		
-			laser2 = new Laser(bitmapL, x, y, -30, 0);
+			laser2 = new Laser(bitmapL, x, y, -30, 0, 5, 2);
 	
 			laser.accelX = destinationX - x;
 			laser.accelY = destinationY - y;
