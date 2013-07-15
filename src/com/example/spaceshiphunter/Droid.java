@@ -24,13 +24,20 @@ public class Droid {
 	public float newY;
 	public float accelX;
 	public float accelY;
-	private float xSpeed;
-	private float ySpeed;
-	private float maxSpeed = 4;
+	private double xSpeed;
+	private double ySpeed;
+	private double maxSpeed = 4;
 	private double accel = .2;
 	private float rotation;
-	Laser laser;
-	ArrayList lasers;
+	public ArrayList<Laser> lasers = new ArrayList<Laser>();
+	private long previousTime;
+	private long fireCooldown = 100;
+	private boolean onCD = false;
+	private boolean firingSide = false;
+	private float recoil = 5;
+	private float xRecoilHolder = 0;
+	private float yRecoilHolder = 0;
+	private double angle;
 
 	
 
@@ -63,11 +70,11 @@ public class Droid {
 
 	
 	
-	public float getXSpeed() {
+	public double getXSpeed() {
 		return xSpeed;
 	}
 	
-	public float getYSpeed() {
+	public double getYSpeed() {
 		return ySpeed;
 	}
 
@@ -80,6 +87,11 @@ public class Droid {
 	}
 	
 	public void draw(Canvas canvas) {
+
+			for ( int i = 0; i < lasers.size(); i++ ) {
+				lasers.get(i).draw(canvas);
+				
+		}
 		canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2), y - (rotatedbitmap.getHeight() / 2), null);
 	}
 
@@ -93,8 +105,14 @@ public class Droid {
 	 * Method which updates the droid's internal state every tick
 	 */
 	public void update() {
+		
+			if (onCD && previousTime + fireCooldown <= System.currentTimeMillis()){
+				onCD = false;
+			}
+	
 			
 			if(xSpeed <= maxSpeed && xSpeed >= -maxSpeed){
+				
 				xSpeed += newX*accel;
 			}else if(xSpeed > maxSpeed){
 				xSpeed = maxSpeed;
@@ -108,25 +126,59 @@ public class Droid {
 			}else if(ySpeed < -maxSpeed){
 				ySpeed = -maxSpeed;
 			}
-			x += xSpeed;
+			
+			xSpeed = xSpeed - (xRecoilHolder * Math.cos(angle));
+			x += xSpeed ;
+			xRecoilHolder = 0;
+			ySpeed =  ySpeed - (yRecoilHolder * Math.sin(angle));
 			y += ySpeed;
-			
+			yRecoilHolder = 0;
 
-		
-			rotation = (float) Math.toDegrees(Math.atan2(accelY,accelX) + 90);
+			angle = Math.atan2(accelY,accelX);
+			rotation = (float) Math.toDegrees(angle);
 			
-			rotatedbitmap = RotateBitmap(bitmap,rotation);
-			if (laser != null){
-				laser.update();
+			rotatedbitmap = RotateBitmap(bitmap,rotation + 90);
+			
+				
+				for ( int i = 0; i < lasers.size(); i++ ) {
+
+					lasers.get(i).update();
+
+					
+					
+				
 			}
-	
+			
 	}
 
 	
 	public void fireLaser(Bitmap bitmapL){
-		laser = new Laser(bitmapL, x, y);
+		if (onCD == false){
+			Laser laser = new Laser(bitmapL, x, y);
+			laser.accelX = accelX;
+			laser.accelY = accelY;
+			laser.setRotation();
+			if (firingSide == false){
+				laser.setSide(0);
+				firingSide = true;
+			}else if (firingSide){
+				laser.setSide(1);
+				firingSide = false;
+			}
+			lasers.add(laser);
+			xRecoilHolder = recoil;
+			yRecoilHolder = recoil;
+			onCD = true;
+			previousTime = System.currentTimeMillis();
+			}
+		}
+	
+	public void removeLaser(int index){
+			lasers.remove(index);
 		}
 	}
+
+	
 	
 
 	

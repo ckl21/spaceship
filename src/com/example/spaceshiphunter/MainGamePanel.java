@@ -21,6 +21,8 @@ public class MainGamePanel extends SurfaceView implements
 	private MainThread thread;
 	private Droid droid;
 	Bitmap laser;
+	boolean firing = true;
+	
 
 	public MainGamePanel(Context context) {
 		super(context);	
@@ -77,16 +79,18 @@ public class MainGamePanel extends SurfaceView implements
 	public void render(Canvas canvas) {
 		canvas.drawColor(Color.BLACK);
 		droid.draw(canvas);
-		if (droid.laser != null){
-		droid.laser.draw(canvas);
-		}
 	}
 
 	public void update() {
+		
+		if (firing){
+			droid.fireLaser(laser);
+		}
 		// check collision with right wall if heading right
 		if (droid.getX() + droid.getBitmap().getWidth() / 2 >= getWidth() && droid.getXSpeed() > 0) {
 			droid.setX(getWidth()-droid.getBitmap().getWidth() / 2);
 			droid.setXSpeed(0);
+			
 			
 			
 		}
@@ -100,9 +104,10 @@ public class MainGamePanel extends SurfaceView implements
 		if (droid.getY() + droid.getBitmap().getHeight() / 2 >= getHeight() && droid.getYSpeed() > 0) {
 			droid.setY(getHeight()-droid.getBitmap().getHeight() / 2);
 			droid.setYSpeed(0);
-			if (droid.laser == null){
-			droid.fireLaser(laser);
-			}
+			
+			
+			
+			
 			
 		}
 		// check collision with top wall if heading up
@@ -113,6 +118,12 @@ public class MainGamePanel extends SurfaceView implements
 		}
 		// Update the lone droid
 		droid.update();
+		
+		for (int i = 0; i < droid.lasers.size(); i++){
+			if (droid.lasers.get(i).getX() > getWidth()+50 || droid.lasers.get(i).getX() < -50 || droid.lasers.get(i).getY() < -50 || droid.lasers.get(i).getY() > getHeight() + 50){
+				droid.removeLaser(i);
+			}
+		}
 
 	}
 	
