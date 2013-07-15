@@ -22,7 +22,8 @@ public class MainGamePanel extends SurfaceView implements
 	private MainThread thread;
 	private Droid droid;
 	Bitmap laser;
-	boolean firing = false;
+	boolean firing1 = false;
+	boolean firing2 = false;
 	
 
 	public MainGamePanel(Context context) {
@@ -86,7 +87,7 @@ public class MainGamePanel extends SurfaceView implements
 
 	public void update() {
 		
-		if (firing){
+		if (firing1){
 			droid.fireLaser(laser);
 		}
 		// check collision with right wall if heading right
@@ -141,12 +142,12 @@ public class MainGamePanel extends SurfaceView implements
 	}
 	
 	public void check1(boolean w1){
-		firing = w1;
+		firing1 = w1;
 		
 	}
 	
 	public void check2(boolean w2){
-		
+		firing2 = w2;
 	}
 	
 }
