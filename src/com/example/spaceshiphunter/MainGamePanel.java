@@ -23,14 +23,17 @@ public class MainGamePanel extends SurfaceView implements
 	private Droid droid;
 	private EDroid eDroid;
 	Bitmap laser;
+
 	Bitmap missile;
 	long previousTime = 0;
 	long enemyDelay = 3000;
 	private double targetX = 0;
 	private double targetY;
-	boolean firing = false;
 	float offsetX = 0;
 	float offsetY = 3;
+	boolean firing1 = false;
+	boolean firing2 = false;
+
 	
 
 
@@ -97,6 +100,7 @@ public class MainGamePanel extends SurfaceView implements
 	}
 
 	public void update() {
+
 		if (eDroid.state == 0){
 				
 				while (Math.abs(targetX - droid.getX()) < 50 && Math.abs(targetY - droid.getY()) < 50 || targetX == 0){
@@ -119,7 +123,8 @@ public class MainGamePanel extends SurfaceView implements
 				eDroid.state = 0;
 			}
 		}
-		if (firing){
+		if (firing1){
+
 			droid.fireLaser(laser);
 		}
 		// check collision with right wall if heading right
@@ -175,12 +180,12 @@ public class MainGamePanel extends SurfaceView implements
 	}
 	
 	public void check1(boolean w1){
-		firing = w1;
+		firing1 = w1;
 		
 	}
 	
 	public void check2(boolean w2){
-		
+		firing2 = w2;
 	}
 	
 }

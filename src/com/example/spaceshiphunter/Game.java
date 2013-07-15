@@ -146,6 +146,14 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 		else if(v.getId()== 99&& event.getAction() == MotionEvent.ACTION_UP)
 			MainThread.getGamePanel().check1(false);
 		}
+		
+		if(v.getId()==100){
+			if(event.getAction() == MotionEvent.ACTION_DOWN)
+				MainThread.getGamePanel().check2(true);			
+			else if(v.getId()== 99&& event.getAction() == MotionEvent.ACTION_UP)
+				MainThread.getGamePanel().check2(false);
+		}
+		
 		return false;
 	}
 
