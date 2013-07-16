@@ -25,6 +25,9 @@ public class Laser {
 	private double offsetX = 0;
 	private double offsetR = 0;
 	public boolean exploded = false;
+	public long laserTimer;
+	public long laserTimerDelay = 100;
+	public int animState = 0;
 	
 
 	
@@ -82,7 +85,7 @@ public class Laser {
 	}
 	
 	public void draw(Canvas canvas) {
-		if (exploded == false){
+		if (animState < 5){
 		canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2) + (float) (offsetX * Math.cos(angle+1.57)), y - (rotatedbitmap.getHeight() / 2) + (float) (offsetX * Math.sin(angle+1.57)), null);
 		}
 	}
@@ -100,6 +103,10 @@ public class Laser {
 			
 		if (speed < maxSpeed){
 			speed = speed*accel;
+		}
+		if (exploded){
+			speed = 2;
+			rotatedbitmap = RotateBitmap(bitmap,rotation + 90 + (float)offsetR);
 		}
 		
 		 x += speed * Math.cos(angle + Math.toRadians(offsetR));
@@ -121,6 +128,9 @@ public class Laser {
 		exploded = true;
 	}
 	
+	public void changeBitmap(Bitmap bitmap){
+		this.bitmap = bitmap;
+	}
 	
 	}
 	

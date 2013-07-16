@@ -23,10 +23,22 @@ public class MainGamePanel extends SurfaceView implements
 	private Droid droid;
 	private EDroid eDroid;
 	Bitmap laser;
-
 	Bitmap missile;
+	Bitmap missile1;
+	Bitmap missile2;
+	Bitmap missile3;
+	Bitmap missile4;
+	Bitmap laser1;
+	Bitmap laser2;
+	Bitmap laser3;
+	Bitmap laser4;
+	Bitmap player0;
+	Bitmap player1;
 	long previousTime = 0;
 	long enemyDelay = 3000;
+	int droidFrame = 0;
+	long droidTimer;
+	long droidTimerDelay = 1000;
 	private double targetX = 0;
 	private double targetY;
 	float offsetX = 0;
@@ -43,10 +55,20 @@ public class MainGamePanel extends SurfaceView implements
 		getHolder().addCallback(this);
 
 		// create droid and load bitmap
-		droid = new Droid(BitmapFactory.decodeResource(getResources(), R.drawable.player), 50, 50);
+		player0 = BitmapFactory.decodeResource(getResources(), R.drawable.player0);
+		player1 = BitmapFactory.decodeResource(getResources(), R.drawable.player1);
+		droid = new Droid(player0, 50, 50);
 		eDroid = new EDroid(BitmapFactory.decodeResource(getResources(), R.drawable.spaceship), 600, 400);
 		laser = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one);
+		laser1 = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one1);
+		laser2 = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one2);
+		laser3 = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one3);
+		laser4 = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one4);
 		missile = BitmapFactory.decodeResource(getResources(), R.drawable.missile);
+		missile1 = BitmapFactory.decodeResource(getResources(), R.drawable.missile1);
+		missile2 = BitmapFactory.decodeResource(getResources(), R.drawable.missile2);
+		missile3 = BitmapFactory.decodeResource(getResources(), R.drawable.missile3);
+		missile4 = BitmapFactory.decodeResource(getResources(), R.drawable.missile4);
 		
 		// create the game loop thread
 		thread = new MainThread(getHolder(), this);
@@ -95,12 +117,31 @@ public class MainGamePanel extends SurfaceView implements
 
 	public void render(Canvas canvas) {
 		canvas.drawColor(Color.BLACK);
-		droid.draw(canvas);
+		
 		eDroid.draw(canvas);
+		for ( int i = 0; i < droid.lasers.size(); i++ ) {
+			droid.lasers.get(i).draw(canvas);
+			
+		}
+		droid.draw(canvas);
+		for ( int i = 0; i < eDroid.lasers.size(); i++ ) {
+			eDroid.lasers.get(i).draw(canvas);
+			
+	}
 	}
 
 	public void update() {
 
+		if (System.currentTimeMillis() > droidTimer + droidTimerDelay){
+			if (droidFrame == 0){
+			droid.changeBaseBitmap(player1);
+			droidFrame = 1;
+			}else{
+				droid.changeBaseBitmap(player0);
+				droidFrame = 0;
+			}
+			droidTimer = System.currentTimeMillis();
+		}
 		if (eDroid.healthPoints > 0){
 			if (eDroid.state == 0){
 					
@@ -166,29 +207,80 @@ public class MainGamePanel extends SurfaceView implements
 		
 		//laser removal when out of bounds
 		for (int i = 0; i < droid.lasers.size(); i++){
-			if (droid.lasers.get(i).getX() > getWidth()+50 || droid.lasers.get(i).getX() < -50 || droid.lasers.get(i).getY() < -50 || droid.lasers.get(i).getY() > getHeight() + 50){
+			if (droid.lasers.get(i).animState >= 5){
 				droid.removeLaser(i);
 			}
-			else if(droid.lasers.get(i).getX() > eDroid.getX() - eDroid.getBitmap().getWidth()/2 && 
+			else if (droid.lasers.get(i).getX() > getWidth()+50 || droid.lasers.get(i).getX() < -50 || droid.lasers.get(i).getY() < -50 || droid.lasers.get(i).getY() > getHeight() + 50){
+				droid.removeLaser(i);
+			}
+			else if(droid.lasers.get(i).exploded == false){ 
+				if(droid.lasers.get(i).getX() > eDroid.getX() - eDroid.getBitmap().getWidth()/2 && 
 					droid.lasers.get(i).getX() < eDroid.getX() + eDroid.getBitmap().getWidth()/2 && 
 					droid.lasers.get(i).getY() > eDroid.getY() - eDroid.getBitmap().getHeight()/2 && 
-					droid.lasers.get(i).getY() < eDroid.getY() + eDroid.getBitmap().getHeight()/2 &&
-					droid.lasers.get(i).exploded == false){
+					droid.lasers.get(i).getY() < eDroid.getY() + eDroid.getBitmap().getHeight()/2 ){
 				droid.lasers.get(i).setExploded();
 				eDroid.fireHit(5);
+				
+				}
 			}
+			else if (droid.lasers.get(i).exploded){
+				if (System.currentTimeMillis() > droid.lasers.get(i).laserTimer + droid.lasers.get(i).laserTimerDelay){
+					if (droid.lasers.get(i).animState == 0){
+						droid.lasers.get(i).changeBitmap(laser1);
+						droid.lasers.get(i).animState ++;
+					}else if (droid.lasers.get(i).animState == 1){
+						droid.lasers.get(i).changeBitmap(laser2);
+						droid.lasers.get(i).animState ++;
+					}else if (droid.lasers.get(i).animState == 2){
+						droid.lasers.get(i).changeBitmap(laser3);
+						droid.lasers.get(i).animState ++;
+					}else if (droid.lasers.get(i).animState == 3){
+						droid.lasers.get(i).changeBitmap(laser4);
+						droid.lasers.get(i).animState ++;
+					}else if (droid.lasers.get(i).animState == 4){
+						droid.lasers.get(i).animState ++;
+					}
+					droid.lasers.get(i).laserTimer = System.currentTimeMillis();
+				}
+			}
+			
 		}
+		
 		for (int i = 0; i < eDroid.lasers.size(); i++){
-			if (eDroid.lasers.get(i).getX() > getWidth()+50 || eDroid.lasers.get(i).getX() < -50 || eDroid.lasers.get(i).getY() < -50 || eDroid.lasers.get(i).getY() > getHeight() + 50){
+			if (eDroid.lasers.get(i).animState >= 5){
 				eDroid.removeLaser(i);
 			}
-			else if(eDroid.lasers.get(i).getX() > droid.getX() - droid.getBitmap().getWidth()/2 && 
-					eDroid.lasers.get(i).getX() < droid.getX() + droid.getBitmap().getWidth()/2 && 
-					eDroid.lasers.get(i).getY() > droid.getY() - droid.getBitmap().getHeight()/2 && 
-					eDroid.lasers.get(i).getY() < droid.getY() + droid.getBitmap().getHeight()/2 &&
-					eDroid.lasers.get(i).exploded == false){
-				eDroid.lasers.get(i).setExploded();
-				droid.fireHit(5);
+			else if (eDroid.lasers.get(i).getX() > getWidth()+50 || eDroid.lasers.get(i).getX() < -50 || eDroid.lasers.get(i).getY() < -50 || eDroid.lasers.get(i).getY() > getHeight() + 50){
+				eDroid.removeLaser(i);
+			}
+			else if(eDroid.lasers.get(i).exploded == false){ 
+				if(eDroid.lasers.get(i).getX() > droid.getX() - droid.getBitmap().getWidth()/2 && 
+						eDroid.lasers.get(i).getX() < droid.getX() + droid.getBitmap().getWidth()/2 && 
+						eDroid.lasers.get(i).getY() > droid.getY() - droid.getBitmap().getHeight()/2 && 
+						eDroid.lasers.get(i).getY() < droid.getY() + droid.getBitmap().getHeight()/2 ){
+					eDroid.lasers.get(i).setExploded();
+					droid.fireHit(5);
+					
+					}
+			}else if (eDroid.lasers.get(i).exploded){
+				if (System.currentTimeMillis() > eDroid.lasers.get(i).laserTimer + eDroid.lasers.get(i).laserTimerDelay){
+					if (eDroid.lasers.get(i).animState == 0){
+						eDroid.lasers.get(i).changeBitmap(missile1);
+						eDroid.lasers.get(i).animState ++;
+					}else if (eDroid.lasers.get(i).animState == 1){
+						eDroid.lasers.get(i).changeBitmap(missile2);
+						eDroid.lasers.get(i).animState ++;
+					}else if (eDroid.lasers.get(i).animState == 2){
+						eDroid.lasers.get(i).changeBitmap(missile3);
+						eDroid.lasers.get(i).animState ++;
+					}else if (eDroid.lasers.get(i).animState == 3){
+						eDroid.lasers.get(i).changeBitmap(missile4);
+						eDroid.lasers.get(i).animState ++;
+					}else if (eDroid.lasers.get(i).animState == 4){
+						eDroid.lasers.get(i).animState ++;
+					}
+					eDroid.lasers.get(i).laserTimer = System.currentTimeMillis();
+				}
 			}
 		}
 

@@ -94,10 +94,7 @@ public class EDroid {
 	
 	public void draw(Canvas canvas) {
 
-			for ( int i = 0; i < lasers.size(); i++ ) {
-				lasers.get(i).draw(canvas);
-				
-		}
+			
 		if (healthPoints > 0){
 			canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2), y - (rotatedbitmap.getHeight() / 2), null);
 		}

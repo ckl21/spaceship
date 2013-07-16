@@ -17,6 +17,7 @@ import android.view.MotionEvent;
 public class Droid {
 
 	private Bitmap bitmap;	// the actual bitmap
+	private Bitmap baseBitmap;
 	private Bitmap rotatedbitmap;
 	private float x;			// the X coordinate
 	private float y;			// the Y coordinate
@@ -44,17 +45,17 @@ public class Droid {
 
 	
 	public Droid(Bitmap bitmap, int x, int y) {
-		this.bitmap = bitmap;
+		this.baseBitmap = bitmap;
 		this.x = x;
 		this.y = y;
 
 	}
 	
 	public Bitmap getBitmap() {
-		return bitmap;
+		return baseBitmap;
 	}
 	public void setBitmap(Bitmap bitmap) {
-		this.bitmap = bitmap;
+		this.baseBitmap = bitmap;
 	}
 	public float getX() {
 		return x;
@@ -89,10 +90,7 @@ public class Droid {
 	
 	public void draw(Canvas canvas) {
 
-			for ( int i = 0; i < lasers.size(); i++ ) {
-				lasers.get(i).draw(canvas);
-				
-		}
+			
 			if (healthPoints > 0){
 		canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2), y - (rotatedbitmap.getHeight() / 2), null);
 			}
@@ -109,6 +107,7 @@ public class Droid {
 	 */
 	public void update() {
 		
+			
 			if (onCD && previousTime + fireCooldown <= System.currentTimeMillis()){
 				onCD = false;
 			}
@@ -140,7 +139,7 @@ public class Droid {
 			angle = Math.atan2(accelY,accelX);
 			rotation = (float) Math.toDegrees(angle);
 			
-			rotatedbitmap = RotateBitmap(bitmap,rotation + 90);
+			rotatedbitmap = RotateBitmap(baseBitmap,rotation + 90);
 			
 				
 				for ( int i = 0; i < lasers.size(); i++ ) {
@@ -180,6 +179,10 @@ public class Droid {
 	
 	public void fireHit(int damage){
 		healthPoints -= damage;
+	}
+	
+	public void changeBaseBitmap(Bitmap bitmap){
+		baseBitmap = bitmap;
 	}
 	}
 
