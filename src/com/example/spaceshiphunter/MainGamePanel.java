@@ -166,6 +166,27 @@ public class MainGamePanel extends SurfaceView implements
 			if (droid.lasers.get(i).getX() > getWidth()+50 || droid.lasers.get(i).getX() < -50 || droid.lasers.get(i).getY() < -50 || droid.lasers.get(i).getY() > getHeight() + 50){
 				droid.removeLaser(i);
 			}
+			else if(droid.lasers.get(i).getX() > eDroid.getX() - eDroid.getBitmap().getWidth()/2 && 
+					droid.lasers.get(i).getX() < eDroid.getX() + eDroid.getBitmap().getWidth()/2 && 
+					droid.lasers.get(i).getY() > eDroid.getY() - eDroid.getBitmap().getHeight()/2 && 
+					droid.lasers.get(i).getY() < eDroid.getY() + eDroid.getBitmap().getHeight()/2 &&
+					droid.lasers.get(i).exploded == false){
+				droid.lasers.get(i).setExploded();
+				droid.fireHit(5);
+			}
+		}
+		for (int i = 0; i < eDroid.lasers.size(); i++){
+			if (eDroid.lasers.get(i).getX() > getWidth()+50 || eDroid.lasers.get(i).getX() < -50 || eDroid.lasers.get(i).getY() < -50 || eDroid.lasers.get(i).getY() > getHeight() + 50){
+				eDroid.removeLaser(i);
+			}
+			else if(eDroid.lasers.get(i).getX() > droid.getX() - droid.getBitmap().getWidth()/2 && 
+					eDroid.lasers.get(i).getX() < droid.getX() + droid.getBitmap().getWidth()/2 && 
+					eDroid.lasers.get(i).getY() > droid.getY() - droid.getBitmap().getHeight()/2 && 
+					eDroid.lasers.get(i).getY() < droid.getY() + droid.getBitmap().getHeight()/2 &&
+					eDroid.lasers.get(i).exploded == false){
+				eDroid.lasers.get(i).setExploded();
+				eDroid.fireHit(5);
+			}
 		}
 
 	}

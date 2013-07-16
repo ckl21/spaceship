@@ -32,7 +32,7 @@ public class Droid {
 	private float rotation;
 	public ArrayList<Laser> lasers = new ArrayList<Laser>();
 	private long previousTime;
-	private long fireCooldown = 150;
+	private long fireCooldown = 125;
 	private boolean onCD = false;
 	private boolean firingSide = false;
 	private float recoil = 4;
@@ -175,6 +175,10 @@ public class Droid {
 	public void removeLaser(int index){
 			lasers.remove(index);
 		}
+	
+	public void fireHit(int damage){
+		healthPoints -= damage;
+	}
 	}
 
 	

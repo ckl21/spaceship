@@ -24,6 +24,7 @@ public class Laser {
 	private double angle;
 	private double offsetX = 0;
 	private double offsetR = 0;
+	public boolean exploded = false;
 	
 
 	
@@ -81,7 +82,9 @@ public class Laser {
 	}
 	
 	public void draw(Canvas canvas) {
+		if (exploded == false){
 		canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2) + (float) (offsetX * Math.cos(angle+1.57)), y - (rotatedbitmap.getHeight() / 2) + (float) (offsetX * Math.sin(angle+1.57)), null);
+		}
 	}
 
 	public static Bitmap RotateBitmap(Bitmap source, float angle)
@@ -114,6 +117,9 @@ public class Laser {
 		rotatedbitmap = RotateBitmap(bitmap,rotation + 90 + (float)offsetR);
 	}
 	
+	public void setExploded(){
+		exploded = true;
+	}
 	
 	
 	}

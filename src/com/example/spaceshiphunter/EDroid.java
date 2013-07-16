@@ -201,6 +201,10 @@ public class EDroid {
 		destinationX = (float)x;
 		destinationY = (float)y;
 	}
+	
+	public void fireHit(int damage){
+		healthPoints -= damage;
+	}
 	}
 
 	
