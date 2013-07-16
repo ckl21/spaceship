@@ -186,6 +186,8 @@ public class MainGamePanel extends SurfaceView implements
 					eDroid.lasers.get(i).exploded == false){
 				eDroid.lasers.get(i).setExploded();
 				eDroid.fireHit(5);
+
+
 			}
 		}
 
