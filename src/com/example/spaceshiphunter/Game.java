@@ -35,6 +35,8 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 	MainGamePanel gamePanel;
 	FrameLayout game;
 	RelativeLayout weaponLayout;
+	ImageButton weapon1;
+	ImageButton weapon2;
 
 	
     @Override
@@ -48,7 +50,7 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
        	weaponLayout = new RelativeLayout(this);
        	  
         //Weapon1
-        ImageButton weapon1 = new ImageButton(this);
+       	weapon1 = new ImageButton(this);
         weapon1.setBackgroundResource(R.drawable.weapon1);
         weapon1.setId(99);        
         RelativeLayout.LayoutParams b1 = new LayoutParams(
@@ -63,7 +65,7 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
         weapon1.setOnTouchListener(this);
         
         //Weapon2
-       ImageButton weapon2 = new ImageButton(this);
+       weapon2 = new ImageButton(this);
        weapon2.setBackgroundResource(R.drawable.weapon2);
        weapon2.setId(100);
        RelativeLayout.LayoutParams b2 = new LayoutParams(
@@ -141,17 +143,25 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		if(v.getId()== 99){
-			if(event.getAction() == MotionEvent.ACTION_DOWN)
-			MainThread.getGamePanel().check1(true);			
-		else if(v.getId()== 99&& event.getAction() == MotionEvent.ACTION_UP)
+			if(event.getAction() == MotionEvent.ACTION_DOWN){
+			MainThread.getGamePanel().check1(true);		
+			weapon1.setBackgroundResource(R.drawable.weapon1_pressed);
+			}
+		else if(v.getId()== 99 && event.getAction() == MotionEvent.ACTION_UP){
 			MainThread.getGamePanel().check1(false);
+			weapon1.setBackgroundResource(R.drawable.weapon1);
+			}
 		}
 		
 		if(v.getId()==100){
-			if(event.getAction() == MotionEvent.ACTION_DOWN)
-				MainThread.getGamePanel().check2(true);			
-			else if(v.getId()== 99&& event.getAction() == MotionEvent.ACTION_UP)
+			if(event.getAction() == MotionEvent.ACTION_DOWN){
+				MainThread.getGamePanel().check2(true);		
+				weapon2.setBackgroundResource(R.drawable.weapon2_pressed);
+			}
+			else if(v.getId()== 100 && event.getAction() == MotionEvent.ACTION_UP){
 				MainThread.getGamePanel().check2(false);
+				weapon2.setBackgroundResource(R.drawable.weapon2);
+			}
 		}
 		
 		return false;

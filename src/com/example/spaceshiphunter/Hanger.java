@@ -11,7 +11,9 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 public class Hanger extends Activity implements OnClickListener {
-
+	
+	ImageButton btn;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -21,10 +23,9 @@ public class Hanger extends Activity implements OnClickListener {
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
 		RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT );
 
-
-		      ImageButton btn = new ImageButton(this);
-		      String prevAct = getIntent().getExtras().getString("FROM");
-		      if (prevAct.equals("mission")){
+				btn = new ImageButton(this);
+				String prevAct = getIntent().getExtras().getString("FROM");
+				if (prevAct.equals("mission")){
 		    	  //replace with launch button
 		      btn.setBackgroundResource(R.drawable.launch);
 		      btn.setId(1);
@@ -59,11 +60,13 @@ public class Hanger extends Activity implements OnClickListener {
 			Intent i = new Intent(this, Game.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(i);
+			btn.setBackgroundResource(R.drawable.launch_pressed);
 			finish();
 		}else if(v.getId() == 2){
 			Intent i = new Intent(this, Mission.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(i);
+			btn.setBackgroundResource(R.drawable.mission_selected_pressed);
 			finish();
 		}
 		
