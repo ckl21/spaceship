@@ -46,7 +46,7 @@ public class MainGamePanel extends SurfaceView implements
 	long enemyDelay = 3000;
 	int droidFrame = 0;
 	long droidTimer;
-	long droidTimerDelay = 100;
+	long droidTimerDelay = 150;
 	private double targetX = 0;
 	private double targetY;
 	float offsetX = 0;

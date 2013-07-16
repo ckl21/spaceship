@@ -147,10 +147,11 @@ public class Droid {
 			yRecoilHolder = 0;
 			yKnockback = 0;
 
-			angle = Math.atan2(accelY,accelX);
-			rotation = (float) Math.toDegrees(angle);
-			
-			rotatedbitmap = RotateBitmap(bitmap,rotation + 90);
+			if (dying == false){
+				angle = Math.atan2(accelY,accelX);
+				rotation = (float) Math.toDegrees(angle);
+			}
+				rotatedbitmap = RotateBitmap(bitmap,rotation + 90);
 			
 				
 				for ( int i = 0; i < lasers.size(); i++ ) {
