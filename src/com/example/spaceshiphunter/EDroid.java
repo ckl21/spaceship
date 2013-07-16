@@ -24,7 +24,7 @@ public class EDroid {
 	public float newY;
 	public float accelX;
 	public float accelY;
-	public int healthPoints = 50;
+	public int healthPoints = 100;
 	private double xSpeed;
 	private double ySpeed;
 	private double maxSpeed = 10;
@@ -98,7 +98,9 @@ public class EDroid {
 				lasers.get(i).draw(canvas);
 				
 		}
-		canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2), y - (rotatedbitmap.getHeight() / 2), null);
+		if (healthPoints > 0){
+			canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2), y - (rotatedbitmap.getHeight() / 2), null);
+		}
 	}
 
 	public static Bitmap RotateBitmap(Bitmap source, float angle)
