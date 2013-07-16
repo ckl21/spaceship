@@ -34,11 +34,19 @@ public class MainGamePanel extends SurfaceView implements
 	Bitmap laser4;
 	Bitmap player0;
 	Bitmap player1;
+	Bitmap player2;
+	Bitmap player3;
+	Bitmap playerd0;
+	Bitmap playerd1;
+	Bitmap playerd2;
+	Bitmap playerd3;
+	Bitmap playerd4;
+	Bitmap playerd5;
 	long previousTime = 0;
 	long enemyDelay = 3000;
 	int droidFrame = 0;
 	long droidTimer;
-	long droidTimerDelay = 1000;
+	long droidTimerDelay = 100;
 	private double targetX = 0;
 	private double targetY;
 	float offsetX = 0;
@@ -55,8 +63,16 @@ public class MainGamePanel extends SurfaceView implements
 		getHolder().addCallback(this);
 
 		// create droid and load bitmap
-		player0 = BitmapFactory.decodeResource(getResources(), R.drawable.player0);
+		player0 = BitmapFactory.decodeResource(getResources(), R.drawable.player);
 		player1 = BitmapFactory.decodeResource(getResources(), R.drawable.player1);
+		player2 = BitmapFactory.decodeResource(getResources(), R.drawable.player2);
+		player3 = BitmapFactory.decodeResource(getResources(), R.drawable.player3);
+		playerd0 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death0);
+		playerd1 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death1);
+		playerd2 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death2);
+		playerd3 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death3);
+		playerd4 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death4);
+		playerd5 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death5);
 		droid = new Droid(player0, 50, 50);
 		eDroid = new EDroid(BitmapFactory.decodeResource(getResources(), R.drawable.spaceship), 600, 400);
 		laser = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one);
@@ -132,16 +148,53 @@ public class MainGamePanel extends SurfaceView implements
 
 	public void update() {
 
-		if (System.currentTimeMillis() > droidTimer + droidTimerDelay){
-			if (droidFrame == 0){
+		//set player ship image based on damage
+		if (droid.healthPoints <= 150 && droidFrame == 0){
 			droid.changeBaseBitmap(player1);
 			droidFrame = 1;
-			}else{
-				droid.changeBaseBitmap(player0);
-				droidFrame = 0;
 			}
-			droidTimer = System.currentTimeMillis();
+		if (droid.healthPoints <= 100 && droidFrame == 1){
+			droid.changeBaseBitmap(player2);
+			droidFrame = 2;
+			}
+		if (droid.healthPoints <= 50 && droidFrame == 2){
+			droid.changeBaseBitmap(player3);
+			droidFrame = 3;
+			}
+		
+		if (droid.healthPoints <= 0 ){
+			if (droidFrame == 3){
+				droid.dying = true;
+				droid.changeBaseBitmap(playerd0);
+				droidTimer = System.currentTimeMillis();
+				droidFrame++;
+			}else if (droidFrame == 4 && System.currentTimeMillis() > droidTimer + droidTimerDelay){
+				droid.changeBaseBitmap(playerd1);
+				droidTimer = System.currentTimeMillis();
+				droidFrame++;
+			}else if (droidFrame == 5 && System.currentTimeMillis() > droidTimer + droidTimerDelay){
+				droid.changeBaseBitmap(playerd2);
+				droidTimer = System.currentTimeMillis();
+				droidFrame++;
+			}else if (droidFrame == 6 && System.currentTimeMillis() > droidTimer + droidTimerDelay){
+				droid.changeBaseBitmap(playerd3);
+				droidTimer = System.currentTimeMillis();
+				droidFrame++;
+			}else if (droidFrame == 7 && System.currentTimeMillis() > droidTimer + droidTimerDelay){
+				droid.changeBaseBitmap(playerd4);
+				droidTimer = System.currentTimeMillis();
+				droidFrame++;
+			}else if (droidFrame == 8 && System.currentTimeMillis() > droidTimer + droidTimerDelay){
+				droid.changeBaseBitmap(playerd5);
+				droidTimer = System.currentTimeMillis();
+				droidFrame++;
+			}else if (droidFrame == 9 && System.currentTimeMillis() > droidTimer + droidTimerDelay){
+				droid.dead = true;
+				droidFrame++;
+			}
 		}
+		
+		
 		if (eDroid.healthPoints > 0){
 			if (eDroid.state == 0){
 					
@@ -153,7 +206,7 @@ public class MainGamePanel extends SurfaceView implements
 				previousTime = System.currentTimeMillis();
 				eDroid.update();
 			}else if (eDroid.state == 1){
-				if(System.currentTimeMillis() < previousTime + enemyDelay){
+				if(System.currentTimeMillis() < previousTime + enemyDelay && droid.dying == false){
 					targetX = droid.getX();
 					targetY = droid.getY();
 					eDroid.setDestination(targetX, targetY);
@@ -219,6 +272,7 @@ public class MainGamePanel extends SurfaceView implements
 					droid.lasers.get(i).getY() > eDroid.getY() - eDroid.getBitmap().getHeight()/2 && 
 					droid.lasers.get(i).getY() < eDroid.getY() + eDroid.getBitmap().getHeight()/2 ){
 				droid.lasers.get(i).setExploded();
+				eDroid.knockback(droid.lasers.get(i), 5);
 				eDroid.fireHit(5);
 				
 				}
@@ -253,13 +307,14 @@ public class MainGamePanel extends SurfaceView implements
 			else if (eDroid.lasers.get(i).getX() > getWidth()+50 || eDroid.lasers.get(i).getX() < -50 || eDroid.lasers.get(i).getY() < -50 || eDroid.lasers.get(i).getY() > getHeight() + 50){
 				eDroid.removeLaser(i);
 			}
-			else if(eDroid.lasers.get(i).exploded == false){ 
+			else if(eDroid.lasers.get(i).exploded == false && droid.dying == false){ 
 				if(eDroid.lasers.get(i).getX() > droid.getX() - droid.getBitmap().getWidth()/2 && 
 						eDroid.lasers.get(i).getX() < droid.getX() + droid.getBitmap().getWidth()/2 && 
 						eDroid.lasers.get(i).getY() > droid.getY() - droid.getBitmap().getHeight()/2 && 
 						eDroid.lasers.get(i).getY() < droid.getY() + droid.getBitmap().getHeight()/2 ){
 					eDroid.lasers.get(i).setExploded();
-					droid.fireHit(5);
+					droid.knockback(eDroid.lasers.get(i), 10);
+					droid.fireHit(15);
 					
 					}
 			}else if (eDroid.lasers.get(i).exploded){

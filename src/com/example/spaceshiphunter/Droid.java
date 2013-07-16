@@ -17,7 +17,6 @@ import android.view.MotionEvent;
 public class Droid {
 
 	private Bitmap bitmap;	// the actual bitmap
-	private Bitmap baseBitmap;
 	private Bitmap rotatedbitmap;
 	private float x;			// the X coordinate
 	private float y;			// the Y coordinate
@@ -25,7 +24,7 @@ public class Droid {
 	public float newY;
 	public float accelX;
 	public float accelY;
-	public int healthPoints = 100;
+	public int healthPoints = 200;
 	private double xSpeed;
 	private double ySpeed;
 	private double maxSpeed = 6;
@@ -39,23 +38,27 @@ public class Droid {
 	private float recoil = 4;
 	private float xRecoilHolder = 0;
 	private float yRecoilHolder = 0;
+	private float xKnockback = 0;
+	private float yKnockback = 0;
 	private double angle;
+	public boolean dead = false;
+	public boolean dying = false;
 
 	
 
 	
 	public Droid(Bitmap bitmap, int x, int y) {
-		this.baseBitmap = bitmap;
+		this.bitmap = bitmap;
 		this.x = x;
 		this.y = y;
 
 	}
 	
 	public Bitmap getBitmap() {
-		return baseBitmap;
+		return bitmap;
 	}
 	public void setBitmap(Bitmap bitmap) {
-		this.baseBitmap = bitmap;
+		this.bitmap = bitmap;
 	}
 	public float getX() {
 		return x;
@@ -91,9 +94,9 @@ public class Droid {
 	public void draw(Canvas canvas) {
 
 			
-			if (healthPoints > 0){
-		canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2), y - (rotatedbitmap.getHeight() / 2), null);
-			}
+		if (dead == false){
+			canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2), y - (rotatedbitmap.getHeight() / 2), null);
+		}
 	}
 
 	public static Bitmap RotateBitmap(Bitmap source, float angle)
@@ -129,17 +132,25 @@ public class Droid {
 				ySpeed = -maxSpeed;
 			}
 			
-			xSpeed = xSpeed - (xRecoilHolder * Math.cos(angle));
+			xSpeed = xSpeed - (xRecoilHolder * Math.cos(angle)) + xKnockback;
+			if (dying){
+				xSpeed = 0;
+			}
 			x += xSpeed ;
 			xRecoilHolder = 0;
-			ySpeed =  ySpeed - (yRecoilHolder * Math.sin(angle));
+			xKnockback = 0;
+			ySpeed =  ySpeed - (yRecoilHolder * Math.sin(angle)) + yKnockback;
+			if (dying){
+				ySpeed = 0;
+			}
 			y += ySpeed;
 			yRecoilHolder = 0;
+			yKnockback = 0;
 
 			angle = Math.atan2(accelY,accelX);
 			rotation = (float) Math.toDegrees(angle);
 			
-			rotatedbitmap = RotateBitmap(baseBitmap,rotation + 90);
+			rotatedbitmap = RotateBitmap(bitmap,rotation + 90);
 			
 				
 				for ( int i = 0; i < lasers.size(); i++ ) {
@@ -156,10 +167,10 @@ public class Droid {
 		Laser laser;
 		if (onCD == false){
 			if (firingSide == false){
-				laser = new Laser(bitmapL, x, y, 25, 0, 10, 5);
+				laser = new Laser(bitmapL, x, y, 25, 0, 10, 5, 1.1);
 				firingSide = true;
 			}else{
-				laser = new Laser(bitmapL, x, y, -25, 0, 10, 5);
+				laser = new Laser(bitmapL, x, y, -25, 0, 10, 5, 1.1);
 				firingSide = false;
 			}
 			laser.accelX = accelX;
@@ -182,7 +193,12 @@ public class Droid {
 	}
 	
 	public void changeBaseBitmap(Bitmap bitmap){
-		baseBitmap = bitmap;
+		this.bitmap = bitmap;
+	}
+	
+	public void knockback(Laser laser, double str){
+		xKnockback = (float)(str*laser.getXAngle());
+		yKnockback = (float)(str*laser.getYAngle());
 	}
 	}
 

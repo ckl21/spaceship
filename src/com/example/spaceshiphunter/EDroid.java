@@ -24,7 +24,7 @@ public class EDroid {
 	public float newY;
 	public float accelX;
 	public float accelY;
-	public int healthPoints = 100;
+	public int healthPoints = 250;
 	private double xSpeed;
 	private double ySpeed;
 	private double maxSpeed = 10;
@@ -32,7 +32,7 @@ public class EDroid {
 	private float rotation;
 	public ArrayList<Laser> lasers = new ArrayList<Laser>();
 	private long previousTime;
-	private long fireCooldown = 800;
+	private long fireCooldown = 400;
 	private boolean onCD = false;
 	private boolean firingSide = false;
 	private float recoil = 1;
@@ -44,6 +44,8 @@ public class EDroid {
 	private float destinationY = 600;
 	private float destinationArea = 50;
 	private double deceleration = 0.8;
+	private float xKnockback = 0;
+	private float yKnockback = 0;
 
 	
 
@@ -143,12 +145,14 @@ public class EDroid {
 			xSpeed = xSpeed*deceleration;
 			ySpeed = ySpeed*deceleration;
 			
-			xSpeed = xSpeed - (xRecoilHolder * Math.cos(angle));
+			xSpeed = xSpeed - (xRecoilHolder * Math.cos(angle)) + xKnockback;
 			x += xSpeed ;
 			xRecoilHolder = 0;
-			ySpeed =  ySpeed - (yRecoilHolder * Math.sin(angle));
+			xKnockback = 0;
+			ySpeed =  ySpeed - (yRecoilHolder * Math.sin(angle)) + yKnockback;
 			y += ySpeed;
 			yRecoilHolder = 0;
+			yKnockback = 0;
 
 			
 			angle = Math.atan2(destinationY-y,destinationX-x);
@@ -170,21 +174,24 @@ public class EDroid {
 	
 	public void fireLaser(Bitmap bitmapL){
 		Laser laser;
-		Laser laser2;
 		if (onCD == false){
-			
-			laser = new Laser(bitmapL, x, y, 30, 0, 5, 2);
+			if (firingSide == false){
+				laser = new Laser(bitmapL, x, y, 30, (Math.random()*10)-5, 20, 2, 1.04);
+				firingSide = true;
+			}else{
 		
-			laser2 = new Laser(bitmapL, x, y, -30, 0, 5, 2);
+				laser = new Laser(bitmapL, x, y, -30, (Math.random()*10)-5, 20, 2, 1.04);
+				firingSide = false;
+			}
 	
 			laser.accelX = destinationX - x;
 			laser.accelY = destinationY - y;
-			laser2.accelX = destinationX - x;
-			laser2.accelY = destinationY - y;
+			
+			
 			laser.setRotation();
-			laser2.setRotation();
+			
 			lasers.add(laser);
-			lasers.add(laser2);
+			
 			xRecoilHolder = recoil;
 			yRecoilHolder = recoil;
 			onCD = true;
@@ -203,6 +210,10 @@ public class EDroid {
 	
 	public void fireHit(int damage){
 		healthPoints -= damage;
+	}
+	public void knockback(Laser laser, double str){
+		xKnockback = (float)(str*laser.getXAngle());
+		yKnockback = (float)(str*laser.getYAngle());
 	}
 	}
 

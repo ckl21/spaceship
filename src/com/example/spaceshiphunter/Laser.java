@@ -36,7 +36,7 @@ public class Laser {
 	
 
 	
-	public Laser(Bitmap bitmap, float x, float y, double offsetX, double offsetR, double speed, double iSpeed) {
+	public Laser(Bitmap bitmap, float x, float y, double offsetX, double offsetR, double speed, double iSpeed, double accel) {
 		this.bitmap = bitmap;
 		this.x = x;
 		this.y = y;
@@ -44,6 +44,7 @@ public class Laser {
 		this.offsetR = offsetR;
 		this.maxSpeed = speed;
 		this.speed = iSpeed;
+		this.accel = accel;
 
 	}
 	
@@ -76,6 +77,12 @@ public class Laser {
 		return ySpeed;
 	}
 
+	public double getXAngle(){
+		return Math.cos(angle + Math.toRadians(offsetR));
+	}
+	public double getYAngle(){
+		return Math.sin(angle + Math.toRadians(offsetR));
+	}
 	public void setXSpeed(float x){
 		xSpeed = x;
 	}
