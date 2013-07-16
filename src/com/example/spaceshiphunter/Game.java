@@ -147,7 +147,7 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 			MainThread.getGamePanel().check1(true);		
 			weapon1.setBackgroundResource(R.drawable.weapon1_pressed);
 			}
-		else if(v.getId()== 99 && event.getAction() == MotionEvent.ACTION_UP){
+		else if(event.getAction() == MotionEvent.ACTION_UP){
 			MainThread.getGamePanel().check1(false);
 			weapon1.setBackgroundResource(R.drawable.weapon1);
 			}
@@ -158,7 +158,7 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 				MainThread.getGamePanel().check2(true);		
 				weapon2.setBackgroundResource(R.drawable.weapon2_pressed);
 			}
-			else if(v.getId()== 100 && event.getAction() == MotionEvent.ACTION_UP){
+			else if(event.getAction() == MotionEvent.ACTION_UP){
 				MainThread.getGamePanel().check2(false);
 				weapon2.setBackgroundResource(R.drawable.weapon2);
 			}

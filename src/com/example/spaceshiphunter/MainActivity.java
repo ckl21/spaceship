@@ -6,18 +6,26 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.ToggleButton;
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends Activity implements OnClickListener, OnTouchListener {
 	//file for saved preferences
 	public static final String PREFS_NAME = "MyPrefsFile";
 	MediaPlayer mp;
 	ToggleButton musicToggle;
-	Button missionButton;
-	Button hangerButton;
+	ImageButton missionButton;
+	ImageButton hangerButton;
+	RelativeLayout screenLayout;
+	int marginX = 250;
+	int marginY = 50;
 	boolean silent;
 	float volume = 0.3f;
 
@@ -26,14 +34,45 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+
+		
+		
 		musicToggle = (ToggleButton) findViewById(R.id.soundToggle);
 		musicToggle.setOnClickListener(this);
 		
-		missionButton = (Button) findViewById(R.id.missionButton);
-		missionButton.setOnClickListener(this);
+		missionButton = new ImageButton(this);
+		missionButton.setBackgroundResource(R.drawable.mission);
+		missionButton.setId(10);
+		RelativeLayout.LayoutParams b1layout = new LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
+		b1layout.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+		b1layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+		b1layout.rightMargin=marginX;
+		b1layout.bottomMargin=marginY;
 		
-		hangerButton = (Button) findViewById(R.id.hangerButton);
-		hangerButton.setOnClickListener(this);
+		missionButton.setLayoutParams(b1layout);
+		missionButton.setOnTouchListener(this);
+		
+						
+		hangerButton = new ImageButton(this);
+		hangerButton.setBackgroundResource(R.drawable.hangar);
+		hangerButton.setId(11);
+		RelativeLayout.LayoutParams b2layout = new LayoutParams(
+				RelativeLayout.LayoutParams.WRAP_CONTENT,
+				RelativeLayout.LayoutParams.WRAP_CONTENT);
+		b2layout.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+		b2layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+		b2layout.leftMargin=marginX;
+		b2layout.bottomMargin=marginY;
+		hangerButton.setLayoutParams(b2layout);
+		hangerButton.setOnTouchListener(this);
+		
+		
+		screenLayout = (RelativeLayout)findViewById(R.id.screenLayout);
+		screenLayout.addView(missionButton);
+		screenLayout.addView(hangerButton);
+		
 				
 		//retrieve shared preferences for music state
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
@@ -87,19 +126,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		    editor.commit();
 		}
 		
-		if (v.getId() == R.id.missionButton){
-			Intent i = new Intent(this, Mission.class);
-			i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivity(i);
-			
-		}
-		if (v.getId() == R.id.hangerButton){
-			Intent i = new Intent(this, Hanger.class);
-			i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			i.putExtra("FROM","menu");
-			startActivity(i);
-			
-		}
+		
 		
 	}
 	protected void onStop(){
@@ -110,5 +137,33 @@ public class MainActivity extends Activity implements OnClickListener {
 		 }
 	    super.onStop();
 	   
+	}
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		if (v.getId() == 10){
+			if(event.getAction() == MotionEvent.ACTION_DOWN){
+			Intent i = new Intent(this, Mission.class);
+			i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			startActivity(i);
+			missionButton.setBackgroundResource(R.drawable.mission_pressed);
+		}
+			else if (event.getAction() == MotionEvent.ACTION_UP){
+				missionButton.setBackgroundResource(R.drawable.mission);	
+				}
+		}
+		if (v.getId() == 11){
+			if(event.getAction() == MotionEvent.ACTION_DOWN){
+			Intent i = new Intent(this, Hanger.class);
+			i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			i.putExtra("FROM","menu");
+			startActivity(i);
+			hangerButton.setBackgroundResource(R.drawable.hangar_pressed);
+		}
+			else if (event.getAction() == MotionEvent.ACTION_UP){
+				hangerButton.setBackgroundResource(R.drawable.hangar);	
+				}
+		}
+		return false;
 	}
 }
