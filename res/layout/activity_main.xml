@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/screenLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -8,15 +9,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-     <ImageView
- 		android:id="@+id/image"
-	    android:layout_width="fill_parent" 
-   		android:layout_height="fill_parent" 
- 	  	android:scaleType="centerCrop"
- 		android:src="@drawable/splash_two"
- 	
- 	/>
-     
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/splash_two" />
+
     <TextView
         android:id="@+id/center"
         android:layout_width="wrap_content"
@@ -24,38 +23,15 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
 
-    <Button
-        android:id="@+id/hangerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/missionButton"
-        android:layout_alignBottom="@+id/missionButton"
-        android:layout_marginLeft="60dp"
-        android:layout_toRightOf="@+id/center"
-        android:text="@string/hanger" />
-
-    <Button
-        android:id="@+id/missionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/center"
-        android:layout_marginRight="60dp"
-        android:layout_marginTop="60dp"
-        android:layout_toLeftOf="@+id/center"
-        android:text="@string/missions" />
-
     <ToggleButton
         android:id="@+id/soundToggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:textOn="" 
-		android:textOff="" 
-	    android:text=""
-        android:background="@drawable/toggle_selector" /> 
-       
-     
-        
-    
+        android:background="@drawable/toggle_selector"
+        android:text=""
+        android:textOff=""
+        android:textOn="" />
+
 </RelativeLayout>

@@ -65,15 +65,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int weapon2_pressed=0x7f02001e;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0008;
-        public static final int center=0x7f0a0004;
-        public static final int hangerButton=0x7f0a0005;
+        public static final int action_settings=0x7f0a0007;
+        public static final int center=0x7f0a0005;
         public static final int hangerLayout=0x7f0a0002;
-        public static final int image=0x7f0a0003;
+        public static final int image=0x7f0a0004;
         public static final int image_areas=0x7f0a0001;
-        public static final int missionButton=0x7f0a0006;
         public static final int my_frame=0x7f0a0000;
-        public static final int soundToggle=0x7f0a0007;
+        public static final int screenLayout=0x7f0a0003;
+        public static final int soundToggle=0x7f0a0006;
     }
     public static final class layout {
         public static final int activity_game=0x7f030000;
