@@ -202,11 +202,11 @@ public class Droid {
 		Laser laser;
 		if (onCD == false){
 			if (firingSide == false){
-				laser = new Laser(bitmapL, x, y, 25, 0, 10, 5, 1.1);
+				laser = new Laser(bitmapL, x, y, 25,30, 0, 10, 5, 1.1);
 				firingSide = true;
 				rightFlashing = true;
 			}else{
-				laser = new Laser(bitmapL, x, y, -25, 0, 10, 5, 1.1);
+				laser = new Laser(bitmapL, x, y, -25,30, 0, 10, 5, 1.1);
 				firingSide = false;
 				leftFlashing = true;
 				

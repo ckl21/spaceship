@@ -176,11 +176,11 @@ public class EDroid {
 		Laser laser;
 		if (onCD == false){
 			if (firingSide == false){
-				laser = new Laser(bitmapL, x, y, 30, (Math.random()*10)-5, 20, 2, 1.04);
+				laser = new Laser(bitmapL, x, y, 30,30, (Math.random()*10)-5, 20, 2, 1.04);
 				firingSide = true;
 			}else{
 		
-				laser = new Laser(bitmapL, x, y, -30, (Math.random()*10)-5, 20, 2, 1.04);
+				laser = new Laser(bitmapL, x, y, -30,30, (Math.random()*10)-5, 20, 2, 1.04);
 				firingSide = false;
 			}
 	

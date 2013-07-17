@@ -23,6 +23,7 @@ public class Laser {
 	private float rotation;
 	private double angle;
 	private double offsetX = 0;
+	private double offsetY = 0;
 	private double offsetR = 0;
 	public boolean exploded = false;
 	public long laserTimer;
@@ -36,11 +37,12 @@ public class Laser {
 	
 
 	
-	public Laser(Bitmap bitmap, float x, float y, double offsetX, double offsetR, double speed, double iSpeed, double accel) {
+	public Laser(Bitmap bitmap, float x, float y, double offsetX, double offsetY, double offsetR, double speed, double iSpeed, double accel) {
 		this.bitmap = bitmap;
 		this.x = x;
 		this.y = y;
 		this.offsetX = offsetX;
+		this.offsetY = offsetY;
 		this.offsetR = offsetR;
 		this.maxSpeed = speed;
 		this.speed = iSpeed;
@@ -93,7 +95,7 @@ public class Laser {
 	
 	public void draw(Canvas canvas) {
 		if (animState < 5){
-		canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2) + (float) (offsetX * Math.cos(angle+1.57)), y - (rotatedbitmap.getHeight() / 2) + (float) (offsetX * Math.sin(angle+1.57)), null);
+		canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2) + (float) (offsetX * Math.cos(angle+1.57)) + (float) (offsetY * Math.cos(angle)), y - (rotatedbitmap.getHeight() / 2) + (float) (offsetX * Math.sin(angle+1.57)), null);
 		}
 	}
 
