@@ -28,6 +28,8 @@ public class MainGamePanel extends SurfaceView implements
 	Bitmap missile2;
 	Bitmap missile3;
 	Bitmap missile4;
+	Bitmap leftFlash;
+	Bitmap rightFlash;
 	Bitmap laser1;
 	Bitmap laser2;
 	Bitmap laser3;
@@ -42,6 +44,8 @@ public class MainGamePanel extends SurfaceView implements
 	Bitmap playerd3;
 	Bitmap playerd4;
 	Bitmap playerd5;
+	Bitmap booster1;
+	Bitmap booster2;
 	long previousTime = 0;
 	long enemyDelay = 3000;
 	int droidFrame = 0;
@@ -73,7 +77,11 @@ public class MainGamePanel extends SurfaceView implements
 		playerd3 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death3);
 		playerd4 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death4);
 		playerd5 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death5);
-		droid = new Droid(player0, 50, 50);
+		leftFlash = BitmapFactory.decodeResource(getResources(), R.drawable.leftflash);
+		rightFlash = BitmapFactory.decodeResource(getResources(), R.drawable.rightflash);
+		booster1 = BitmapFactory.decodeResource(getResources(), R.drawable.boosters1);
+		booster2 = BitmapFactory.decodeResource(getResources(), R.drawable.boosters2);
+		droid = new Droid(player0, 50, 50, leftFlash, rightFlash, booster1, booster2);
 		eDroid = new EDroid(BitmapFactory.decodeResource(getResources(), R.drawable.spaceship), 600, 400);
 		laser = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one);
 		laser1 = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one1);
@@ -85,6 +93,8 @@ public class MainGamePanel extends SurfaceView implements
 		missile2 = BitmapFactory.decodeResource(getResources(), R.drawable.missile2);
 		missile3 = BitmapFactory.decodeResource(getResources(), R.drawable.missile3);
 		missile4 = BitmapFactory.decodeResource(getResources(), R.drawable.missile4);
+
+
 		
 		// create the game loop thread
 		thread = new MainThread(getHolder(), this);

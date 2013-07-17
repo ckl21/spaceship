@@ -18,6 +18,17 @@ public class Droid {
 
 	private Bitmap bitmap;	// the actual bitmap
 	private Bitmap rotatedbitmap;
+	private Bitmap bitmapOverlay;
+	private Bitmap rotatedbitmapoverlay;
+	private Bitmap leftFlash;
+	private Bitmap leftRotated;
+	private Bitmap rightRotated;
+	private Bitmap rightFlash;
+	private Bitmap booster1;
+	private Bitmap booster2;
+	private Bitmap rotatedBooster;
+	private boolean leftFlashing = false;
+	private boolean rightFlashing = false;
 	private float x;			// the X coordinate
 	private float y;			// the Y coordinate
 	public float newX;
@@ -47,10 +58,15 @@ public class Droid {
 	
 
 	
-	public Droid(Bitmap bitmap, int x, int y) {
+	public Droid(Bitmap bitmap, int x, int y, Bitmap lf, Bitmap rf, Bitmap booster1, Bitmap booster2) {
 		this.bitmap = bitmap;
 		this.x = x;
 		this.y = y;
+		leftFlash = lf;
+		rightFlash = rf;
+		this.booster1 = booster1;
+		this.booster2 = booster2;
+		
 
 	}
 	
@@ -96,6 +112,15 @@ public class Droid {
 			
 		if (dead == false){
 			canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2), y - (rotatedbitmap.getHeight() / 2), null);
+			if (dying == false){
+				canvas.drawBitmap(rotatedBooster, x - (rotatedBooster.getWidth() / 2), y - (rotatedBooster.getHeight() / 2), null);
+				if (leftFlashing){
+					canvas.drawBitmap(leftRotated, x - (leftRotated.getWidth() / 2), y - (leftRotated.getHeight() / 2), null);
+				}
+				if (rightFlashing){
+					canvas.drawBitmap(rightRotated, x - (rightRotated.getWidth() / 2), y - (rightRotated.getHeight() / 2), null);
+				}
+			}
 		}
 	}
 
@@ -113,6 +138,8 @@ public class Droid {
 			
 			if (onCD && previousTime + fireCooldown <= System.currentTimeMillis()){
 				onCD = false;
+				leftFlashing = false;
+				rightFlashing = false;
 			}
 	
 			
@@ -152,6 +179,13 @@ public class Droid {
 				rotation = (float) Math.toDegrees(angle);
 			}
 				rotatedbitmap = RotateBitmap(bitmap,rotation + 90);
+				leftRotated = RotateBitmap(leftFlash,rotation + 90);
+				rightRotated = RotateBitmap(rightFlash,rotation + 90);
+				if (xSpeed > 3 || ySpeed > 3){
+					rotatedBooster = RotateBitmap(booster2,rotation + 90);
+				}else{
+					rotatedBooster = RotateBitmap(booster1,rotation + 90);
+				}
 			
 				
 				for ( int i = 0; i < lasers.size(); i++ ) {
@@ -170,9 +204,12 @@ public class Droid {
 			if (firingSide == false){
 				laser = new Laser(bitmapL, x, y, 25, 0, 10, 5, 1.1);
 				firingSide = true;
+				rightFlashing = true;
 			}else{
 				laser = new Laser(bitmapL, x, y, -25, 0, 10, 5, 1.1);
 				firingSide = false;
+				leftFlashing = true;
+				
 			}
 			laser.accelX = accelX;
 			laser.accelY = accelY;
@@ -196,6 +233,8 @@ public class Droid {
 	public void changeBaseBitmap(Bitmap bitmap){
 		this.bitmap = bitmap;
 	}
+	
+
 	
 	public void knockback(Laser laser, double str){
 		xKnockback = (float)(str*laser.getXAngle());
