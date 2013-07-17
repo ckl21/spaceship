@@ -61,31 +61,33 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int mission_screen_red=0x7f02001a;
         public static final int mission_select=0x7f02001b;
         public static final int mission_selected_pressed=0x7f02001c;
-        public static final int player=0x7f02001d;
-        public static final int player0=0x7f02001e;
-        public static final int player1=0x7f02001f;
-        public static final int player2=0x7f020020;
-        public static final int player3=0x7f020021;
-        public static final int player_death0=0x7f020022;
-        public static final int player_death1=0x7f020023;
-        public static final int player_death2=0x7f020024;
-        public static final int player_death3=0x7f020025;
-        public static final int player_death4=0x7f020026;
-        public static final int player_death5=0x7f020027;
-        public static final int rightflash=0x7f020028;
-        public static final int soundmuted=0x7f020029;
-        public static final int soundunmuted=0x7f02002a;
-        public static final int sp=0x7f02002b;
-        public static final int space_bg=0x7f02002c;
-        public static final int spaceship=0x7f02002d;
-        public static final int splash_two=0x7f02002e;
-        public static final int superlaser=0x7f02002f;
-        public static final int testimg=0x7f020030;
-        public static final int toggle_selector=0x7f020031;
-        public static final int weapon1=0x7f020032;
-        public static final int weapon1_pressed=0x7f020033;
-        public static final int weapon2=0x7f020034;
-        public static final int weapon2_pressed=0x7f020035;
+        public static final int new_hangar_concept=0x7f02001d;
+        public static final int newhangar_concept=0x7f02001e;
+        public static final int player=0x7f02001f;
+        public static final int player0=0x7f020020;
+        public static final int player1=0x7f020021;
+        public static final int player2=0x7f020022;
+        public static final int player3=0x7f020023;
+        public static final int player_death0=0x7f020024;
+        public static final int player_death1=0x7f020025;
+        public static final int player_death2=0x7f020026;
+        public static final int player_death3=0x7f020027;
+        public static final int player_death4=0x7f020028;
+        public static final int player_death5=0x7f020029;
+        public static final int rightflash=0x7f02002a;
+        public static final int soundmuted=0x7f02002b;
+        public static final int soundunmuted=0x7f02002c;
+        public static final int sp=0x7f02002d;
+        public static final int space_bg=0x7f02002e;
+        public static final int spaceship=0x7f02002f;
+        public static final int splash_two=0x7f020030;
+        public static final int superlaser=0x7f020031;
+        public static final int testimg=0x7f020032;
+        public static final int toggle_selector=0x7f020033;
+        public static final int weapon1=0x7f020034;
+        public static final int weapon1_pressed=0x7f020035;
+        public static final int weapon2=0x7f020036;
+        public static final int weapon2_pressed=0x7f020037;
     }
     public static final class id {
         public static final int action_settings=0x7f0a0007;
@@ -114,6 +116,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class raw {
         public static final int arpanauts=0x7f040000;
         public static final int hhavok=0x7f040001;
+        public static final int hit=0x7f040002;
+        public static final int laser=0x7f040003;
+        public static final int player_destroy=0x7f040004;
     }
     public static final class string {
         public static final int action_settings=0x7f070001;

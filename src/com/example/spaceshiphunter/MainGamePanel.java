@@ -7,6 +7,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -57,12 +60,17 @@ public class MainGamePanel extends SurfaceView implements
 	float offsetY = 3;
 	boolean firing1 = false;
 	boolean firing2 = false;
+	protected static Context mContext;
+	
 
 	
 
 
 	public MainGamePanel(Context context) {
 		super(context);	
+		//Context passing
+		this.mContext = getContext();
+		
 		// adding the callback (this) to the surface holder to intercept events
 		getHolder().addCallback(this);
 
@@ -93,7 +101,7 @@ public class MainGamePanel extends SurfaceView implements
 		missile2 = BitmapFactory.decodeResource(getResources(), R.drawable.missile2);
 		missile3 = BitmapFactory.decodeResource(getResources(), R.drawable.missile3);
 		missile4 = BitmapFactory.decodeResource(getResources(), R.drawable.missile4);
-
+		
 
 		
 		// create the game loop thread
@@ -173,11 +181,14 @@ public class MainGamePanel extends SurfaceView implements
 			}
 		
 		if (droid.healthPoints <= 0 ){
+				
 			if (droidFrame == 3){
 				droid.dying = true;
 				droid.changeBaseBitmap(playerd0);
 				droidTimer = System.currentTimeMillis();
 				droidFrame++;
+				
+				
 			}else if (droidFrame == 4 && System.currentTimeMillis() > droidTimer + droidTimerDelay){
 				droid.changeBaseBitmap(playerd1);
 				droidTimer = System.currentTimeMillis();
@@ -362,11 +373,13 @@ public class MainGamePanel extends SurfaceView implements
 	
 	public void check1(boolean w1){
 		firing1 = w1;
-		
+	
 	}
 	
 	public void check2(boolean w2){
 		firing2 = w2;
 	}
+
+	
 	
 }
