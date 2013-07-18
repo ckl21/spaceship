@@ -6,11 +6,13 @@ package com.example.spaceshiphunter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.media.MediaPlayer;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -127,6 +129,7 @@ public class Droid {
 		else if(dead == true){
 			MediaPlayer pdying = MediaPlayer.create(MainGamePanel.mContext, R.raw.player_destroy);
 			pdying.start();
+			
 		}
 	}
 

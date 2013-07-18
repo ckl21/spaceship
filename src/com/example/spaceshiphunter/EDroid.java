@@ -182,9 +182,16 @@ public class EDroid {
 				laser = new Laser(bitmapL, x, y, 50,60, (Math.random()*10)-5, 20, 2, 1.04);
 				firingSide = true;
 			}else{
+
+				MediaPlayer elaser = MediaPlayer.create(MainGamePanel.mContext, R.raw.missile); 
+				elaser.start();
+				laser = new Laser(bitmapL, x, y, -30,30, (Math.random()*10)-5, 20, 2, 1.04);
+
 		
 				laser = new Laser(bitmapL, x, y, -50,60, (Math.random()*10)-5, 20, 2, 1.04);
+
 				firingSide = false;
+				
 			}
 	
 			laser.accelX = destinationX - x;

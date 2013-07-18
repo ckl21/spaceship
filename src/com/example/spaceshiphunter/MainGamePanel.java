@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -206,7 +207,7 @@ public class MainGamePanel extends SurfaceView implements
 		
 		if (droid.healthPoints <= 0 ){
 				
-			if (droidFrame == 3){
+			if (droidFrame == 3)	{
 				droid.dying = true;
 				droid.changeBaseBitmap(playerd0);
 				droidTimer = System.currentTimeMillis();
