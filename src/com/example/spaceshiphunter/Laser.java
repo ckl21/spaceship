@@ -57,13 +57,13 @@ public class Laser {
 		this.bitmap = bitmap;
 	}
 	public float getX() {
-		return x;
+		return x - (rotatedbitmap.getWidth() / 2) + (float) (offsetX * Math.cos(angle+1.57)) + (float) (offsetY * Math.cos(angle));
 	}
 	public void setX(int x) {
 		this.x = x;
 	}
 	public float getY() {
-		return y;
+		return y - (rotatedbitmap.getHeight() / 2) + (float) (offsetX * Math.sin(angle+1.57) + (float) (offsetY * Math.sin(angle)));
 	}
 	public void setY(int y) {
 		this.y = y;
@@ -95,7 +95,7 @@ public class Laser {
 	
 	public void draw(Canvas canvas) {
 		if (animState < 5){
-		canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2) + (float) (offsetX * Math.cos(angle+1.57)) + (float) (offsetY * Math.cos(angle)), y - (rotatedbitmap.getHeight() / 2) + (float) (offsetX * Math.sin(angle+1.57)), null);
+		canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2) + (float) (offsetX * Math.cos(angle+1.57)) + (float) (offsetY * Math.cos(angle)), y - (rotatedbitmap.getHeight() / 2) + (float) (offsetX * Math.sin(angle+1.57) + (float) (offsetY * Math.sin(angle))), null);
 		}
 	}
 
