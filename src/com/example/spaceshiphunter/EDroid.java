@@ -227,6 +227,9 @@ public class EDroid {
 		xKnockback = (float)(str*laser.getXAngle());
 		yKnockback = (float)(str*laser.getYAngle());
 	}
+	public void changeBaseBitmap(Bitmap bitmap){
+		this.bitmap = bitmap;
+	}
 	}
 
 	
