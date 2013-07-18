@@ -115,6 +115,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class raw {
         public static final int arpanauts=0x7f040000;
         public static final int hhavok=0x7f040001;
+        public static final int hit=0x7f040002;
+        public static final int laser=0x7f040003;
+        public static final int player_destroy=0x7f040004;
     }
     public static final class string {
         public static final int action_settings=0x7f070001;

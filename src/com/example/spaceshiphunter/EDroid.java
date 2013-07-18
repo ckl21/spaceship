@@ -6,10 +6,12 @@ package com.example.spaceshiphunter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -211,6 +213,8 @@ public class EDroid {
 	
 	public void fireHit(int damage){
 		healthPoints -= damage;
+		MediaPlayer ehit = MediaPlayer.create(MainGamePanel.mContext, R.raw.hit); 
+		ehit.start();
 	}
 	public void knockback(Laser laser, double str){
 		xKnockback = (float)(str*laser.getXAngle());

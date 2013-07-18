@@ -9,7 +9,11 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -39,6 +43,10 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 	RelativeLayout weaponLayout;
 	ImageButton weapon1;
 	ImageButton weapon2;
+	Vibrator vb;
+
+	MediaPlayer mPlayer;
+	
 
 	
     @Override
@@ -51,7 +59,11 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
         gamePanel = new MainGamePanel(this);
         game = new FrameLayout(this);
        	weaponLayout = new RelativeLayout(this);
-       	  
+       	vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+       
+      
+       	
+       	
         //Weapon1
        	weapon1 = new ImageButton(this);
         weapon1.setBackgroundResource(R.drawable.weapon1);
@@ -150,10 +162,19 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
 			MainThread.getGamePanel().check1(true);		
 			weapon1.setBackgroundResource(R.drawable.weapon1_pressed);
+			vb.vibrate(60);
+			mPlayer = MediaPlayer.create(getBaseContext(), R.raw.laser);
+			mPlayer.start();
+			mPlayer.setLooping(true);
+			
+		
+	       
 			}
 		else if(event.getAction() == MotionEvent.ACTION_UP){
 			MainThread.getGamePanel().check1(false);
 			weapon1.setBackgroundResource(R.drawable.weapon1);
+			mPlayer.setLooping(false);
+			
 			}
 		}
 		
@@ -161,6 +182,9 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
 				MainThread.getGamePanel().check2(true);		
 				weapon2.setBackgroundResource(R.drawable.weapon2_pressed);
+				vb.vibrate(60);
+				
+			 
 			}
 			else if(event.getAction() == MotionEvent.ACTION_UP){
 				MainThread.getGamePanel().check2(false);

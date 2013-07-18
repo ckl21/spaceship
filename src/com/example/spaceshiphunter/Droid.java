@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -122,6 +123,11 @@ public class Droid {
 				}
 			}
 		}
+		
+		else if(dead == true){
+			MediaPlayer pdying = MediaPlayer.create(MainGamePanel.mContext, R.raw.player_destroy);
+			pdying.start();
+		}
 	}
 
 	public static Bitmap RotateBitmap(Bitmap source, float angle)
@@ -228,6 +234,8 @@ public class Droid {
 	
 	public void fireHit(int damage){
 		healthPoints -= damage;
+		MediaPlayer phit = MediaPlayer.create(MainGamePanel.mContext, R.raw.hit); 
+		phit.start();
 	}
 	
 	public void changeBaseBitmap(Bitmap bitmap){
