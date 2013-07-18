@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -49,6 +50,7 @@ public class EDroid {
 	private float xKnockback = 0;
 	private float yKnockback = 0;
 	boolean dead = false;
+
 
 	
 
@@ -182,12 +184,7 @@ public class EDroid {
 				laser = new Laser(bitmapL, x, y, 50,60, (Math.random()*10)-5, 20, 2, 1.04);
 				firingSide = true;
 			}else{
-
-				MediaPlayer elaser = MediaPlayer.create(MainGamePanel.mContext, R.raw.missile); 
-				elaser.start();
 				laser = new Laser(bitmapL, x, y, -30,30, (Math.random()*10)-5, 20, 2, 1.04);
-
-		
 				laser = new Laser(bitmapL, x, y, -50,60, (Math.random()*10)-5, 20, 2, 1.04);
 
 				firingSide = false;

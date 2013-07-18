@@ -237,8 +237,7 @@ public class Droid {
 	
 	public void fireHit(int damage){
 		healthPoints -= damage;
-		MediaPlayer phit = MediaPlayer.create(MainGamePanel.mContext, R.raw.hit); 
-		phit.start();
+		
 	}
 	
 	public void changeBaseBitmap(Bitmap bitmap){
