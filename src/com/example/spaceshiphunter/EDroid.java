@@ -48,6 +48,7 @@ public class EDroid {
 	private double deceleration = 0.8;
 	private float xKnockback = 0;
 	private float yKnockback = 0;
+	boolean dead = false;
 
 	
 
@@ -178,12 +179,17 @@ public class EDroid {
 		Laser laser;
 		if (onCD == false){
 			if (firingSide == false){
-				laser = new Laser(bitmapL, x, y, 30,30, (Math.random()*10)-5, 20, 2, 1.04);
+				laser = new Laser(bitmapL, x, y, 50,60, (Math.random()*10)-5, 20, 2, 1.04);
 				firingSide = true;
 			}else{
+
 				MediaPlayer elaser = MediaPlayer.create(MainGamePanel.mContext, R.raw.missile); 
 				elaser.start();
 				laser = new Laser(bitmapL, x, y, -30,30, (Math.random()*10)-5, 20, 2, 1.04);
+
+		
+				laser = new Laser(bitmapL, x, y, -50,60, (Math.random()*10)-5, 20, 2, 1.04);
+
 				firingSide = false;
 				
 			}

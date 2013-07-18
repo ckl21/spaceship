@@ -3,6 +3,7 @@ package com.example.spaceshiphunter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -61,9 +62,9 @@ public class MainGamePanel extends SurfaceView implements
 	float offsetY = 3;
 	boolean firing1 = false;
 	boolean firing2 = false;
+	boolean gameEnded = false;
 	protected static Context mContext;
 	
-
 	
 
 
@@ -91,7 +92,7 @@ public class MainGamePanel extends SurfaceView implements
 		booster1 = BitmapFactory.decodeResource(getResources(), R.drawable.boosters1);
 		booster2 = BitmapFactory.decodeResource(getResources(), R.drawable.boosters2);
 		droid = new Droid(player0, 50, 50, leftFlash, rightFlash, booster1, booster2);
-		eDroid = new EDroid(BitmapFactory.decodeResource(getResources(), R.drawable.spaceship), 600, 400);
+		eDroid = new EDroid(BitmapFactory.decodeResource(getResources(), R.drawable.enemyship), 600, 400);
 		laser = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one);
 		laser1 = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one1);
 		laser2 = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one2);
@@ -102,8 +103,6 @@ public class MainGamePanel extends SurfaceView implements
 		missile2 = BitmapFactory.decodeResource(getResources(), R.drawable.missile2);
 		missile3 = BitmapFactory.decodeResource(getResources(), R.drawable.missile3);
 		missile4 = BitmapFactory.decodeResource(getResources(), R.drawable.missile4);
-		
-
 		
 		// create the game loop thread
 		thread = new MainThread(getHolder(), this);
@@ -166,6 +165,31 @@ public class MainGamePanel extends SurfaceView implements
 	}
 
 	public void update() {
+		if (gameEnded == false){
+			if(droid.dead){
+		
+				Context context = getContext();
+				Intent i = new Intent(context, Score.class);
+				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				i.putExtra("Winner", "player" );
+		    	context.startActivity(i); 
+		    	((Activity)(context)).finish();
+		    	Log.d(TAG, "end game screen");
+		    	gameEnded = true;
+		    	
+			}
+			
+			if(eDroid.dead){
+				Context context = getContext();
+				Intent i = new Intent(context, Score.class);
+				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				i.putExtra("Winner", "enemy");
+		    	context.startActivity(i); 
+		    	gameEnded = true;
+			}
+		}
+		
+
 
 		//set player ship image based on damage
 		if (droid.healthPoints <= 150 && droidFrame == 0){

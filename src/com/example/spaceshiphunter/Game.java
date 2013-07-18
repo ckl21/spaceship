@@ -4,6 +4,7 @@ package com.example.spaceshiphunter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -50,6 +51,7 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	
         super.onCreate(savedInstanceState);// requesting to turn the title OFF
         requestWindowFeature(Window.FEATURE_NO_TITLE);// making it full screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);// set our MainGamePanel as the View
@@ -106,6 +108,7 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
         Log.d(TAG, "View added");
         mySensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		myAccelerometer = mySensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		
     }
 
 	@Override
@@ -191,6 +194,8 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 		
 		return false;
 	}
+	
+	
 
 
 }
