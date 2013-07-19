@@ -216,7 +216,7 @@ public class Droid {
 				laser = new Laser(bitmapL, x, y, 25,30, 0, 10, 5, 1.1);
 				firingSide = true;
 				rightFlashing = true;
-				Game.spool.play(Game.lasersfx,Game.volume,Game.volume,0,0,1.3f);
+				Game.spool.play(Game.lasersfx,Game.volume,Game.volume,0,0,0.8f);
 			}else{
 				laser = new Laser(bitmapL, x, y, -25,30, 0, 10, 5, 1.1);
 				firingSide = false;
