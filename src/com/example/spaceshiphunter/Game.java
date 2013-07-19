@@ -46,7 +46,7 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 	Vibrator vb;
 
 	MediaPlayer mPlayer;
-	
+	SoundPool spool;
 
 	
     @Override
@@ -60,8 +60,8 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
         game = new FrameLayout(this);
        	weaponLayout = new RelativeLayout(this);
        	vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-       
-      
+        AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+        spool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
        	
        	
         //Weapon1
@@ -163,9 +163,10 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 			MainThread.getGamePanel().check1(true);		
 			weapon1.setBackgroundResource(R.drawable.weapon1_pressed);
 			vb.vibrate(60);
-			mPlayer = MediaPlayer.create(getBaseContext(), R.raw.laser);
-			mPlayer.start();
-			mPlayer.setLooping(true);
+			//spool.play(R.raw.laser,1,1,1,0,1);
+			//mPlayer = MediaPlayer.create(getBaseContext(), R.raw.laser);
+			//mPlayer.start();
+			//mPlayer.setLooping(true);
 			
 		
 	       

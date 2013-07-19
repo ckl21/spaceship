@@ -79,10 +79,14 @@ public class MainGamePanel extends SurfaceView implements
 	protected static Context mContext;
 	
 	
+	
+	
+	
 
 
 	public MainGamePanel(Context context) {
 		super(context);	
+		
 		//Context passing
 		this.mContext = getContext();
 		
@@ -137,6 +141,7 @@ public class MainGamePanel extends SurfaceView implements
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
+		
 	}
 
 	@Override
@@ -340,6 +345,7 @@ public class MainGamePanel extends SurfaceView implements
 					targetY = droid.getY();
 					eDroid.setDestination(targetX, targetY);
 					eDroid.fireLaser(missile);
+					//sPool.play(R.raw.missile, 1, 1, 1, 0, 1);
 					eDroid.update();
 				}else{
 					targetX = Math.random()*(getWidth()-eDroid.getBitmap().getWidth()) + eDroid.getBitmap().getWidth()/2;
@@ -444,6 +450,8 @@ public class MainGamePanel extends SurfaceView implements
 					eDroid.lasers.get(i).setExploded();
 					droid.knockback(eDroid.lasers.get(i), 10);
 					droid.fireHit(15);
+					//sPool.play(R.raw.hit, 1, 1, 1, 0, 1);
+					
 					
 					}
 			}else if (eDroid.lasers.get(i).exploded){
@@ -486,8 +494,8 @@ public class MainGamePanel extends SurfaceView implements
 	
 	public void check2(boolean w2){
 		firing2 = w2;
+		
 	}
 
-	
 	
 }
