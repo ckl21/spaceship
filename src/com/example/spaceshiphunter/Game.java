@@ -52,6 +52,8 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 	static int hitsfx;
 	static int enemydeathsfx;
 	static int playerdeathsfx;
+	static int enemyhitsfx;
+	static float volume;
 	 
 	
     @Override
@@ -78,7 +80,19 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
         hitsfx = spool.load(this, R.raw.hit,5);
         enemydeathsfx = spool.load(this, R.raw.enemy_destroy, 5);
         playerdeathsfx =spool.load(this, R.raw.player_destroy, 5);
+        enemyhitsfx = spool.load(this, R.raw.enemy_hit, 5);
+        if (MainActivity.silent == true){
+        	volume = 0f;
+        }
         
+        else {
+        	volume = 0.5f;
+        }
+        mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.battle);
+    	mPlayer.setVolume(volume,volume);
+    	mPlayer.setLooping(true);
+    	mPlayer.start();
+    	
       
        	
         //Weapon1
@@ -138,11 +152,20 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 	@Override
 	protected void onStop() {
 		Log.d(TAG, "Stopping...");
-		super.onStop();
+		if(mPlayer != null){
+			super.onStop();
+			mPlayer.stop();
+			mPlayer.release();
+			mPlayer = null;
+		}
 	}
 	@Override
 	protected void onResume() {
 		super.onResume();
+		 mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.battle);
+	    	mPlayer.setVolume(volume,volume);
+	    	mPlayer.setLooping(true);
+	    	mPlayer.start();
 		mySensorManager.registerListener(this, myAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 	}
 	

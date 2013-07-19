@@ -1,6 +1,8 @@
 package com.example.spaceshiphunter;
 
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -26,15 +28,19 @@ public class MainActivity extends Activity implements OnClickListener, OnTouchLi
 	RelativeLayout screenLayout;
 	int marginX = 250;
 	int marginY = 50;
-	boolean silent;
-	float volume = 0.3f;
+	static boolean silent;
+	static float volume = 0.35f;
+	static SoundPool spool;
+	static int buttonsfx;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-
+		//Sound effects
+		spool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+		buttonsfx = spool.load(this, R.raw.buttonpress,0);
 		
 		
 		musicToggle = (ToggleButton) findViewById(R.id.soundToggle);
@@ -143,10 +149,13 @@ public class MainActivity extends Activity implements OnClickListener, OnTouchLi
 	public boolean onTouch(View v, MotionEvent event) {
 		if (v.getId() == 10){
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
+			spool.play(buttonsfx, volume, volume, 1, 0, 1);
 			Intent i = new Intent(this, Mission.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(i);
 			missionButton.setBackgroundResource(R.drawable.mission_pressed);
+			spool.play(buttonsfx, volume, volume, 1, 0, 1);
+			
 		}
 			else if (event.getAction() == MotionEvent.ACTION_UP){
 				missionButton.setBackgroundResource(R.drawable.mission);	
@@ -154,6 +163,7 @@ public class MainActivity extends Activity implements OnClickListener, OnTouchLi
 		}
 		if (v.getId() == 11){
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
+			spool.play(buttonsfx, volume, volume, 1, 0, 1);
 			Intent i = new Intent(this, Hanger.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			i.putExtra("FROM","menu");
