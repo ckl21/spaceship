@@ -27,6 +27,10 @@ public class MainGamePanel extends SurfaceView implements
 	private MainThread thread;
 	private Droid droid;
 	private EDroid eDroid;
+	private Marker marker3;
+	private Marker marker1;
+	private Marker marker2;
+	private Marker marker4;
 	Bitmap laser;
 	Bitmap missile;
 	Bitmap missile1;
@@ -61,6 +65,7 @@ public class MainGamePanel extends SurfaceView implements
 	Bitmap enemyd5;
 	Bitmap booster1;
 	Bitmap booster2;
+	Bitmap marker;
 	long previousTime = 0;
 	long enemyDelay = 3000;
 	int droidFrame = 0;
@@ -122,6 +127,7 @@ public class MainGamePanel extends SurfaceView implements
 		booster2 = BitmapFactory.decodeResource(getResources(), R.drawable.boosters2);
 		droid = new Droid(player0, 50, 50, leftFlash, rightFlash, booster1, booster2);
 		eDroid = new EDroid(enemy0, 600, 400);
+		
 		laser = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one);
 		laser1 = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one1);
 		laser2 = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one2);
@@ -132,6 +138,12 @@ public class MainGamePanel extends SurfaceView implements
 		missile2 = BitmapFactory.decodeResource(getResources(), R.drawable.missile2);
 		missile3 = BitmapFactory.decodeResource(getResources(), R.drawable.missile3);
 		missile4 = BitmapFactory.decodeResource(getResources(), R.drawable.missile4);
+		marker = BitmapFactory.decodeResource(getResources(), R.drawable.marker);
+		marker3 = new Marker(marker,0, 0, 3);
+		marker1 = new Marker(marker,0, 0, 1);
+		marker2 = new Marker(marker,0, 0, 2);
+		marker4 = new Marker(marker,0, 0, 4);
+
 		
 		// create the game loop thread
 		thread = new MainThread(getHolder(), this);
@@ -194,6 +206,10 @@ public class MainGamePanel extends SurfaceView implements
 			eDroid.lasers.get(i).draw(canvas);
 			
 	}
+		marker3.draw(canvas);
+		marker1.draw(canvas);
+		marker2.draw(canvas);
+		marker4.draw(canvas);
 	}
 
 	public void update() {
@@ -486,6 +502,10 @@ public class MainGamePanel extends SurfaceView implements
 				}
 			}
 		}
+		marker3.update(getHeight(), getWidth());
+		marker1.update(getHeight(), getWidth());
+		marker2.update(getHeight(), getWidth());
+		marker4.update(getHeight(), getWidth());
 		
 
 	}
@@ -496,6 +516,15 @@ public class MainGamePanel extends SurfaceView implements
 		droid.newY = newY - offsetY;
 		droid.accelX = accelX - offsetX;
 		droid.accelY = accelY - offsetY;
+		marker3.accelX= accelX - offsetX;
+		marker3.accelY= accelY - offsetY;
+		marker1.accelX= accelX - offsetX;
+		marker1.accelY= accelY - offsetY;
+		marker2.accelX= accelX - offsetX;
+		marker2.accelY= accelY - offsetY;
+		marker4.accelX= accelX - offsetX;
+		marker4.accelY= accelY - offsetY;
+		
 	
 	}
 	
