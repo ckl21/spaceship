@@ -264,6 +264,8 @@ public class MainGamePanel extends SurfaceView implements
 				droid.changeBaseBitmap(playerd0);
 				droidTimer = System.currentTimeMillis();
 				droidFrame++;
+				Game.spool.play(Game.playerdeathsfx,0.99f,0.99f, 1, 0, 1);
+				Game.vb.vibrate(1000);
 				
 				
 			}else if (droidFrame == 4 && System.currentTimeMillis() > droidTimer + droidTimerDelay){
@@ -303,6 +305,7 @@ public class MainGamePanel extends SurfaceView implements
 				eDroid.changeBaseBitmap(enemyd0);
 				eDroidTimer = System.currentTimeMillis();
 				eDroidFrame++;
+				Game.spool.play(Game.enemydeathsfx, 0.99f, 0.99f, 1, 0, 1);
 				
 				
 			}else if (eDroidFrame == 4 && System.currentTimeMillis() > eDroidTimer + eDroidTimerDelay){

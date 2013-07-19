@@ -131,8 +131,7 @@ public class Droid {
 		}
 		
 		else if(dead == true){
-			Game.spool.play(Game.playerdeathsfx,0.99f,0.99f, 1, 0, 1);
-			Game.vb.vibrate(1200);
+		
 					}
 	}
 

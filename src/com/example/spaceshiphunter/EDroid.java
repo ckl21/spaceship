@@ -108,9 +108,9 @@ public class EDroid {
 			canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2), y - (rotatedbitmap.getHeight() / 2), null);
 		}
 		
-		else if(dead == true){
-			Game.spool.play(Game.enemydeathsfx, 0.99f, 0.99f, 1, 0, 1);
-			}
+		
+			
+			
 		
 		}
 
