@@ -180,14 +180,14 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 			MainThread.getGamePanel().check1(true);		
 			weapon1.setBackgroundResource(R.drawable.weapon1_pressed);
 			vb.vibrate(40);			
-			spool.play(lasersfx,0.80f,0.80f,0,0,1);
+		
 			
 	       
 			}
 		else if(event.getAction() == MotionEvent.ACTION_UP){
 			MainThread.getGamePanel().check1(false);
 			weapon1.setBackgroundResource(R.drawable.weapon1);
-			//mPlayer.setLooping(false);
+		
 			
 			}
 		}
