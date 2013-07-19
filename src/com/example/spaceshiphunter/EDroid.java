@@ -15,6 +15,7 @@ import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.util.Log;
 import android.view.MotionEvent;
+import com.example.spaceshiphunter.Game;
 
 
 public class EDroid {
@@ -52,7 +53,6 @@ public class EDroid {
 	public boolean dead = false;
 	public boolean dying = false;
 	public boolean end = false;
-
 
 	
 
@@ -107,7 +107,12 @@ public class EDroid {
 		if (dead == false){
 			canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2), y - (rotatedbitmap.getHeight() / 2), null);
 		}
-	}
+		
+		
+			
+			
+		
+		}
 
 	public static Bitmap RotateBitmap(Bitmap source, float angle)
 	{
@@ -190,6 +195,7 @@ public class EDroid {
 		if (onCD == false){
 			if (firingSide == false){
 				laser = new Laser(bitmapL, x, y, 50,60, (Math.random()*10)-5, 20, 2, 1.04);
+				Game.spool.play(Game.missilesfx, 0.99f, 0.99f, 0, 0,1);
 				firingSide = true;
 			}else{
 				laser = new Laser(bitmapL, x, y, -30,30, (Math.random()*10)-5, 20, 2, 1.04);
@@ -225,8 +231,8 @@ public class EDroid {
 	
 	public void fireHit(int damage){
 		healthPoints -= damage;
-		MediaPlayer ehit = MediaPlayer.create(MainGamePanel.mContext, R.raw.hit); 
-		ehit.start();
+		Game.spool.play(Game.hitsfx, 0.99f, 0.99f, 1, 0, 1); 
+	
 	}
 	public void knockback(Laser laser, double str){
 		xKnockback = (float)(str*laser.getXAngle());

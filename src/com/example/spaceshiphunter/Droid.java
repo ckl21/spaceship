@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -57,7 +58,9 @@ public class Droid {
 	private double angle;
 	public boolean dead = false;
 	public boolean dying = false;
+
 	public boolean end = false;
+
 
 	
 
@@ -128,10 +131,8 @@ public class Droid {
 		}
 		
 		else if(dead == true){
-			MediaPlayer pdying = MediaPlayer.create(MainGamePanel.mContext, R.raw.player_destroy);
-			pdying.start();
-			
-		}
+		
+					}
 	}
 
 	public static Bitmap RotateBitmap(Bitmap source, float angle)
@@ -215,6 +216,7 @@ public class Droid {
 				laser = new Laser(bitmapL, x, y, 25,30, 0, 10, 5, 1.1);
 				firingSide = true;
 				rightFlashing = true;
+				Game.spool.play(Game.lasersfx,0.80f,0.80f,0,0,1);
 			}else{
 				laser = new Laser(bitmapL, x, y, -25,30, 0, 10, 5, 1.1);
 				firingSide = false;
@@ -238,7 +240,8 @@ public class Droid {
 	
 	public void fireHit(int damage){
 		healthPoints -= damage;
-		
+		Game.spool.play(Game.hitsfx,0.99f, 0.99f, 0, 0, 1);
+		Game.vb.vibrate(200);
 	}
 	
 	public void changeBaseBitmap(Bitmap bitmap){
