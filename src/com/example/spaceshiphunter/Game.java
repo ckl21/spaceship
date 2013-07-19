@@ -43,11 +43,16 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 	RelativeLayout weaponLayout;
 	ImageButton weapon1;
 	ImageButton weapon2;
-	Vibrator vb;
+	static Vibrator vb;
 
 	MediaPlayer mPlayer;
-	SoundPool spool;
-
+	static SoundPool spool;
+	static int lasersfx; 
+	static int missilesfx;
+	static int hitsfx;
+	static int enemydeathsfx;
+	static int playerdeathsfx;
+	 
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,10 +64,22 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
         gamePanel = new MainGamePanel(this);
         game = new FrameLayout(this);
        	weaponLayout = new RelativeLayout(this);
+       	
+       	
        	vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+       
+        
+        //Load sound effects
         AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
         spool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-       	
+        
+        lasersfx = spool.load(this, R.raw.laser, 5);
+        missilesfx = spool.load(this, R.raw.missile, 5);
+        hitsfx = spool.load(this, R.raw.hit,5);
+        enemydeathsfx = spool.load(this, R.raw.enemy_destroy, 5);
+        playerdeathsfx =spool.load(this, R.raw.player_destroy, 5);
+        
+      
        	
         //Weapon1
        	weapon1 = new ImageButton(this);
@@ -162,19 +179,15 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
 			MainThread.getGamePanel().check1(true);		
 			weapon1.setBackgroundResource(R.drawable.weapon1_pressed);
-			vb.vibrate(60);
-			//spool.play(R.raw.laser,1,1,1,0,1);
-			//mPlayer = MediaPlayer.create(getBaseContext(), R.raw.laser);
-			//mPlayer.start();
-			//mPlayer.setLooping(true);
+			vb.vibrate(40);			
+			spool.play(lasersfx,0.80f,0.80f,0,0,1);
 			
-		
 	       
 			}
 		else if(event.getAction() == MotionEvent.ACTION_UP){
 			MainThread.getGamePanel().check1(false);
 			weapon1.setBackgroundResource(R.drawable.weapon1);
-			mPlayer.setLooping(false);
+			//mPlayer.setLooping(false);
 			
 			}
 		}
@@ -183,7 +196,7 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
 				MainThread.getGamePanel().check2(true);		
 				weapon2.setBackgroundResource(R.drawable.weapon2_pressed);
-				vb.vibrate(60);
+				vb.vibrate(40);
 				
 			 
 			}

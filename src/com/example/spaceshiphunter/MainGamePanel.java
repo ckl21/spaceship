@@ -69,6 +69,8 @@ public class MainGamePanel extends SurfaceView implements
 	boolean firing2 = false;
 	boolean gameEnded = false;
 	protected static Context mContext;
+	SoundPool spool;
+
 	
 	
 	
@@ -122,6 +124,8 @@ public class MainGamePanel extends SurfaceView implements
 		
 		// make the GamePanel focusable so it can handle events
 		setFocusable(true);
+		
+	
 	}
 
 	@Override
@@ -181,7 +185,8 @@ public class MainGamePanel extends SurfaceView implements
 	public void update() {
 		if (gameEnded == false){
 			if(droid.dead){
-		
+				Game.spool.play(Game.playerdeathsfx,0.99f,0.99f, 1, 0, 1);
+	
 				Context context = getContext();
 				Intent i = new Intent(context, Score.class);
 				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -191,15 +196,18 @@ public class MainGamePanel extends SurfaceView implements
 		    	Log.d(TAG, "end game screen");
 		    	gameEnded = true;
 		    	
+		    	
 			}
 			
 			if(eDroid.dead){
+				Game.spool.play(Game.enemydeathsfx, 0.99f, 0.99f, 1, 0, 1);
 				Context context = getContext();
 				Intent i = new Intent(context, Score.class);
 				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				i.putExtra("Winner", "enemy");
 		    	context.startActivity(i); 
 		    	gameEnded = true;
+		    	
 			}
 		}
 		
@@ -298,6 +306,7 @@ public class MainGamePanel extends SurfaceView implements
 		}
 		if (firing1 && droid.healthPoints > 0){
 			droid.fireLaser(laser);
+			
 		}
 		// check collision with right wall if heading right
 		if (droid.getX() + droid.getBitmap().getWidth() / 2 >= getWidth() && droid.getXSpeed() > 0) {
