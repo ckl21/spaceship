@@ -53,6 +53,12 @@ public class MainGamePanel extends SurfaceView implements
 	Bitmap playerd3;
 	Bitmap playerd4;
 	Bitmap playerd5;
+	Bitmap enemyd0;
+	Bitmap enemyd1;
+	Bitmap enemyd2;
+	Bitmap enemyd3;
+	Bitmap enemyd4;
+	Bitmap enemyd5;
 	Bitmap booster1;
 	Bitmap booster2;
 	long previousTime = 0;
@@ -60,6 +66,8 @@ public class MainGamePanel extends SurfaceView implements
 	int droidFrame = 0;
 	int eDroidFrame = 0;
 	long droidTimer;
+	long eDroidTimer;
+	long eDroidTimerDelay = 150;
 	long droidTimerDelay = 150;
 	private double targetX = 0;
 	private double targetY;
@@ -102,6 +110,12 @@ public class MainGamePanel extends SurfaceView implements
 		playerd3 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death3);
 		playerd4 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death4);
 		playerd5 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death5);
+		enemyd0 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyd0);
+		enemyd1 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyd1);
+		enemyd2 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyd2);
+		enemyd3 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyd3);
+		enemyd4 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyd4);
+		enemyd5 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyd5);
 		leftFlash = BitmapFactory.decodeResource(getResources(), R.drawable.leftflash);
 		rightFlash = BitmapFactory.decodeResource(getResources(), R.drawable.rightflash);
 		booster1 = BitmapFactory.decodeResource(getResources(), R.drawable.boosters1);
@@ -184,28 +198,29 @@ public class MainGamePanel extends SurfaceView implements
 
 	public void update() {
 		if (gameEnded == false){
-			if(droid.dead){
-				Game.spool.play(Game.playerdeathsfx,0.99f,0.99f, 1, 0, 1);
-	
+			if(droid.end){
 				Context context = getContext();
 				Intent i = new Intent(context, Score.class);
 				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				i.putExtra("Winner", "player" );
 		    	context.startActivity(i); 
 		    	((Activity)(context)).finish();
-		    	Log.d(TAG, "end game screen");
-		    	gameEnded = true;
-		    	
+		    	Log.d(TAG, "droid win");
+		    	gameEnded = true;    	
 		    	
 			}
 			
-			if(eDroid.dead){
-				Game.spool.play(Game.enemydeathsfx, 0.99f, 0.99f, 1, 0, 1);
+
+
+			else if(eDroid.end){
+
 				Context context = getContext();
 				Intent i = new Intent(context, Score.class);
 				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				i.putExtra("Winner", "enemy");
 		    	context.startActivity(i); 
+		    	((Activity)(context)).finish();
+		    	Log.d(TAG, "edroid win");
 		    	gameEnded = true;
 		    	
 			}
@@ -241,6 +256,7 @@ public class MainGamePanel extends SurfaceView implements
 			eDroidFrame = 3;
 			}
 		
+		//player death animation
 		if (droid.healthPoints <= 0 ){
 				
 			if (droidFrame == 3)	{
@@ -273,8 +289,51 @@ public class MainGamePanel extends SurfaceView implements
 			}else if (droidFrame == 9 && System.currentTimeMillis() > droidTimer + droidTimerDelay){
 				droid.dead = true;
 				droidFrame++;
+			}else if (droidFrame == 10 && System.currentTimeMillis() > droidTimer + droidTimerDelay*20){
+				droid.end = true;
+				droidFrame++;
 			}
 		}
+		
+		//enemy death animation
+		if (eDroid.healthPoints <= 0 ){
+				
+			if (eDroidFrame == 3)	{
+				eDroid.dying = true;
+				eDroid.changeBaseBitmap(enemyd0);
+				eDroidTimer = System.currentTimeMillis();
+				eDroidFrame++;
+				
+				
+			}else if (eDroidFrame == 4 && System.currentTimeMillis() > eDroidTimer + eDroidTimerDelay){
+				eDroid.changeBaseBitmap(enemyd1);
+				eDroidTimer = System.currentTimeMillis();
+				eDroidFrame++;
+			}else if (eDroidFrame == 5 && System.currentTimeMillis() > eDroidTimer + eDroidTimerDelay){
+				eDroid.changeBaseBitmap(enemyd2);
+				eDroidTimer = System.currentTimeMillis();
+				eDroidFrame++;
+			}else if (eDroidFrame == 6 && System.currentTimeMillis() > eDroidTimer + eDroidTimerDelay){
+				eDroid.changeBaseBitmap(enemyd3);
+				eDroidTimer = System.currentTimeMillis();
+				eDroidFrame++;
+			}else if (eDroidFrame == 7 && System.currentTimeMillis() > eDroidTimer + eDroidTimerDelay){
+				eDroid.changeBaseBitmap(enemyd4);
+				eDroidTimer = System.currentTimeMillis();
+				eDroidFrame++;
+			}else if (eDroidFrame == 8 && System.currentTimeMillis() > eDroidTimer + eDroidTimerDelay){
+				eDroid.changeBaseBitmap(enemyd5);
+				eDroidTimer = System.currentTimeMillis();
+				eDroidFrame++;
+			}else if (eDroidFrame == 9 && System.currentTimeMillis() > eDroidTimer + eDroidTimerDelay){
+				eDroid.dead = true;
+				eDroidFrame++;
+			}else if (eDroidFrame == 10 && System.currentTimeMillis() > eDroidTimer + eDroidTimerDelay*20){
+				eDroid.end = true;
+				eDroidFrame++;
+			}
+		}
+		
 		
 		
 		if (eDroid.healthPoints > 0){
@@ -350,7 +409,7 @@ public class MainGamePanel extends SurfaceView implements
 			else if (droid.lasers.get(i).getX() > getWidth()+50 || droid.lasers.get(i).getX() < -50 || droid.lasers.get(i).getY() < -50 || droid.lasers.get(i).getY() > getHeight() + 50){
 				droid.removeLaser(i);
 			}
-			else if(droid.lasers.get(i).exploded == false){ 
+			else if(droid.lasers.get(i).exploded == false && eDroid.dying == false){ 
 				if(droid.lasers.get(i).getX() > eDroid.getX() - eDroid.getBitmap().getWidth()/2 && 
 					droid.lasers.get(i).getX() < eDroid.getX() + eDroid.getBitmap().getWidth()/2 && 
 					droid.lasers.get(i).getY() > eDroid.getY() - eDroid.getBitmap().getHeight()/2 && 
@@ -424,6 +483,7 @@ public class MainGamePanel extends SurfaceView implements
 				}
 			}
 		}
+		
 
 	}
 	
@@ -439,6 +499,7 @@ public class MainGamePanel extends SurfaceView implements
 	public void check1(boolean w1){
 		firing1 = w1;
 	
+		
 	}
 	
 	public void check2(boolean w2){
