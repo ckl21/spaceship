@@ -48,7 +48,9 @@ public class EDroid {
 	private double deceleration = 0.8;
 	private float xKnockback = 0;
 	private float yKnockback = 0;
-	boolean dead = false;
+	public boolean dead = false;
+	public boolean dying = false;
+	public boolean end = false;
 
 	
 
@@ -100,7 +102,7 @@ public class EDroid {
 	public void draw(Canvas canvas) {
 
 			
-		if (healthPoints > 0){
+		if (dead == false){
 			canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2), y - (rotatedbitmap.getHeight() / 2), null);
 		}
 	}
@@ -149,18 +151,24 @@ public class EDroid {
 			ySpeed = ySpeed*deceleration;
 			
 			xSpeed = xSpeed - (xRecoilHolder * Math.cos(angle)) + xKnockback;
+			if (dying){
+				xSpeed = 0;
+			}
 			x += xSpeed ;
 			xRecoilHolder = 0;
 			xKnockback = 0;
 			ySpeed =  ySpeed - (yRecoilHolder * Math.sin(angle)) + yKnockback;
+			if (dying){
+				ySpeed = 0;
+			}
 			y += ySpeed;
 			yRecoilHolder = 0;
 			yKnockback = 0;
 
-			
-			angle = Math.atan2(destinationY-y,destinationX-x);
-			rotation = (float) Math.toDegrees(angle);
-			
+			if (dying == false){
+				angle = Math.atan2(destinationY-y,destinationX-x);
+				rotation = (float) Math.toDegrees(angle);
+			}
 			rotatedbitmap = RotateBitmap(bitmap,rotation + 90);
 			
 			

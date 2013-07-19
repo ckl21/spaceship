@@ -57,6 +57,7 @@ public class Droid {
 	private double angle;
 	public boolean dead = false;
 	public boolean dying = false;
+	public boolean end = false;
 
 	
 

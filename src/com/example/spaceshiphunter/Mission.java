@@ -39,13 +39,13 @@ public class Mission extends Activity implements OnTouchListener{
 
 	@Override
 	protected void onResume() {
+		nextActivity = 0;
 		 if (!silent){   
 			 mp = MediaPlayer.create(getApplicationContext(), R.raw.hhavok);
 				mp.setVolume(volume,volume);
 				mp.setLooping(true);
 				mp.start();
 		 }
-		 nextActivity = 0;
 		 super.onResume();
 	}
 	
