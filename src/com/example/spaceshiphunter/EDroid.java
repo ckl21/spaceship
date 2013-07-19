@@ -195,7 +195,7 @@ public class EDroid {
 		if (onCD == false){
 			if (firingSide == false){
 				laser = new Laser(bitmapL, x, y, 50,60, (Math.random()*10)-5, 20, 2, 1.04);
-				Game.spool.play(Game.missilesfx, 0.99f, 0.99f, 0, 0,1);
+				Game.spool.play(Game.missilesfx, Game.volume, Game.volume, 0, 0,0.8f);
 				firingSide = true;
 			}else{
 				laser = new Laser(bitmapL, x, y, -30,30, (Math.random()*10)-5, 20, 2, 1.04);
@@ -231,7 +231,7 @@ public class EDroid {
 	
 	public void fireHit(int damage){
 		healthPoints -= damage;
-		Game.spool.play(Game.hitsfx, 0.99f, 0.99f, 1, 0, 1); 
+		Game.spool.play(Game.enemyhitsfx, Game.volume, Game.volume, 1, 0, 1); 
 	
 	}
 	public void knockback(Laser laser, double str){

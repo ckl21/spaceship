@@ -26,7 +26,7 @@ public class MainActivity extends Activity implements OnClickListener, OnTouchLi
 	RelativeLayout screenLayout;
 	int marginX = 250;
 	int marginY = 50;
-	boolean silent;
+	static boolean silent;
 	float volume = 0.3f;
 
 	@Override

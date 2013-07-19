@@ -264,6 +264,7 @@ public class MainGamePanel extends SurfaceView implements
 				droid.changeBaseBitmap(playerd0);
 				droidTimer = System.currentTimeMillis();
 				droidFrame++;
+				
 				Game.spool.play(Game.playerdeathsfx,0.99f,0.99f, 1, 0, 1);
 				Game.vb.vibrate(1000);
 				
@@ -461,7 +462,7 @@ public class MainGamePanel extends SurfaceView implements
 					eDroid.lasers.get(i).setExploded();
 					droid.knockback(eDroid.lasers.get(i), 10);
 					droid.fireHit(15);
-					//sPool.play(R.raw.hit, 1, 1, 1, 0, 1);
+					
 					
 					
 					}
