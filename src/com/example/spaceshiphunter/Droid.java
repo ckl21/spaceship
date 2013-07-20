@@ -33,8 +33,8 @@ public class Droid {
 	private Bitmap rotatedBooster;
 	private boolean leftFlashing = false;
 	private boolean rightFlashing = false;
-	private float x;			// the X coordinate
-	private float y;			// the Y coordinate
+	float x;			// the X coordinate
+	float y;			// the Y coordinate
 	public float newX;
 	public float newY;
 	public float accelX;
