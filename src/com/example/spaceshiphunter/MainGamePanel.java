@@ -31,6 +31,7 @@ public class MainGamePanel extends SurfaceView implements
 	private Marker marker1;
 	private Marker marker2;
 	private Marker marker4;
+	private Marker cMarker;
 	Bitmap laser;
 	Bitmap missile;
 	Bitmap missile1;
@@ -66,6 +67,7 @@ public class MainGamePanel extends SurfaceView implements
 	Bitmap booster1;
 	Bitmap booster2;
 	Bitmap marker;
+	Bitmap centerMarker;
 	long previousTime = 0;
 	long enemyDelay = 3000;
 	int droidFrame = 0;
@@ -128,6 +130,7 @@ public class MainGamePanel extends SurfaceView implements
 		droid = new Droid(player0, 50, 50, leftFlash, rightFlash, booster1, booster2);
 		eDroid = new EDroid(enemy0, 600, 400);
 		
+		
 		laser = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one);
 		laser1 = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one1);
 		laser2 = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one2);
@@ -139,10 +142,12 @@ public class MainGamePanel extends SurfaceView implements
 		missile3 = BitmapFactory.decodeResource(getResources(), R.drawable.missile3);
 		missile4 = BitmapFactory.decodeResource(getResources(), R.drawable.missile4);
 		marker = BitmapFactory.decodeResource(getResources(), R.drawable.marker);
+		centerMarker = BitmapFactory.decodeResource(getResources(), R.drawable.centermark);
 		marker3 = new Marker(marker,0, 0, 3);
 		marker1 = new Marker(marker,0, 0, 1);
 		marker2 = new Marker(marker,0, 0, 2);
 		marker4 = new Marker(marker,0, 0, 4);
+		cMarker = new Marker(centerMarker,0,0, 5);
 
 		
 		// create the game loop thread
@@ -210,6 +215,7 @@ public class MainGamePanel extends SurfaceView implements
 		marker1.draw(canvas);
 		marker2.draw(canvas);
 		marker4.draw(canvas);
+		cMarker.draw(canvas);
 	}
 
 	public void update() {
@@ -503,10 +509,12 @@ public class MainGamePanel extends SurfaceView implements
 				}
 			}
 		}
+		cMarker.update(getHeight(), getWidth());
 		marker3.update(getHeight(), getWidth());
 		marker1.update(getHeight(), getWidth());
 		marker2.update(getHeight(), getWidth());
 		marker4.update(getHeight(), getWidth());
+		
 		
 
 	}

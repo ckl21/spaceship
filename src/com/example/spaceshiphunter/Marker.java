@@ -48,6 +48,8 @@ public class Marker {
 			this.bitmap = bitmap;
 		}else if(side == 4){
 			this.bitmap = RotateBitmap(bitmap, 90);
+		}else if(side == 5){
+			this.bitmap = bitmap;
 		}
 		this.x = x;
 		this.y = y;
@@ -133,6 +135,10 @@ public class Marker {
 			}
 			if (side == 4){
 				x = bitmap.getWidth()/2;
+			}
+			if (side == 5){
+				x = width/2;
+				y = height - bitmap.getHeight()/2;
 			}
 			
 			
