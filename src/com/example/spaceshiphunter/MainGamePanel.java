@@ -209,8 +209,8 @@ public class MainGamePanel extends SurfaceView implements
 	
 
 	public void render(Canvas canvas) {
-		parX= (float) ((0- 50) + ((0-droid.x)*0.3));
-		parY = (float) ((0- 50) + ((0-droid.y)*0.3));
+		parX= (float) ((0- 55) + ((0-droid.x)*0.3));
+		parY = (float) ((0- 55) + ((0-droid.y)*0.3));
 		canvas.drawBitmap(background, parX, parY, null);
 		
 		eDroid.draw(canvas);
