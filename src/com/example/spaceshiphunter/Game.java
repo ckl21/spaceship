@@ -65,9 +65,7 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
         
         gamePanel = new MainGamePanel(this);
         game = new FrameLayout(this);
-       	weaponLayout = new RelativeLayout(this);
-       	
-       	
+       	weaponLayout = new RelativeLayout(this);   	
        	vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
        
         
