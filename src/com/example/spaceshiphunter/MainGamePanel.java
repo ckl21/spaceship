@@ -32,6 +32,9 @@ public class MainGamePanel extends SurfaceView implements
 	private Marker marker2;
 	private Marker marker4;
 	private Marker cMarker;
+	private Marker cMarker2;
+	private Marker cMarker3;
+	private Marker cMarker4;
 	Bitmap laser;
 	Bitmap missile;
 	Bitmap missile1;
@@ -148,6 +151,9 @@ public class MainGamePanel extends SurfaceView implements
 		marker2 = new Marker(marker,0, 0, 2);
 		marker4 = new Marker(marker,0, 0, 4);
 		cMarker = new Marker(centerMarker,0,0, 5);
+		cMarker2 = new Marker(centerMarker,0,0, 6);
+		cMarker3 = new Marker(centerMarker,0,0, 7);
+		cMarker4 = new Marker(centerMarker,0,0, 8);
 
 		
 		// create the game loop thread
@@ -211,11 +217,15 @@ public class MainGamePanel extends SurfaceView implements
 			eDroid.lasers.get(i).draw(canvas);
 			
 	}
+		cMarker.draw(canvas);
+		cMarker2.draw(canvas);
+		cMarker3.draw(canvas);
+		cMarker4.draw(canvas);
 		marker3.draw(canvas);
 		marker1.draw(canvas);
 		marker2.draw(canvas);
 		marker4.draw(canvas);
-		cMarker.draw(canvas);
+		
 	}
 
 	public void update() {
@@ -483,7 +493,7 @@ public class MainGamePanel extends SurfaceView implements
 						eDroid.lasers.get(i).getY() < droid.getY() + droid.getBitmap().getHeight()/2 ){
 					eDroid.lasers.get(i).setExploded();
 					droid.knockback(eDroid.lasers.get(i), 10);
-					droid.fireHit(15);
+					droid.fireHit(10);
 					
 					
 					
@@ -510,6 +520,9 @@ public class MainGamePanel extends SurfaceView implements
 			}
 		}
 		cMarker.update(getHeight(), getWidth());
+		cMarker2.update(getHeight(), getWidth());
+		cMarker3.update(getHeight(), getWidth());
+		cMarker4.update(getHeight(), getWidth());
 		marker3.update(getHeight(), getWidth());
 		marker1.update(getHeight(), getWidth());
 		marker2.update(getHeight(), getWidth());

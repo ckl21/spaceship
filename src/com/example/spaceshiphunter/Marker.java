@@ -40,16 +40,14 @@ public class Marker {
 
 	
 	public Marker(Bitmap bitmap, int x, int y, int side) {
-		if(side == 1){
+		if(side == 1 || side == 5){
 			this.bitmap = RotateBitmap(bitmap, 180);
-		}else if(side == 2){
+		}else if(side == 2 || side == 6){
 			this.bitmap = RotateBitmap(bitmap, -90);
-		}else if(side == 3){
+		}else if(side == 3 || side == 7 ){
 			this.bitmap = bitmap;
-		}else if(side == 4){
+		}else if(side == 4 || side == 8){
 			this.bitmap = RotateBitmap(bitmap, 90);
-		}else if(side == 5){
-			this.bitmap = bitmap;
 		}
 		this.x = x;
 		this.y = y;
@@ -136,9 +134,22 @@ public class Marker {
 			if (side == 4){
 				x = bitmap.getWidth()/2;
 			}
+			
 			if (side == 5){
 				x = width/2;
+				y = bitmap.getHeight()/2;
+			}
+			if (side == 6){
+				x = width - bitmap.getWidth()/2 ;
+				y = height/2;
+			}
+			if (side == 7){
+				x = width/2;
 				y = height - bitmap.getHeight()/2;
+			}
+			if (side == 8){
+				x = bitmap.getWidth()/2;
+				y = height/2;
 			}
 			
 			
