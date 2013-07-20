@@ -71,6 +71,7 @@ public class MainGamePanel extends SurfaceView implements
 	Bitmap booster2;
 	Bitmap marker;
 	Bitmap centerMarker;
+	Bitmap background;
 	long previousTime = 0;
 	long enemyDelay = 3000;
 	int droidFrame = 0;
@@ -154,7 +155,7 @@ public class MainGamePanel extends SurfaceView implements
 		cMarker2 = new Marker(centerMarker,0,0, 6);
 		cMarker3 = new Marker(centerMarker,0,0, 7);
 		cMarker4 = new Marker(centerMarker,0,0, 8);
-
+		background = BitmapFactory.decodeResource(getResources(), R.drawable.battleground);
 		
 		// create the game loop thread
 		thread = new MainThread(getHolder(), this);
@@ -176,6 +177,7 @@ public class MainGamePanel extends SurfaceView implements
 		if(thread.getState() == Thread.State.NEW){
 			thread.setRunning(true);
 			thread.start();
+			
 			}else
 				if (thread.getState() == Thread.State.TERMINATED){
 					thread = new MainThread(getHolder(), this);
@@ -205,7 +207,7 @@ public class MainGamePanel extends SurfaceView implements
 	
 
 	public void render(Canvas canvas) {
-		canvas.drawColor(Color.BLACK);
+		canvas.drawBitmap(background, 0, 0, null);
 		
 		eDroid.draw(canvas);
 		for ( int i = 0; i < droid.lasers.size(); i++ ) {
