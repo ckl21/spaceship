@@ -42,9 +42,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int boosters1=0x7f020007;
         public static final int boosters2=0x7f020008;
         public static final int centermark=0x7f020009;
-        public static final int eboosters1=0x7f02000a;
-        public static final int eboosters2=0x7f02000b;
-        public static final int eleftflash=0x7f02000c;
+        public static final int eboosters12=0x7f02000a;
+        public static final int eboosters22=0x7f02000b;
+        public static final int eleftflash2=0x7f02000c;
         public static final int enemyd0=0x7f02000d;
         public static final int enemyd1=0x7f02000e;
         public static final int enemyd2=0x7f02000f;
@@ -55,7 +55,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int enemyship1=0x7f020014;
         public static final int enemyship2=0x7f020015;
         public static final int enemyship3=0x7f020016;
-        public static final int erightflash=0x7f020017;
+        public static final int erightflash2=0x7f020017;
         public static final int hangar=0x7f020018;
         public static final int hangar_pressed=0x7f020019;
         public static final int hanger=0x7f02001a;
@@ -64,6 +64,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int launch_pressed=0x7f02001d;
         public static final int leftflash=0x7f02001e;
         public static final int marker=0x7f02001f;
+<<<<<<< HEAD
         public static final int marker2=0x7f020020;
         public static final int marker4=0x7f020021;
         public static final int missile=0x7f020022;
@@ -104,6 +105,47 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int weapon1_pressed=0x7f020045;
         public static final int weapon2=0x7f020046;
         public static final int weapon2_pressed=0x7f020047;
+=======
+        public static final int missile=0x7f020020;
+        public static final int missile1=0x7f020021;
+        public static final int missile2=0x7f020022;
+        public static final int missile3=0x7f020023;
+        public static final int missile4=0x7f020024;
+        public static final int mission=0x7f020025;
+        public static final int mission_pressed=0x7f020026;
+        public static final int mission_screen=0x7f020027;
+        public static final int mission_screen_blue=0x7f020028;
+        public static final int mission_screen_hotspots=0x7f020029;
+        public static final int mission_screen_red=0x7f02002a;
+        public static final int mission_select=0x7f02002b;
+        public static final int mission_selected_pressed=0x7f02002c;
+        public static final int planet=0x7f02002d;
+        public static final int planet_grey=0x7f02002e;
+        public static final int planet_home=0x7f02002f;
+        public static final int planet_pressed=0x7f020030;
+        public static final int player=0x7f020031;
+        public static final int player1=0x7f020032;
+        public static final int player2=0x7f020033;
+        public static final int player3=0x7f020034;
+        public static final int player_death0=0x7f020035;
+        public static final int player_death1=0x7f020036;
+        public static final int player_death2=0x7f020037;
+        public static final int player_death3=0x7f020038;
+        public static final int player_death4=0x7f020039;
+        public static final int player_death5=0x7f02003a;
+        public static final int rightflash=0x7f02003b;
+        public static final int soundmuted=0x7f02003c;
+        public static final int soundunmuted=0x7f02003d;
+        public static final int space_bg=0x7f02003e;
+        public static final int spaceship=0x7f02003f;
+        public static final int splash_two=0x7f020040;
+        public static final int superlaser=0x7f020041;
+        public static final int toggle_selector=0x7f020042;
+        public static final int weapon1=0x7f020043;
+        public static final int weapon1_pressed=0x7f020044;
+        public static final int weapon2=0x7f020045;
+        public static final int weapon2_pressed=0x7f020046;
+>>>>>>> 23634ed25a6365254d6387d289678a4f785b0c05
     }
     public static final class id {
         public static final int TimeElapsedLabel=0x7f0a000b;
