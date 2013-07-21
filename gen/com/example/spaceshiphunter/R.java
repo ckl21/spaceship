@@ -96,15 +96,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int rightflash=0x7f02003d;
         public static final int soundmuted=0x7f02003e;
         public static final int soundunmuted=0x7f02003f;
-        public static final int space_bg=0x7f020040;
-        public static final int spaceship=0x7f020041;
-        public static final int splash_two=0x7f020042;
-        public static final int superlaser=0x7f020043;
-        public static final int toggle_selector=0x7f020044;
-        public static final int weapon1=0x7f020045;
-        public static final int weapon1_pressed=0x7f020046;
-        public static final int weapon2=0x7f020047;
-        public static final int weapon2_pressed=0x7f020048;
+        public static final int spaceship=0x7f020040;
+        public static final int splash_two=0x7f020041;
+        public static final int superlaser=0x7f020042;
+        public static final int toggle_selector=0x7f020043;
+        public static final int weapon1=0x7f020044;
+        public static final int weapon1_pressed=0x7f020045;
+        public static final int weapon2=0x7f020046;
+        public static final int weapon2_pressed=0x7f020047;
     }
     public static final class id {
         public static final int TimeElapsedLabel=0x7f0a000b;
