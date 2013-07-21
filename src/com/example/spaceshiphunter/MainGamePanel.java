@@ -89,16 +89,13 @@ public class MainGamePanel extends SurfaceView implements
 	boolean gameEnded = false;
 	protected static Context mContext;
 	SoundPool spool;
-<<<<<<< HEAD
 	
 	private int shotsHit = 0;
 	private long timeElapsed;
 	private long startTime = 0;
-=======
 	float parX;
 	float parY;
 
->>>>>>> 9fb4c59239dcc23e2da39c44bea91f55678bbe2e
 	
 	
 	
@@ -164,7 +161,8 @@ public class MainGamePanel extends SurfaceView implements
 		cMarker2 = new Marker(centerMarker,0,0, 6);
 		cMarker3 = new Marker(centerMarker,0,0, 7);
 		cMarker4 = new Marker(centerMarker,0,0, 8);
-		background = BitmapFactory.decodeResource(getResources(), R.drawable.battleground);
+		
+		background = BitmapFactory.decodeResource(getResources(), R.drawable.battleground2);
 		
 		// create the game loop thread
 		thread = new MainThread(getHolder(), this);
@@ -216,6 +214,7 @@ public class MainGamePanel extends SurfaceView implements
 	
 
 	public void render(Canvas canvas) {
+		canvas.drawColor(Color.BLACK);
 		parX= (float) ((0- 55) + ((0-droid.x)*0.3));
 		parY = (float) ((0- 55) + ((0-droid.y)*0.3));
 		canvas.drawBitmap(background, parX, parY, null);
