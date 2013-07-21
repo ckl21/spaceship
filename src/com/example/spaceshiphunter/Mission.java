@@ -53,26 +53,51 @@ public class Mission extends Activity implements OnTouchListener {
 		Display display = wm.getDefaultDisplay();
 
 		display.getSize(dispXY);
-		m1x = (dispXY.x) / 4;
+
+		homex = ((dispXY.x) / 4)*2;
+		homey = ((dispXY.y) / 9) * 6;
+		
+		m1x = ((dispXY.x) / 4)*2;
 		m1y = ((dispXY.y) / 9) * 6;
+		
+		m2x = ((dispXY.x) / 4) * 3;
+		m2y = ((dispXY.y) / 9) * 4;
+		
+		home = new ImageButton(this);
+		home.setBackgroundResource(R.drawable.planet_home);
+		home.setId(49);
 
 		mission1 = new ImageButton(this);
 		mission1.setBackgroundResource(R.drawable.planet);
 		mission1.setId(50);
+		
+		mission2 = new ImageButton(this);
+		mission2.setBackgroundResource(R.drawable.planet_grey);
+		mission2.setId(51);
+	
+		
+		RelativeLayout.LayoutParams homepos = new LayoutParams(60, 60);
+		homepos.leftMargin = homex;
+		homepos.topMargin = homey;
+		home.setLayoutParams(homepos);
+
 		RelativeLayout.LayoutParams m1pos = new LayoutParams(60, 60);
 		m1pos.leftMargin = m1x;
 		m1pos.topMargin = m1y;
 		mission1.setLayoutParams(m1pos);
+		
+		RelativeLayout.LayoutParams m2pos = new LayoutParams(60, 60);
+		m2pos.leftMargin = m2x;
+		m2pos.topMargin = m2y;
+		mission2.setLayoutParams(m2pos);
 
 		screenLayout = (RelativeLayout) findViewById(R.id.my_frame);
 		screenLayout.addView(mission1);
+		screenLayout.addView(mission2);
+		screenLayout.addView(home);
 		mission1.setOnTouchListener(this);
-		//
-		//
-		// SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		// silent = settings.getBoolean("silentMode", false);
-		// imageView = (ImageView) findViewById (R.id.image);
-		// imageView.setOnTouchListener(this);
+	
+		
 
 	}
 
@@ -174,12 +199,23 @@ public class Mission extends Activity implements OnTouchListener {
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		// TODO Auto-generated method stub
+		if (v.getId() == 49){
+			if(event.getAction()== MotionEvent.ACTION_DOWN){
+				home.setBackgroundResource(R.drawable.planet_pressed);
+				Intent j = new Intent(this, Game.class);
+				startActivity(j);
+		}
+			if (event.getAction() == MotionEvent.ACTION_UP){
+				home.setBackgroundResource(R.drawable.planet_home);
+			}
+		
+	}
+		
 		
 		if(v.getId() ==50){
 			if(event.getAction()== MotionEvent.ACTION_DOWN){
 			mission1.setBackgroundResource(R.drawable.planet_pressed);
 			Intent i = new Intent(this, Hanger.class);
-		//	i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			i.putExtra("FROM","mission");
 		 	startActivity(i);
 			}
@@ -188,7 +224,8 @@ public class Mission extends Activity implements OnTouchListener {
 				mission1.setBackgroundResource(R.drawable.planet);
 			}
 		}
+		
 		return false;
 	}
-
+	
 }
