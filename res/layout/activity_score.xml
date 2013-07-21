@@ -9,8 +9,112 @@
     tools:context=".Score" >
 
     <TextView
+        android:id="@+id/statusText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/accuracyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/shotsFiredLabel"
+        android:layout_below="@+id/shotsFiredLabel"
+        android:layout_marginTop="16dp"
+        android:text="Accuracy" />
+
+    <TextView
+        android:id="@+id/healthRemainingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/accuracyLabel"
+        android:layout_alignLeft="@+id/accuracyLabel"
+        android:layout_marginTop="17dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/TimeElapsedLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/healthRemainingLabel"
+        android:layout_below="@+id/healthRemainingLabel"
+        android:layout_marginTop="16dp"
+        android:text="Time Elapsed" />
+
+    <TextView
+        android:id="@+id/accuracyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/accuracyLabel"
+        android:layout_alignBottom="@+id/accuracyLabel"
+        android:layout_alignRight="@+id/shotsFiredText"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/healthRemainingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/healthRemainingLabel"
+        android:layout_alignBottom="@+id/healthRemainingLabel"
+        android:layout_alignRight="@+id/accuracyText"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/timeElapsedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/TimeElapsedLabel"
+        android:layout_alignRight="@+id/healthRemainingText"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/scoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/scoreLabel"
+        android:layout_alignBottom="@+id/scoreLabel"
+        android:layout_alignRight="@+id/timeElapsedText"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/shotsFiredText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/shotsFiredLabel"
+        android:layout_alignBottom="@+id/shotsFiredLabel"
+        android:layout_marginLeft="225dp"
+        android:layout_toRightOf="@+id/shotsFiredLabel"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/shotsFiredLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/statusText"
+        android:layout_below="@+id/statusText"
+        android:layout_marginTop="16dp"
+        android:text="Shots Fired" />
+
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/scoreText"
+        android:layout_marginRight="20dp"
+        android:text="Button" />
+
+    <TextView
+        android:id="@+id/scoreLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TimeElapsedLabel"
+        android:layout_below="@+id/TimeElapsedLabel"
+        android:layout_marginTop="49dp"
+        android:text="Final Score" />
 
 </RelativeLayout>

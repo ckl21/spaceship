@@ -40,6 +40,7 @@ public class Droid {
 	public float accelX;
 	public float accelY;
 	public int healthPoints = 200;
+	public int maxHealth = 200;
 	private double xSpeed;
 	private double ySpeed;
 	private double maxSpeed = 6;
@@ -60,6 +61,7 @@ public class Droid {
 	public boolean dying = false;
 
 	public boolean end = false;
+	public int shotsFired = 0;
 
 
 	
@@ -213,11 +215,13 @@ public class Droid {
 		Laser laser;
 		if (onCD == false){
 			if (firingSide == false){
+				shotsFired ++;
 				laser = new Laser(bitmapL, x, y, 25,30, 0, 10, 5, 1.1);
 				firingSide = true;
 				rightFlashing = true;
 				Game.spool.play(Game.lasersfx,Game.volume,Game.volume,0,0,0.8f);
 			}else{
+				shotsFired ++;
 				laser = new Laser(bitmapL, x, y, -25,30, 0, 10, 5, 1.1);
 				firingSide = false;
 				leftFlashing = true;

@@ -88,7 +88,10 @@ public class MainGamePanel extends SurfaceView implements
 	boolean gameEnded = false;
 	protected static Context mContext;
 	SoundPool spool;
-
+	
+	private int shotsHit = 0;
+	private long timeElapsed;
+	private long startTime = 0;
 	
 	
 	
@@ -229,15 +232,23 @@ public class MainGamePanel extends SurfaceView implements
 	}
 
 	public void update() {
+		if	(startTime == 0){
+			startTime = System.currentTimeMillis();
+		}
 		if (gameEnded == false){
 			if(droid.end){
+				timeElapsed = System.currentTimeMillis() - startTime;
 				Context context = getContext();
 				Intent i = new Intent(context, Score.class);
 				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-				i.putExtra("Winner", "player" );
+				i.putExtra("Winner", "enemy" );
+				i.putExtra("ShotsFired", droid.shotsFired );
+				i.putExtra("ShotsHit", shotsHit );
+				i.putExtra("HealthRemaining", eDroid.healthPoints );
+				i.putExtra("MaxHealth", eDroid.maxHealth );
+				i.putExtra("TimeElapsed", timeElapsed );
 		    	context.startActivity(i); 
 		    	((Activity)(context)).finish();
-		    	Log.d(TAG, "droid win");
 		    	gameEnded = true;    	
 		    	
 			}
@@ -245,14 +256,18 @@ public class MainGamePanel extends SurfaceView implements
 
 
 			else if(eDroid.end){
-
+				timeElapsed = System.currentTimeMillis() - startTime;
 				Context context = getContext();
 				Intent i = new Intent(context, Score.class);
 				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-				i.putExtra("Winner", "enemy");
+				i.putExtra("Winner", "player");
+				i.putExtra("ShotsFired", droid.shotsFired );
+				i.putExtra("ShotsHit", shotsHit );
+				i.putExtra("HealthRemaining", droid.healthPoints );
+				i.putExtra("MaxHealth", droid.maxHealth );
+				i.putExtra("TimeElapsed", timeElapsed );
 		    	context.startActivity(i); 
 		    	((Activity)(context)).finish();
-		    	Log.d(TAG, "edroid win");
 		    	gameEnded = true;
 		    	
 			}
@@ -453,7 +468,7 @@ public class MainGamePanel extends SurfaceView implements
 				droid.lasers.get(i).setExploded();
 				eDroid.knockback(droid.lasers.get(i), 5);
 				eDroid.fireHit(5);
-				
+				shotsHit++;
 				}
 			}
 			else if (droid.lasers.get(i).exploded){
@@ -494,6 +509,7 @@ public class MainGamePanel extends SurfaceView implements
 					eDroid.lasers.get(i).setExploded();
 					droid.knockback(eDroid.lasers.get(i), 10);
 					droid.fireHit(10);
+					
 					
 					
 					
