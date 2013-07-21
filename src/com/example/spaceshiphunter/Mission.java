@@ -30,7 +30,7 @@ public class Mission extends Activity implements OnTouchListener {
 	MediaPlayer mp;
 	float volume = 0.2f;
 	ImageView imageView;
-	Point dispXY;
+	static Point dispXY;
 	int homex;
 	int homey;
 	int m1x;
