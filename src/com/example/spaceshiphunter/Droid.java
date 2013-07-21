@@ -132,9 +132,6 @@ public class Droid {
 			}
 		}
 		
-		else if(dead == true){
-		
-					}
 	}
 
 	public static Bitmap RotateBitmap(Bitmap source, float angle)

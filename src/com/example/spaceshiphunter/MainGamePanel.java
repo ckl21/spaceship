@@ -43,6 +43,8 @@ public class MainGamePanel extends SurfaceView implements
 	Bitmap missile4;
 	Bitmap leftFlash;
 	Bitmap rightFlash;
+	Bitmap eleftFlash;
+	Bitmap erightFlash;
 	Bitmap laser1;
 	Bitmap laser2;
 	Bitmap laser3;
@@ -69,6 +71,8 @@ public class MainGamePanel extends SurfaceView implements
 	Bitmap enemyd5;
 	Bitmap booster1;
 	Bitmap booster2;
+	Bitmap ebooster1;
+	Bitmap ebooster2;
 	Bitmap marker;
 	Bitmap centerMarker;
 	Bitmap background;
@@ -137,9 +141,10 @@ public class MainGamePanel extends SurfaceView implements
 		rightFlash = BitmapFactory.decodeResource(getResources(), R.drawable.rightflash);
 		booster1 = BitmapFactory.decodeResource(getResources(), R.drawable.boosters1);
 		booster2 = BitmapFactory.decodeResource(getResources(), R.drawable.boosters2);
+		ebooster1 = BitmapFactory.decodeResource(getResources(), R.drawable.eboosters1);
+		ebooster2 = BitmapFactory.decodeResource(getResources(), R.drawable.eboosters2);
 		droid = new Droid(player0, 50, 50, leftFlash, rightFlash, booster1, booster2);
-		eDroid = new EDroid(enemy0, 600, 400);
-		
+		eDroid = new EDroid(enemy0, 600, 400, ebooster1, ebooster2);
 		
 		laser = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one);
 		laser1 = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one1);
@@ -214,6 +219,7 @@ public class MainGamePanel extends SurfaceView implements
 	
 
 	public void render(Canvas canvas) {
+		
 		canvas.drawColor(Color.BLACK);
 		parX= (float) ((0- 55) + ((0-droid.x)*0.3));
 		parY = (float) ((0- 55) + ((0-droid.y)*0.3));
@@ -237,7 +243,7 @@ public class MainGamePanel extends SurfaceView implements
 		marker1.draw(canvas);
 		marker2.draw(canvas);
 		marker4.draw(canvas);
-		
+
 	}
 
 	public void update() {
