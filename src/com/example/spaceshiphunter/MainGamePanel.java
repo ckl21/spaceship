@@ -146,6 +146,7 @@ public class MainGamePanel extends SurfaceView implements
 		droid = new Droid(player0, 50, 50, leftFlash, rightFlash, booster1, booster2);
 		eDroid = new EDroid(enemy0, 600, 400, ebooster1, ebooster2);
 		
+		
 		laser = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one);
 		laser1 = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one1);
 		laser2 = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one2);

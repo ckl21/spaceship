@@ -72,6 +72,8 @@ public class EDroid {
 		this.bitmap = bitmap;
 		this.x = x;
 		this.y = y;
+		//leftFlash = lf;
+		//rightFlash = rf;
 		this.booster1 = booster1;
 		this.booster2 = booster2;
 
@@ -201,10 +203,8 @@ public class EDroid {
 				rotation = (float) Math.toDegrees(angle);
 			}
 			rotatedbitmap = RotateBitmap(bitmap,rotation + 90);
-			/*
-			leftRotated = RotateBitmap(leftFlash,rotation + 90);
-			rightRotated = RotateBitmap(rightFlash,rotation + 90);
-			*/
+			/*leftRotated = RotateBitmap(leftFlash,rotation + 90);
+			rightRotated = RotateBitmap(rightFlash,rotation + 90);*/
 			if (xSpeed > 3 || ySpeed > 3){
 				rotatedBooster = RotateBitmap(booster2,rotation + 90);
 			}else{
@@ -230,13 +230,13 @@ public class EDroid {
 				laser = new Laser(bitmapL, x, y, 50,60, (Math.random()*10)-5, 20, 2, 1.04);
 				Game.spool.play(Game.missilesfx, Game.volume, Game.volume, 0, 0,0.8f);
 				firingSide = true;
-				rightFlashing = true;
+				//rightFlashing = true;
 			}else{
 				laser = new Laser(bitmapL, x, y, -30,30, (Math.random()*10)-5, 20, 2, 1.04);
 				laser = new Laser(bitmapL, x, y, -50,60, (Math.random()*10)-5, 20, 2, 1.04);
 
 				firingSide = false;
-				leftFlashing = true;
+				//leftFlashing = true;
 				
 			}
 	
