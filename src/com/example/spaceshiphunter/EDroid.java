@@ -29,6 +29,7 @@ public class EDroid {
 	public float accelX;
 	public float accelY;
 	public int healthPoints = 250;
+	public int maxHealth = 250;
 	private double xSpeed;
 	private double ySpeed;
 	private double maxSpeed = 10;
