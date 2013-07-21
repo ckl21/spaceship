@@ -58,17 +58,23 @@ public class Hanger extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		if(v.getId() == 1){
 			Intent i = new Intent(this, Game.class);
-			MainActivity.spool.play(MainActivity.buttonsfx, MainActivity.volume, MainActivity.volume, 0,0,1);
+			
 			i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(i);
+			if (MainActivity.silent == false){
+				MainActivity.spool.play(MainActivity.buttonsfx, MainActivity.volume, MainActivity.volume, 0,0,1);
+			}
+			
 			btn.setBackgroundResource(R.drawable.launch_pressed);
 			finish();
 		}else if(v.getId() == 2){
+			if (MainActivity.silent == false){
+				MainActivity.spool.play(MainActivity.buttonsfx, MainActivity.volume, MainActivity.volume, 0,0,1);
+			}
 			Intent i = new Intent(this, Mission.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(i);
 			btn.setBackgroundResource(R.drawable.mission_selected_pressed);
-			MainActivity.spool.play(MainActivity.buttonsfx, MainActivity.volume, MainActivity.volume, 0,0,1);
 			finish();
 		}
 		

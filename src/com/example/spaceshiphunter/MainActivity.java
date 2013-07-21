@@ -43,6 +43,7 @@ public class MainActivity extends Activity implements OnClickListener, OnTouchLi
 		buttonsfx = spool.load(this, R.raw.buttonpress,0);
 		
 		
+		
 		musicToggle = (ToggleButton) findViewById(R.id.soundToggle);
 		musicToggle.setOnClickListener(this);
 		
@@ -149,13 +150,14 @@ public class MainActivity extends Activity implements OnClickListener, OnTouchLi
 	public boolean onTouch(View v, MotionEvent event) {
 		if (v.getId() == 10){
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
-			spool.play(buttonsfx, volume, volume, 1, 0, 1);
 			Intent i = new Intent(this, Mission.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			startActivity(i);
 			missionButton.setBackgroundResource(R.drawable.mission_pressed);
-			spool.play(buttonsfx, volume, volume, 1, 0, 1);
-			
+			if (!silent){
+				spool.play(buttonsfx, volume, volume, 1, 0, 1);
+			}
+
 		}
 			else if (event.getAction() == MotionEvent.ACTION_UP){
 				missionButton.setBackgroundResource(R.drawable.mission);	
@@ -163,7 +165,10 @@ public class MainActivity extends Activity implements OnClickListener, OnTouchLi
 		}
 		if (v.getId() == 11){
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
-			spool.play(buttonsfx, volume, volume, 1, 0, 1);
+				if (!silent){
+					spool.play(buttonsfx, volume, volume, 1, 0, 1);
+				}
+			
 			Intent i = new Intent(this, Hanger.class);
 			i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			i.putExtra("FROM","menu");

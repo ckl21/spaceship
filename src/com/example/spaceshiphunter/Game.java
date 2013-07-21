@@ -2,6 +2,7 @@ package com.example.spaceshiphunter;
 
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -56,7 +57,8 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 	static float volume;
 	 
 	
-    @Override
+    @SuppressLint("NewApi")
+	@Override
     public void onCreate(Bundle savedInstanceState) {
     	
         super.onCreate(savedInstanceState);// requesting to turn the title OFF
@@ -65,9 +67,8 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
         
         gamePanel = new MainGamePanel(this);
         game = new FrameLayout(this);
-       	weaponLayout = new RelativeLayout(this);
-       	
-       	
+        //game.setBackground(getResources().getDrawable(R.drawable.battleground));
+       	weaponLayout = new RelativeLayout(this);   	
        	vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
        
         

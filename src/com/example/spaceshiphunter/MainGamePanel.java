@@ -71,6 +71,7 @@ public class MainGamePanel extends SurfaceView implements
 	Bitmap booster2;
 	Bitmap marker;
 	Bitmap centerMarker;
+	Bitmap background;
 	long previousTime = 0;
 	long enemyDelay = 3000;
 	int droidFrame = 0;
@@ -88,10 +89,16 @@ public class MainGamePanel extends SurfaceView implements
 	boolean gameEnded = false;
 	protected static Context mContext;
 	SoundPool spool;
+<<<<<<< HEAD
 	
 	private int shotsHit = 0;
 	private long timeElapsed;
 	private long startTime = 0;
+=======
+	float parX;
+	float parY;
+
+>>>>>>> 9fb4c59239dcc23e2da39c44bea91f55678bbe2e
 	
 	
 	
@@ -157,7 +164,7 @@ public class MainGamePanel extends SurfaceView implements
 		cMarker2 = new Marker(centerMarker,0,0, 6);
 		cMarker3 = new Marker(centerMarker,0,0, 7);
 		cMarker4 = new Marker(centerMarker,0,0, 8);
-
+		background = BitmapFactory.decodeResource(getResources(), R.drawable.battleground);
 		
 		// create the game loop thread
 		thread = new MainThread(getHolder(), this);
@@ -179,6 +186,7 @@ public class MainGamePanel extends SurfaceView implements
 		if(thread.getState() == Thread.State.NEW){
 			thread.setRunning(true);
 			thread.start();
+			
 			}else
 				if (thread.getState() == Thread.State.TERMINATED){
 					thread = new MainThread(getHolder(), this);
@@ -208,7 +216,9 @@ public class MainGamePanel extends SurfaceView implements
 	
 
 	public void render(Canvas canvas) {
-		canvas.drawColor(Color.BLACK);
+		parX= (float) ((0- 55) + ((0-droid.x)*0.3));
+		parY = (float) ((0- 55) + ((0-droid.y)*0.3));
+		canvas.drawBitmap(background, parX, parY, null);
 		
 		eDroid.draw(canvas);
 		for ( int i = 0; i < droid.lasers.size(); i++ ) {
@@ -312,7 +322,7 @@ public class MainGamePanel extends SurfaceView implements
 				droidTimer = System.currentTimeMillis();
 				droidFrame++;
 				
-				Game.spool.play(Game.playerdeathsfx,0.99f,0.99f, 1, 0, 1);
+				Game.spool.play(Game.playerdeathsfx,Game.volume,Game.volume, 1, 0, 1);
 				Game.vb.vibrate(1000);
 				
 				
@@ -353,7 +363,7 @@ public class MainGamePanel extends SurfaceView implements
 				eDroid.changeBaseBitmap(enemyd0);
 				eDroidTimer = System.currentTimeMillis();
 				eDroidFrame++;
-				Game.spool.play(Game.enemydeathsfx, 0.99f, 0.99f, 1, 0, 1);
+				Game.spool.play(Game.enemydeathsfx, Game.volume, Game.volume, 1, 0, 1);
 				
 				
 			}else if (eDroidFrame == 4 && System.currentTimeMillis() > eDroidTimer + eDroidTimerDelay){
