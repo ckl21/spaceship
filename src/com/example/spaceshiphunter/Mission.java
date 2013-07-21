@@ -123,10 +123,7 @@ public class Mission extends Activity implements OnTouchListener {
 
 	@Override
 	protected void onPause() {
-		// imageView.setImageResource (R.drawable.mission_screen);
-		mp.stop();
-		mp.release();
-		mp = null;
+		
 		super.onPause();
 	}
 
