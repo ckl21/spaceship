@@ -210,8 +210,10 @@ public class Mission extends Activity implements OnTouchListener {
 		if (v.getId() == 49){
 			if(event.getAction()== MotionEvent.ACTION_DOWN){
 				home.setBackgroundResource(R.drawable.planet_pressed);
-				Intent j = new Intent(this, Game.class);
+				Intent j = new Intent(this, Hanger.class);
+				j.putExtra("FROM","menu");
 				startActivity(j);
+				
 				
 		
 			}
