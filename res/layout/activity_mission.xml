@@ -1,22 +1,7 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
- android:id="@+id/my_frame"
- android:layout_width="fill_parent"
- android:layout_height="fill_parent" >
-<ImageView 
- android:id="@+id/image_areas"
- android:layout_width="fill_parent" 
- android:layout_height="fill_parent" 
- android:scaleType="centerCrop"
- android:visibility="invisible"
- android:src="@drawable/mission_screen_hotspots" 
- />
- <ImageView
- android:id="@+id/image"
- android:layout_width="fill_parent" 
- android:layout_height="fill_parent" 
- android:scaleType="centerCrop"
- android:src="@drawable/mission_screen"
- />
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/my_frame"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/mission_screen" >
  
-</FrameLayout>
+</RelativeLayout>
