@@ -203,8 +203,8 @@ public class EDroid {
 				rotation = (float) Math.toDegrees(angle);
 			}
 			rotatedbitmap = RotateBitmap(bitmap,rotation + 90);
-			/*leftRotated = RotateBitmap(leftFlash,rotation + 90);
-			rightRotated = RotateBitmap(rightFlash,rotation + 90);*/
+			//leftRotated = RotateBitmap(leftFlash,rotation + 90);
+			//rightRotated = RotateBitmap(rightFlash,rotation + 90);
 			if (xSpeed > 3 || ySpeed > 3){
 				rotatedBooster = RotateBitmap(booster2,rotation + 90);
 			}else{
