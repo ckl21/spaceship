@@ -41,23 +41,26 @@ public class Mission extends Activity implements OnTouchListener {
 	ImageButton mission2;
 	ImageButton home;
 	RelativeLayout screenLayout;
+	RelativeLayout bg;
 
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		
+		
 		dispXY = new Point();
 		setContentView(R.layout.activity_mission);
 		WindowManager wm = ((WindowManager) this
 				.getSystemService(this.WINDOW_SERVICE));
 		Display display = wm.getDefaultDisplay();
-
 		display.getSize(dispXY);
 
-		homex = ((dispXY.x) / 4)*2;
+		homex = ((dispXY.x) / 4);
 		homey = ((dispXY.y) / 9) * 6;
 		
-		m1x = ((dispXY.x) / 4)*2;
+		m1x = ((dispXY.x) / 4) * 2; 
 		m1y = ((dispXY.y) / 9) * 6;
 		
 		m2x = ((dispXY.x) / 4) * 3;
@@ -76,17 +79,17 @@ public class Mission extends Activity implements OnTouchListener {
 		mission2.setId(51);
 	
 		
-		RelativeLayout.LayoutParams homepos = new LayoutParams(60, 60);
+		RelativeLayout.LayoutParams homepos = new LayoutParams(75, 75);
 		homepos.leftMargin = homex;
 		homepos.topMargin = homey;
 		home.setLayoutParams(homepos);
 
-		RelativeLayout.LayoutParams m1pos = new LayoutParams(60, 60);
+		RelativeLayout.LayoutParams m1pos = new LayoutParams(75, 75);
 		m1pos.leftMargin = m1x;
 		m1pos.topMargin = m1y;
 		mission1.setLayoutParams(m1pos);
 		
-		RelativeLayout.LayoutParams m2pos = new LayoutParams(60, 60);
+		RelativeLayout.LayoutParams m2pos = new LayoutParams(75, 75);
 		m2pos.leftMargin = m2x;
 		m2pos.topMargin = m2y;
 		mission2.setLayoutParams(m2pos);
@@ -96,6 +99,7 @@ public class Mission extends Activity implements OnTouchListener {
 		screenLayout.addView(mission2);
 		screenLayout.addView(home);
 		mission1.setOnTouchListener(this);
+		mission2.setOnTouchListener(this);
 	
 		
 
@@ -204,14 +208,16 @@ public class Mission extends Activity implements OnTouchListener {
 				home.setBackgroundResource(R.drawable.planet_pressed);
 				Intent j = new Intent(this, Game.class);
 				startActivity(j);
-		}
-			if (event.getAction() == MotionEvent.ACTION_UP){
+				
+		
+			}
+			if(event.getAction() == MotionEvent.ACTION_UP){
 				home.setBackgroundResource(R.drawable.planet_home);
+				
 			}
 		
+			
 	}
-		
-		
 		if(v.getId() ==50){
 			if(event.getAction()== MotionEvent.ACTION_DOWN){
 			mission1.setBackgroundResource(R.drawable.planet_pressed);
