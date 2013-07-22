@@ -71,9 +71,6 @@ public class Hanger extends Activity implements OnClickListener {
 			if (MainActivity.silent == false){
 				MainActivity.spool.play(MainActivity.buttonsfx, MainActivity.volume, MainActivity.volume, 0,0,1);
 			}
-			Intent i = new Intent(this, Mission.class);
-			i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			startActivity(i);
 			btn.setBackgroundResource(R.drawable.mission_selected_pressed);
 			finish();
 		}

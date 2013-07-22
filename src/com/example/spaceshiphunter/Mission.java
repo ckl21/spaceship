@@ -100,6 +100,7 @@ public class Mission extends Activity implements OnTouchListener {
 		screenLayout.addView(home);
 		mission1.setOnTouchListener(this);
 		mission2.setOnTouchListener(this);
+		home.setOnTouchListener(this);
 	
 		
 
@@ -122,7 +123,7 @@ public class Mission extends Activity implements OnTouchListener {
 
 	@Override
 	protected void onPause() {
-		// imageView.setImageResource (R.drawable.mission_screen);
+		
 		super.onPause();
 	}
 
@@ -206,8 +207,10 @@ public class Mission extends Activity implements OnTouchListener {
 		if (v.getId() == 49){
 			if(event.getAction()== MotionEvent.ACTION_DOWN){
 				home.setBackgroundResource(R.drawable.planet_pressed);
-				Intent j = new Intent(this, Game.class);
+				Intent j = new Intent(this, Hanger.class);
+				j.putExtra("FROM","menu");
 				startActivity(j);
+				
 				
 		
 			}
