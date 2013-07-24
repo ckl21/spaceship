@@ -119,19 +119,21 @@ public class MainGamePanel extends SurfaceView implements
 
 		// create droid and load bitmap
 		player0 = BitmapFactory.decodeResource(getResources(), R.drawable.player);
-		
+		//player0 = Bitmap.createScaledBitmap (player0, player0.getWidth()/2, player0.getWidth()/2, false);
 		enemy0 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyship);
 		
 		
 		leftFlash = BitmapFactory.decodeResource(getResources(), R.drawable.leftflash);
 		rightFlash = BitmapFactory.decodeResource(getResources(), R.drawable.rightflash);
+		eleftFlash = BitmapFactory.decodeResource(getResources(), R.drawable.eleftflash2);
+		erightFlash = BitmapFactory.decodeResource(getResources(), R.drawable.erightflash2);
 
 		booster1 = BitmapFactory.decodeResource(getResources(), R.drawable.boosters1);
 		booster2 = BitmapFactory.decodeResource(getResources(), R.drawable.boosters2);
 		ebooster1 = BitmapFactory.decodeResource(getResources(), R.drawable.eboosters12);
 		ebooster2 = BitmapFactory.decodeResource(getResources(), R.drawable.eboosters22);
 		droid = new Droid(player0, 50, 50, leftFlash, rightFlash, booster1, booster2);
-		eDroid = new EDroid(enemy0, 1500, 1500, ebooster1, ebooster2);
+		eDroid = new EDroid(enemy0, 1500, 1500, eleftFlash, erightFlash, ebooster1, ebooster2);
 		
 		
 		laser = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one);
@@ -282,6 +284,7 @@ public class MainGamePanel extends SurfaceView implements
 		if (droid.healthPoints <= 150 && droidFrame == 0){
 			if (player1 == null){
 				player1 = BitmapFactory.decodeResource(getResources(), R.drawable.player1);
+				player0.recycle();
 			}
 			droid.changeBaseBitmap(player1);
 			droidFrame = 1;
@@ -289,6 +292,7 @@ public class MainGamePanel extends SurfaceView implements
 		if (droid.healthPoints <= 100 && droidFrame == 1){
 			if (player2 == null){
 				player2 = BitmapFactory.decodeResource(getResources(), R.drawable.player2);
+				player1.recycle();
 			}
 			droid.changeBaseBitmap(player2);
 			droidFrame = 2;
@@ -296,6 +300,7 @@ public class MainGamePanel extends SurfaceView implements
 		if (droid.healthPoints <= 50 && droidFrame == 2){
 			if (player3 == null){
 				player3 = BitmapFactory.decodeResource(getResources(), R.drawable.player3);
+				player2.recycle();
 			}
 			droid.changeBaseBitmap(player3);
 			droidFrame = 3;
@@ -305,6 +310,7 @@ public class MainGamePanel extends SurfaceView implements
 		if (eDroid.healthPoints <= 150 && eDroidFrame == 0){
 			if (enemy1== null){
 				enemy1 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyship1);
+				enemy0.recycle();
 			}
 			eDroid.changeBaseBitmap(enemy1);
 			eDroidFrame = 1;
@@ -312,6 +318,7 @@ public class MainGamePanel extends SurfaceView implements
 		if (eDroid.healthPoints <= 100 && eDroidFrame == 1){
 			if (enemy2== null){
 				enemy2 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyship2);
+				enemy1.recycle();
 			}
 			eDroid.changeBaseBitmap(enemy2);
 			eDroidFrame = 2;
@@ -319,6 +326,7 @@ public class MainGamePanel extends SurfaceView implements
 		if (eDroid.healthPoints <= 50 && eDroidFrame == 2){
 			if (enemy3== null){
 				enemy3 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyship3);
+				enemy2.recycle();
 			}
 			eDroid.changeBaseBitmap(enemy3);
 			eDroidFrame = 3;

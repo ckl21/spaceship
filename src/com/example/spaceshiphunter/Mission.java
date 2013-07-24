@@ -102,6 +102,8 @@ public class Mission extends Activity implements OnTouchListener {
 		mission2.setOnTouchListener(this);
 		home.setOnTouchListener(this);
 	
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		silent = settings.getBoolean("silentMode", false);
 		
 
 	}
@@ -109,12 +111,12 @@ public class Mission extends Activity implements OnTouchListener {
 	@Override
 	protected void onResume() {
 		nextActivity = 0;
-		if (!MainActivity.silent) {
+		if (silent == false) {
 			mp = MediaPlayer.create(getApplicationContext(), R.raw.hhavok);
 			mp.setVolume(volume, volume);
 			mp.setLooping(true);
 			mp.start();
-		} else if (MainActivity.silent == true) {
+		} else if (silent == true && mp != null) {
 			mp.stop();
 			mp.release();
 		}

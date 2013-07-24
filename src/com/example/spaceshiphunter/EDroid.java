@@ -68,12 +68,12 @@ public class EDroid {
 	
 
 	
-	public EDroid(Bitmap bitmap, int x, int y, Bitmap booster1, Bitmap booster2) {
+	public EDroid(Bitmap bitmap, int x, int y,Bitmap lf, Bitmap rf, Bitmap booster1, Bitmap booster2) {
 		this.bitmap = bitmap;
 		this.x = x;
 		this.y = y;
-		//leftFlash = lf;
-		//rightFlash = rf;
+		leftFlash = lf;
+		rightFlash = rf;
 		this.booster1 = booster1;
 		this.booster2 = booster2;
 
@@ -123,12 +123,12 @@ public class EDroid {
 			canvas.drawBitmap(rotatedbitmap, x - (rotatedbitmap.getWidth() / 2), y - (rotatedbitmap.getHeight() / 2), null);
 			if (dying == false){
 				canvas.drawBitmap(rotatedBooster, x - (rotatedBooster.getWidth() / 2), y - (rotatedBooster.getHeight() / 2), null);
-				/*if (leftFlashing){
+				if (leftFlashing){
 					canvas.drawBitmap(leftRotated, x - (leftRotated.getWidth() / 2), y - (leftRotated.getHeight() / 2), null);
 				}
 				if (rightFlashing){
 					canvas.drawBitmap(rightRotated, x - (rightRotated.getWidth() / 2), y - (rightRotated.getHeight() / 2), null);
-				}*/
+				}
 			}
 		}
 		
@@ -147,10 +147,10 @@ public class EDroid {
 	 * Method which updates the droid's internal state every tick
 	 */
 	public void update() {
-			/*if (onCD && previousTime + fireAnimCooldown <= System.currentTimeMillis() && (leftFlashing || rightFlashing)){
+			if (onCD && previousTime + fireAnimCooldown <= System.currentTimeMillis() && (leftFlashing || rightFlashing)){
 				leftFlashing = false;
 				rightFlashing = false;
-			}*/
+			}
 			if (onCD && previousTime + fireCooldown <= System.currentTimeMillis()){
 				onCD = false;
 			}
@@ -203,8 +203,8 @@ public class EDroid {
 				rotation = (float) Math.toDegrees(angle);
 			}
 			rotatedbitmap = RotateBitmap(bitmap,rotation + 90);
-			//leftRotated = RotateBitmap(leftFlash,rotation + 90);
-			//rightRotated = RotateBitmap(rightFlash,rotation + 90);
+			leftRotated = RotateBitmap(leftFlash,rotation + 90);
+			rightRotated = RotateBitmap(rightFlash,rotation + 90);
 			if (xSpeed > 3 || ySpeed > 3){
 				rotatedBooster = RotateBitmap(booster2,rotation + 90);
 			}else{
@@ -230,13 +230,13 @@ public class EDroid {
 				laser = new Laser(bitmapL, x, y, 50,60, (Math.random()*10)-5, 20, 2, 1.04);
 				Game.spool.play(Game.missilesfx, Game.volume, Game.volume, 0, 0,0.8f);
 				firingSide = true;
-				//rightFlashing = true;
+				rightFlashing = true;
 			}else{
 				laser = new Laser(bitmapL, x, y, -30,30, (Math.random()*10)-5, 20, 2, 1.04);
 				laser = new Laser(bitmapL, x, y, -50,60, (Math.random()*10)-5, 20, 2, 1.04);
 
 				firingSide = false;
-				//leftFlashing = true;
+				leftFlashing = true;
 				
 			}
 	
