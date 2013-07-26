@@ -12,6 +12,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Vibrator;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -100,6 +101,10 @@ public class MainGamePanel extends SurfaceView implements
 	private long startTime = 0;
 	float parX;
 	float parY;
+	
+	public double scaleFactor = 0;
+	boolean loaded = false;
+	int defaultDPI = 220;
 
 	
 	
@@ -118,11 +123,13 @@ public class MainGamePanel extends SurfaceView implements
 		getHolder().addCallback(this);
 
 		// create droid and load bitmap
+		
+		
+
+			
+			//player0 = Bitmap.createScaledBitmap (player0, (int)(player0.getWidth()*scaleFactor), (int)(player0.getWidth()*scaleFactor), false);
 		player0 = BitmapFactory.decodeResource(getResources(), R.drawable.player);
-		//player0 = Bitmap.createScaledBitmap (player0, player0.getWidth()/2, player0.getWidth()/2, false);
 		enemy0 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyship);
-		
-		
 		leftFlash = BitmapFactory.decodeResource(getResources(), R.drawable.leftflash);
 		rightFlash = BitmapFactory.decodeResource(getResources(), R.drawable.rightflash);
 		eleftFlash = BitmapFactory.decodeResource(getResources(), R.drawable.eleftflash2);
@@ -132,9 +139,9 @@ public class MainGamePanel extends SurfaceView implements
 		booster2 = BitmapFactory.decodeResource(getResources(), R.drawable.boosters2);
 		ebooster1 = BitmapFactory.decodeResource(getResources(), R.drawable.eboosters12);
 		ebooster2 = BitmapFactory.decodeResource(getResources(), R.drawable.eboosters22);
-		droid = new Droid(player0, 50, 50, leftFlash, rightFlash, booster1, booster2);
-		eDroid = new EDroid(enemy0, 1500, 1500, eleftFlash, erightFlash, ebooster1, ebooster2);
 		
+		eDroid = new EDroid(enemy0, 1500, 1500, eleftFlash, erightFlash, ebooster1, ebooster2);
+		droid = new Droid(player0, 50, 50, leftFlash, rightFlash, booster1, booster2);
 		
 		laser = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one);
 		laser1 = BitmapFactory.decodeResource(getResources(), R.drawable.attack_one1);
@@ -156,6 +163,7 @@ public class MainGamePanel extends SurfaceView implements
 		cMarker2 = new Marker(centerMarker,0,0, 6);
 		cMarker3 = new Marker(centerMarker,0,0, 7);
 		cMarker4 = new Marker(centerMarker,0,0, 8);
+		
 		
 		background = BitmapFactory.decodeResource(getResources(), R.drawable.battleground2);
 		
@@ -186,7 +194,42 @@ public class MainGamePanel extends SurfaceView implements
 					thread.setRunning(true);
 					thread.start(); // Start a new thread
 					}
+		DisplayMetrics metrics = getResources().getDisplayMetrics();
+		Log.d("Game", ""+ metrics.xdpi);
+		scaleFactor = ((double)metrics.xdpi/defaultDPI)*1.1;
+		droid.scaleFactor = scaleFactor;
+		eDroid.scaleFactor = scaleFactor;
+		player0 = Bitmap.createScaledBitmap (player0, (int)(player0.getWidth()/scaleFactor), (int)(player0.getHeight()/scaleFactor), true);
+		enemy0 = Bitmap.createScaledBitmap (enemy0, (int)(enemy0.getWidth()/scaleFactor), (int)(enemy0.getHeight()/scaleFactor), true);
+		droid.setBitmap(player0);
+		eDroid.setBitmap(enemy0);
+		laser = Bitmap.createScaledBitmap (laser, (int)(laser.getWidth()/scaleFactor), (int)(laser.getHeight()/scaleFactor), true);
+		laser1 = Bitmap.createScaledBitmap (laser1, (int)(laser1.getWidth()/scaleFactor), (int)(laser1.getHeight()/scaleFactor), true);
+		laser2 = Bitmap.createScaledBitmap (laser2, (int)(laser2.getWidth()/scaleFactor), (int)(laser2.getHeight()/scaleFactor), true);
+		laser3 = Bitmap.createScaledBitmap (laser3, (int)(laser3.getWidth()/scaleFactor), (int)(laser3.getHeight()/scaleFactor), true);
+		laser4 = Bitmap.createScaledBitmap (laser4, (int)(laser4.getWidth()/scaleFactor), (int)(laser4.getHeight()/scaleFactor), true);
+		missile = Bitmap.createScaledBitmap (missile, (int)(missile.getWidth()/scaleFactor), (int)(missile.getHeight()/scaleFactor), true);
+		missile1 = Bitmap.createScaledBitmap (missile1, (int)(missile1.getWidth()/scaleFactor), (int)(missile1.getHeight()/scaleFactor), true);
+		missile2 = Bitmap.createScaledBitmap (missile2, (int)(missile2.getWidth()/scaleFactor), (int)(missile2.getHeight()/scaleFactor), true);
+		missile3 = Bitmap.createScaledBitmap (missile3, (int)(missile3.getWidth()/scaleFactor), (int)(missile3.getHeight()/scaleFactor), true);
+		missile4 = Bitmap.createScaledBitmap (missile4, (int)(missile4.getWidth()/scaleFactor), (int)(missile4.getHeight()/scaleFactor), true);
+		leftFlash = Bitmap.createScaledBitmap (leftFlash, (int)(leftFlash.getWidth()/scaleFactor), (int)(leftFlash.getHeight()/scaleFactor), true);
+		rightFlash = Bitmap.createScaledBitmap (rightFlash, (int)(rightFlash.getWidth()/scaleFactor), (int)(rightFlash.getHeight()/scaleFactor), true);
+		eleftFlash = Bitmap.createScaledBitmap (eleftFlash, (int)(eleftFlash.getWidth()/scaleFactor), (int)(eleftFlash.getHeight()/scaleFactor), true);
+		erightFlash = Bitmap.createScaledBitmap (erightFlash, (int)(erightFlash.getWidth()/scaleFactor), (int)(erightFlash.getHeight()/scaleFactor), true);
 		
+		booster1 = Bitmap.createScaledBitmap (booster1, (int)(booster1.getWidth()/scaleFactor), (int)(booster1.getHeight()/scaleFactor), true);
+		booster2 = Bitmap.createScaledBitmap (booster2, (int)(booster2.getWidth()/scaleFactor), (int)(booster2.getHeight()/scaleFactor), true);
+		ebooster1 = Bitmap.createScaledBitmap (ebooster1, (int)(ebooster1.getWidth()/scaleFactor), (int)(ebooster1.getHeight()/scaleFactor), true);
+		ebooster2 = Bitmap.createScaledBitmap (ebooster2, (int)(ebooster2.getWidth()/scaleFactor), (int)(ebooster2.getHeight()/scaleFactor), true);
+		droid.booster1 = booster1;
+		droid.booster2 = booster2;
+		droid.leftFlash = leftFlash;
+		droid.rightFlash = rightFlash;
+		eDroid.booster1 = ebooster1;
+		eDroid.booster2 = ebooster2;
+		eDroid.leftFlash = eleftFlash;
+		eDroid.rightFlash = erightFlash;
 		
 	}
 
@@ -209,6 +252,7 @@ public class MainGamePanel extends SurfaceView implements
 	
 
 	public void render(Canvas canvas) {
+		
 		
 		canvas.drawColor(Color.BLACK);
 		parX= (float) (((Mission.dispXY.x)/2 - 360)  + ((0-droid.x)*0.3));
@@ -237,6 +281,8 @@ public class MainGamePanel extends SurfaceView implements
 	}
 
 	public void update() {
+		
+	
 		if	(startTime == 0){
 			startTime = System.currentTimeMillis();
 		}
@@ -284,6 +330,7 @@ public class MainGamePanel extends SurfaceView implements
 		if (droid.healthPoints <= 150 && droidFrame == 0){
 			if (player1 == null){
 				player1 = BitmapFactory.decodeResource(getResources(), R.drawable.player1);
+				player1 = Bitmap.createScaledBitmap (player1, (int)(player1.getWidth()/scaleFactor), (int)(player1.getHeight()/scaleFactor), true);
 				player0.recycle();
 			}
 			droid.changeBaseBitmap(player1);
@@ -292,6 +339,7 @@ public class MainGamePanel extends SurfaceView implements
 		if (droid.healthPoints <= 100 && droidFrame == 1){
 			if (player2 == null){
 				player2 = BitmapFactory.decodeResource(getResources(), R.drawable.player2);
+				player2 = Bitmap.createScaledBitmap (player2, (int)(player2.getWidth()/scaleFactor), (int)(player2.getHeight()/scaleFactor), true);
 				player1.recycle();
 			}
 			droid.changeBaseBitmap(player2);
@@ -300,6 +348,7 @@ public class MainGamePanel extends SurfaceView implements
 		if (droid.healthPoints <= 50 && droidFrame == 2){
 			if (player3 == null){
 				player3 = BitmapFactory.decodeResource(getResources(), R.drawable.player3);
+				player3 = Bitmap.createScaledBitmap (player3, (int)(player3.getWidth()/scaleFactor), (int)(player3.getHeight()/scaleFactor), true);
 				player2.recycle();
 			}
 			droid.changeBaseBitmap(player3);
@@ -310,6 +359,7 @@ public class MainGamePanel extends SurfaceView implements
 		if (eDroid.healthPoints <= 150 && eDroidFrame == 0){
 			if (enemy1== null){
 				enemy1 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyship1);
+				enemy1 = Bitmap.createScaledBitmap (enemy1, (int)(enemy1.getWidth()/scaleFactor), (int)(enemy1.getHeight()/scaleFactor), true);
 				enemy0.recycle();
 			}
 			eDroid.changeBaseBitmap(enemy1);
@@ -318,6 +368,7 @@ public class MainGamePanel extends SurfaceView implements
 		if (eDroid.healthPoints <= 100 && eDroidFrame == 1){
 			if (enemy2== null){
 				enemy2 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyship2);
+				enemy2 = Bitmap.createScaledBitmap (enemy2, (int)(enemy2.getWidth()/scaleFactor), (int)(enemy2.getHeight()/scaleFactor), true);
 				enemy1.recycle();
 			}
 			eDroid.changeBaseBitmap(enemy2);
@@ -326,6 +377,7 @@ public class MainGamePanel extends SurfaceView implements
 		if (eDroid.healthPoints <= 50 && eDroidFrame == 2){
 			if (enemy3== null){
 				enemy3 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyship3);
+				enemy3 = Bitmap.createScaledBitmap (enemy3, (int)(enemy3.getWidth()/scaleFactor), (int)(enemy3.getHeight()/scaleFactor), true);
 				enemy2.recycle();
 			}
 			eDroid.changeBaseBitmap(enemy3);
@@ -339,6 +391,7 @@ public class MainGamePanel extends SurfaceView implements
 				droid.dying = true;
 				if (playerd0 == null){
 					playerd0 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death0);
+					playerd0 = Bitmap.createScaledBitmap (playerd0, (int)(playerd0.getWidth()/scaleFactor), (int)(playerd0.getHeight()/scaleFactor), true);
 				}
 				droid.changeBaseBitmap(playerd0);
 				droidTimer = System.currentTimeMillis();
@@ -351,6 +404,7 @@ public class MainGamePanel extends SurfaceView implements
 			}else if (droidFrame == 4 && System.currentTimeMillis() > droidTimer + droidTimerDelay){
 				if (playerd1 == null){
 					playerd1 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death1);
+					playerd1 = Bitmap.createScaledBitmap (playerd1, (int)(playerd1.getWidth()/scaleFactor), (int)(playerd1.getHeight()/scaleFactor), true);
 				}
 				droid.changeBaseBitmap(playerd1);
 				droidTimer = System.currentTimeMillis();
@@ -358,6 +412,7 @@ public class MainGamePanel extends SurfaceView implements
 			}else if (droidFrame == 5 && System.currentTimeMillis() > droidTimer + droidTimerDelay){
 				if (playerd2 == null){
 					playerd2 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death2);
+					playerd2 = Bitmap.createScaledBitmap (playerd2, (int)(playerd2.getWidth()/scaleFactor), (int)(playerd2.getHeight()/scaleFactor), true);
 				}
 				droid.changeBaseBitmap(playerd2);
 				droidTimer = System.currentTimeMillis();
@@ -365,6 +420,7 @@ public class MainGamePanel extends SurfaceView implements
 			}else if (droidFrame == 6 && System.currentTimeMillis() > droidTimer + droidTimerDelay){
 				if (playerd3 == null){
 					playerd3 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death3);
+					playerd3 = Bitmap.createScaledBitmap (playerd3, (int)(playerd3.getWidth()/scaleFactor), (int)(playerd3.getHeight()/scaleFactor), true);
 				}
 				droid.changeBaseBitmap(playerd3);
 				droidTimer = System.currentTimeMillis();
@@ -372,6 +428,7 @@ public class MainGamePanel extends SurfaceView implements
 			}else if (droidFrame == 7 && System.currentTimeMillis() > droidTimer + droidTimerDelay){
 				if (playerd4 == null){
 					playerd4 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death4);
+					playerd4 = Bitmap.createScaledBitmap (playerd4, (int)(playerd4.getWidth()/scaleFactor), (int)(playerd4.getHeight()/scaleFactor), true);
 				}
 				droid.changeBaseBitmap(playerd4);
 				droidTimer = System.currentTimeMillis();
@@ -379,6 +436,7 @@ public class MainGamePanel extends SurfaceView implements
 			}else if (droidFrame == 8 && System.currentTimeMillis() > droidTimer + droidTimerDelay){
 				if (playerd5 == null){
 					playerd5 = BitmapFactory.decodeResource(getResources(), R.drawable.player_death5);
+					playerd5 = Bitmap.createScaledBitmap (playerd5, (int)(playerd5.getWidth()/scaleFactor), (int)(playerd5.getHeight()/scaleFactor), true);
 				}
 				droid.changeBaseBitmap(playerd5);
 				droidTimer = System.currentTimeMillis();
@@ -399,6 +457,7 @@ public class MainGamePanel extends SurfaceView implements
 				eDroid.dying = true;
 				if (enemyd0 == null){
 					enemyd0 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyd0);
+					enemyd0 = Bitmap.createScaledBitmap (enemyd0, (int)(enemyd0.getWidth()/scaleFactor), (int)(enemyd0.getHeight()/scaleFactor), true);
 				}
 				eDroid.changeBaseBitmap(enemyd0);
 				eDroidTimer = System.currentTimeMillis();
@@ -409,6 +468,7 @@ public class MainGamePanel extends SurfaceView implements
 			}else if (eDroidFrame == 4 && System.currentTimeMillis() > eDroidTimer + eDroidTimerDelay){
 				if (enemyd1 == null){
 					enemyd1 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyd1);
+					enemyd1 = Bitmap.createScaledBitmap (enemyd1, (int)(enemyd1.getWidth()/scaleFactor), (int)(enemyd1.getHeight()/scaleFactor), true);
 				}
 				eDroid.changeBaseBitmap(enemyd1);
 				eDroidTimer = System.currentTimeMillis();
@@ -416,6 +476,7 @@ public class MainGamePanel extends SurfaceView implements
 			}else if (eDroidFrame == 5 && System.currentTimeMillis() > eDroidTimer + eDroidTimerDelay){
 				if (enemyd2 == null){
 					enemyd2 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyd2);
+					enemyd2 = Bitmap.createScaledBitmap (enemyd2, (int)(enemyd2.getWidth()/scaleFactor), (int)(enemyd2.getHeight()/scaleFactor), true);
 				}
 				eDroid.changeBaseBitmap(enemyd2);
 				eDroidTimer = System.currentTimeMillis();
@@ -423,6 +484,7 @@ public class MainGamePanel extends SurfaceView implements
 			}else if (eDroidFrame == 6 && System.currentTimeMillis() > eDroidTimer + eDroidTimerDelay){
 				if (enemyd3 == null){
 					enemyd3 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyd3);
+					enemyd3 = Bitmap.createScaledBitmap (enemyd3, (int)(enemyd3.getWidth()/scaleFactor), (int)(enemyd3.getHeight()/scaleFactor), true);
 				}
 				eDroid.changeBaseBitmap(enemyd3);
 				eDroidTimer = System.currentTimeMillis();
@@ -430,6 +492,7 @@ public class MainGamePanel extends SurfaceView implements
 			}else if (eDroidFrame == 7 && System.currentTimeMillis() > eDroidTimer + eDroidTimerDelay){
 				if (enemyd4 == null){
 					enemyd4 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyd4);
+					enemyd4 = Bitmap.createScaledBitmap (enemyd4, (int)(enemyd4.getWidth()/scaleFactor), (int)(enemyd4.getHeight()/scaleFactor), true);
 				}
 				eDroid.changeBaseBitmap(enemyd4);
 				eDroidTimer = System.currentTimeMillis();
@@ -437,6 +500,7 @@ public class MainGamePanel extends SurfaceView implements
 			}else if (eDroidFrame == 8 && System.currentTimeMillis() > eDroidTimer + eDroidTimerDelay){
 				if (enemyd5 == null){
 					enemyd5 = BitmapFactory.decodeResource(getResources(), R.drawable.enemyd5);
+					enemyd5 = Bitmap.createScaledBitmap (enemyd5, (int)(enemyd5.getWidth()/scaleFactor), (int)(enemyd5.getHeight()/scaleFactor), true);
 				}
 				eDroid.changeBaseBitmap(enemyd5);
 				eDroidTimer = System.currentTimeMillis();

@@ -5,7 +5,6 @@ package com.example.spaceshiphunter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -18,16 +17,13 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
-import android.widget.TextView;
 
 
 public class Game extends Activity implements SensorEventListener, OnTouchListener {
@@ -55,7 +51,6 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 	static int playerdeathsfx;
 	static int enemyhitsfx;
 	static float volume;
-	 
 	
     @SuppressLint("NewApi")
 	@Override

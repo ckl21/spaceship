@@ -55,15 +55,16 @@ public class EDroid {
 	public boolean dead = false;
 	public boolean dying = false;
 	public boolean end = false;
-	private Bitmap leftFlash;
+	public Bitmap leftFlash;
 	private Bitmap leftRotated;
 	private Bitmap rightRotated;
-	private Bitmap rightFlash;
-	private Bitmap booster1;
-	private Bitmap booster2;
+	public Bitmap rightFlash;
+	public Bitmap booster1;
+	public Bitmap booster2;
 	private Bitmap rotatedBooster;
 	private boolean leftFlashing = false;
 	private boolean rightFlashing = false;
+	public double scaleFactor;
 
 	
 
@@ -227,13 +228,13 @@ public class EDroid {
 		Laser laser;
 		if (onCD == false){
 			if (firingSide == false){
-				laser = new Laser(bitmapL, x, y, 50,60, (Math.random()*10)-5, 20, 2, 1.04);
+				laser = new Laser(bitmapL, x, y, 50/scaleFactor,60/scaleFactor, (Math.random()*10)-5, 20, 2, 1.04);
 				Game.spool.play(Game.missilesfx, Game.volume, Game.volume, 0, 0,0.8f);
 				firingSide = true;
 				rightFlashing = true;
 			}else{
-				laser = new Laser(bitmapL, x, y, -30,30, (Math.random()*10)-5, 20, 2, 1.04);
-				laser = new Laser(bitmapL, x, y, -50,60, (Math.random()*10)-5, 20, 2, 1.04);
+			
+				laser = new Laser(bitmapL, x, y, -50/scaleFactor,60/scaleFactor, (Math.random()*10)-5, 20, 2, 1.04);
 
 				firingSide = false;
 				leftFlashing = true;
@@ -276,6 +277,7 @@ public class EDroid {
 	public void changeBaseBitmap(Bitmap bitmap){
 		this.bitmap = bitmap;
 	}
+	
 	}
 
 	

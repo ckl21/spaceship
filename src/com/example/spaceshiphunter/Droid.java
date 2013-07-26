@@ -24,12 +24,12 @@ public class Droid {
 	private Bitmap rotatedbitmap;
 	private Bitmap bitmapOverlay;
 	private Bitmap rotatedbitmapoverlay;
-	private Bitmap leftFlash;
+	public Bitmap leftFlash;
 	private Bitmap leftRotated;
 	private Bitmap rightRotated;
-	private Bitmap rightFlash;
-	private Bitmap booster1;
-	private Bitmap booster2;
+	public Bitmap rightFlash;
+	public Bitmap booster1;
+	public Bitmap booster2;
 	private Bitmap rotatedBooster;
 	private boolean leftFlashing = false;
 	private boolean rightFlashing = false;
@@ -62,6 +62,7 @@ public class Droid {
 
 	public boolean end = false;
 	public int shotsFired = 0;
+	public double scaleFactor;
 
 
 	
@@ -213,13 +214,13 @@ public class Droid {
 		if (onCD == false){
 			if (firingSide == false){
 				shotsFired ++;
-				laser = new Laser(bitmapL, x, y, 25,30, 0, 10, 5, 1.1);
+				laser = new Laser(bitmapL, x, y, 25/scaleFactor,30/scaleFactor, 0, 10, 5, 1.1);
 				firingSide = true;
 				rightFlashing = true;
 				Game.spool.play(Game.lasersfx,Game.volume,Game.volume,0,0,0.8f);
 			}else{
 				shotsFired ++;
-				laser = new Laser(bitmapL, x, y, -25,30, 0, 10, 5, 1.1);
+				laser = new Laser(bitmapL, x, y, -25/scaleFactor,30/scaleFactor, 0, 10, 5, 1.1);
 				firingSide = false;
 				leftFlashing = true;
 				
@@ -248,6 +249,7 @@ public class Droid {
 	public void changeBaseBitmap(Bitmap bitmap){
 		this.bitmap = bitmap;
 	}
+	
 	
 
 	
