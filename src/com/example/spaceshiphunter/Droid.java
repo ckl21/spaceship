@@ -60,7 +60,7 @@ public class Droid {
 	public boolean dead = false;
 	public boolean dying = false;
 
-	public boolean end = false;
+	public boolean end = true;
 	public int shotsFired = 0;
 	public double scaleFactor;
 
