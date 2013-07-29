@@ -10,7 +10,8 @@
 
     <TextView
         android:id="@+id/statusText"
-        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -99,15 +100,6 @@
         android:layout_marginTop="16dp"
         android:text="Shots Fired" />
 
-    <Button
-        android:id="@+id/continueButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/scoreText"
-        android:layout_marginRight="20dp"
-        android:text="Button" />
-
     <TextView
         android:id="@+id/scoreLabel"
         android:layout_width="wrap_content"
@@ -115,6 +107,6 @@
         android:layout_alignLeft="@+id/TimeElapsedLabel"
         android:layout_below="@+id/TimeElapsedLabel"
         android:layout_marginTop="49dp"
-        android:text="Final Score" />
+        android:text="Your Ranking" />
 
 </RelativeLayout>

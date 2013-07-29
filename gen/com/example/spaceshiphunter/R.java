@@ -107,9 +107,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int TimeElapsedLabel=0x7f0a000b;
         public static final int accuracyLabel=0x7f0a0008;
         public static final int accuracyText=0x7f0a000c;
-        public static final int action_settings=0x7f0a0013;
+        public static final int action_settings=0x7f0a0012;
         public static final int center=0x7f0a0005;
-        public static final int continueButton=0x7f0a0012;
         public static final int hangerLayout=0x7f0a0002;
         public static final int healthRemainingLabel=0x7f0a000a;
         public static final int healthRemainingText=0x7f0a000e;
