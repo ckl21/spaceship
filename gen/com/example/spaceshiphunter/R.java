@@ -153,6 +153,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int laser=0x7f040007;
         public static final int missile=0x7f040008;
         public static final int player_destroy=0x7f040009;
+        public static final int warning=0x7f04000a;
     }
     public static final class string {
         public static final int action_settings=0x7f070001;
