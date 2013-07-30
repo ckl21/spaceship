@@ -1,7 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scoreLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginRight="45dp"
+    android:background="@drawable/scorebg"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -10,13 +13,14 @@
 
     <TextView
         android:id="@+id/statusText"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="23dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        android:hint="45dp"
         android:text="TextView" />
 
     <TextView
@@ -32,9 +36,9 @@
         android:id="@+id/healthRemainingLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/accuracyLabel"
         android:layout_alignLeft="@+id/accuracyLabel"
-        android:layout_marginTop="17dp"
+        android:layout_below="@+id/accuracyLabel"
+        android:layout_marginTop="16dp"
         android:text="TextView" />
 
     <TextView
@@ -73,31 +77,13 @@
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/scoreText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/scoreLabel"
-        android:layout_alignBottom="@+id/scoreLabel"
-        android:layout_alignRight="@+id/timeElapsedText"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/shotsFiredText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/shotsFiredLabel"
-        android:layout_alignBottom="@+id/shotsFiredLabel"
-        android:layout_marginLeft="225dp"
-        android:layout_toRightOf="@+id/shotsFiredLabel"
-        android:text="TextView" />
-
-    <TextView
         android:id="@+id/shotsFiredLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/statusText"
         android:layout_below="@+id/statusText"
-        android:layout_marginTop="16dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="45dp"
         android:text="Shots Fired" />
 
     <TextView
@@ -106,7 +92,26 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/TimeElapsedLabel"
         android:layout_below="@+id/TimeElapsedLabel"
-        android:layout_marginTop="49dp"
+        android:layout_marginTop="20dp"
         android:text="Your Ranking" />
+
+    <TextView
+        android:id="@+id/shotsFiredText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/accuracyLabel"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/scoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/scoreLabel"
+        android:layout_alignBottom="@+id/scoreLabel"
+        android:layout_marginRight="64dp"
+        android:layout_toLeftOf="@+id/timeElapsedText"
+        android:text="TextView" />
 
 </RelativeLayout>

@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -37,16 +39,25 @@ public class Score extends Activity implements OnTouchListener{
 	TextView accuracyLabel;
 	TextView timeElapsedLabel;
 	TextView gameScoreLabel;
-	ImageButton next;
+	Button nextb;
+	
+	
+
 	
 	
 	
-	@SuppressLint("NewApi")
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		next = new ImageButton(this);
-		next.setId(27);
-		next.setBackgroundResource(R.drawable.mission_select);
+		
+		setContentView(R.layout.activity_score);
+		super.onCreate(savedInstanceState);
+		
+		nextb = new Button(this);
+		nextb.setId(27);
+		nextb.setBackgroundResource(R.drawable.next);
+		
+		
 		
 		RelativeLayout.LayoutParams nextButton = new LayoutParams(
 				RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -54,16 +65,21 @@ public class Score extends Activity implements OnTouchListener{
 		nextButton.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
 		nextButton.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,
 				RelativeLayout.TRUE);
-		nextButton.rightMargin = 50;
-		nextButton.bottomMargin = 250;
+		nextButton.rightMargin = 0;
+		nextButton.bottomMargin = 0;
 		
-		next.setLayoutParams(nextButton);
-		next.setOnTouchListener(this);
+		nextb.setLayoutParams(nextButton);
+		nextb.setOnTouchListener(this);
 		
+		
+		RelativeLayout mLayout = (RelativeLayout)findViewById(R.id.scoreLayout);
+		mLayout.addView(nextb);
+		
+		
+		
+	
 		
 		Typeface PostPixel = Typeface.createFromAsset(this.getAssets(),"fonts/postpixel.ttf");
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_score);
 		
 		String winner = getIntent().getExtras().getString("Winner");
 		int shotsFired = getIntent().getExtras().getInt("ShotsFired");
@@ -77,9 +93,12 @@ public class Score extends Activity implements OnTouchListener{
 		
 		shotsFiredText = (TextView)findViewById(R.id.shotsFiredText);
 		
+			
+		
 		shotsFiredLabel = (TextView)findViewById(R.id.shotsFiredLabel);
 		shotsFiredLabel.setTypeface(PostPixel);
 		shotsFiredLabel.setTextSize(14f);
+		
 		
 		accuracyLabel = (TextView)findViewById(R.id.accuracyLabel);
 		accuracyLabel.setTextSize(14f);
@@ -118,7 +137,7 @@ public class Score extends Activity implements OnTouchListener{
 			healthRemainingLabel.setText("Health Remaining (Enemy)");
 		}
 		
-		status.setTextSize(25f);
+		status.setTextSize(30f);
 		
 		shotsFiredText.setText(String.format("%d",shotsFired));
 		shotsFiredText.setTypeface(PostPixel);
@@ -184,7 +203,17 @@ public class Score extends Activity implements OnTouchListener{
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
-		// TODO Auto-generated method stub
+		if (v.getId() == 27){
+			if(event.getAction() == MotionEvent.ACTION_DOWN){
+				Intent i = new Intent(this, Mission.class );
+				startActivity(i);
+				nextb.setBackgroundResource(R.drawable.next_pressed);
+			}
+			
+			if (event.getAction() == MotionEvent.ACTION_UP){
+				nextb.setBackgroundResource(R.drawable.next);
+			}
+		}
 		return false;
 	}
 

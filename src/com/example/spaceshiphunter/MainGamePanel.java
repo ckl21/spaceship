@@ -547,6 +547,10 @@ public class MainGamePanel extends SurfaceView implements
 			droid.fireLaser(laser);
 			
 		}
+		
+		if(firing2 && droid.healthPoints > 0){
+			droid.fireLaser(laser);
+		}
 		// check collision with right wall if heading right
 		if (droid.getX() + droid.getBitmap().getWidth() / 2 >= getWidth() && droid.getXSpeed() > 0) {
 			droid.setX(getWidth()-droid.getBitmap().getWidth() / 2);
