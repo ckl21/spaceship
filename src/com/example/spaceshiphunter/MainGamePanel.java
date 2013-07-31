@@ -242,6 +242,7 @@ public class MainGamePanel extends SurfaceView implements
 					thread.setRunning(true);
 					thread.start(); // Start a new thread
 					}
+		//resize all bitmaps based on device's dpi
 		DisplayMetrics metrics = getResources().getDisplayMetrics();
 		Log.d("Game", ""+ metrics.xdpi);
 		scaleFactor = ((double)metrics.xdpi/defaultDPI)*1.1;
@@ -322,12 +323,12 @@ public class MainGamePanel extends SurfaceView implements
 
 	public void render(Canvas canvas) {
 		
-		
+		//draw background
 		canvas.drawColor(Color.BLACK);
 		parX= (float) (((Mission.dispXY.x)/2 - 360)  + ((0-droid.x)*0.3));
 		parY = (float) (((Mission.dispXY.y)/2 - 216) + ((0-droid.y)*0.3));
 		canvas.drawBitmap(background, parX, parY, null);
-		
+		//draw player, enemy and lasers
 		eDroid.draw(canvas);
 		for ( int i = 0; i < droid.lasers.size(); i++ ) {
 			droid.lasers.get(i).draw(canvas);
@@ -342,6 +343,7 @@ public class MainGamePanel extends SurfaceView implements
 			eDroid.lasers.get(i).draw(canvas);
 			
 	}
+		//draw markers
 		cMarker.draw(canvas);
 		cMarker2.draw(canvas);
 		cMarker3.draw(canvas);
@@ -355,10 +357,11 @@ public class MainGamePanel extends SurfaceView implements
 
 	public void update() {
 		
-	
+	// timer for score screen
 		if	(startTime == 0){
 			startTime = System.currentTimeMillis();
 		}
+		//game end intents
 		if (gameEnded == false){
 			if(droid.end){
 				timeElapsed = System.currentTimeMillis() - startTime;
@@ -619,6 +622,7 @@ public class MainGamePanel extends SurfaceView implements
 		}else{
 			eDroid.update();
 		}
+		//firing animation and timer for secondary attack
 		if (firing2 && droid.healthPoints > 0){
 			if (chargeLevel == 0){
 				droid.charge = charge01;
@@ -711,7 +715,7 @@ public class MainGamePanel extends SurfaceView implements
 			droid.charge = charge01;
 			chargeLevel = 0;
 		}
-		
+		//firing mechanism for first attack
 		if(firing1 && droid.healthPoints > 0 && firing2 == false){
 			droid.fireLaser(laser);
 		}
@@ -757,6 +761,7 @@ public class MainGamePanel extends SurfaceView implements
 			else if (droid.lasers.get(i).getX() > getWidth()+50 || droid.lasers.get(i).getX() < -50 || droid.lasers.get(i).getY() < -50 || droid.lasers.get(i).getY() > getHeight() + 50){
 				droid.removeLaser(i);
 			}
+			//collision detection for lasers to enemy ship
 			else if(droid.lasers.get(i).exploded == false && eDroid.dying == false){ 
 				if(droid.lasers.get(i).getX() > eDroid.getX() - eDroid.getBitmap().getWidth()/2 && 
 					droid.lasers.get(i).getX() < eDroid.getX() + eDroid.getBitmap().getWidth()/2 && 
@@ -768,6 +773,7 @@ public class MainGamePanel extends SurfaceView implements
 				shotsHit++;
 				}
 			}
+			//laser explosion animation
 			else if (droid.lasers.get(i).exploded){
 				if (System.currentTimeMillis() > droid.lasers.get(i).laserTimer + droid.lasers.get(i).laserTimerDelay){
 					if (droid.lasers.get(i).animState == 0){
@@ -797,6 +803,7 @@ public class MainGamePanel extends SurfaceView implements
 			else if (droid.glasers.get(i).getX() > getWidth()+50 || droid.glasers.get(i).getX() < -50 || droid.glasers.get(i).getY() < -50 || droid.glasers.get(i).getY() > getHeight() + 50){
 				droid.removegLaser(i);
 			}
+			//collision detection of secondary lasers
 			else if(droid.glasers.get(i).exploded == false && eDroid.dying == false){ 
 				if(droid.glasers.get(i).getX() > eDroid.getX() - eDroid.getBitmap().getWidth()/2  - droid.glasers.get(i).getBitmap().getWidth()/2 && 
 					droid.glasers.get(i).getX() < eDroid.getX() + eDroid.getBitmap().getWidth()/2 + droid.glasers.get(i).getBitmap().getWidth()/2 && 
@@ -808,6 +815,7 @@ public class MainGamePanel extends SurfaceView implements
 				shotsHit++;
 				}
 			}
+			//animation for secondary laser
 			else if (droid.glasers.get(i).exploded){
 				if (System.currentTimeMillis() > droid.glasers.get(i).laserTimer + droid.glasers.get(i).laserTimerDelay){
 					if (droid.glasers.get(i).animState == 0){
@@ -841,6 +849,7 @@ public class MainGamePanel extends SurfaceView implements
 			else if (eDroid.lasers.get(i).getX() > getWidth()+50 || eDroid.lasers.get(i).getX() < -50 || eDroid.lasers.get(i).getY() < -50 || eDroid.lasers.get(i).getY() > getHeight() + 50){
 				eDroid.removeLaser(i);
 			}
+			//collision detection for enemy missles
 			else if(eDroid.lasers.get(i).exploded == false && droid.dying == false){ 
 				if(eDroid.lasers.get(i).getX() > droid.getX() - droid.getBitmap().getWidth()/2 && 
 						eDroid.lasers.get(i).getX() < droid.getX() + droid.getBitmap().getWidth()/2 && 
@@ -854,6 +863,7 @@ public class MainGamePanel extends SurfaceView implements
 					
 					
 					}
+				//animation for enemy missles
 			}else if (eDroid.lasers.get(i).exploded){
 				if (System.currentTimeMillis() > eDroid.lasers.get(i).laserTimer + eDroid.lasers.get(i).laserTimerDelay){
 					if (eDroid.lasers.get(i).animState == 0){
@@ -875,6 +885,7 @@ public class MainGamePanel extends SurfaceView implements
 				}
 			}
 		}
+		//update marker position
 		cMarker.update(getHeight(), getWidth());
 		cMarker2.update(getHeight(), getWidth());
 		cMarker3.update(getHeight(), getWidth());
