@@ -146,14 +146,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int arpanauts=0x7f040000;
         public static final int battle=0x7f040001;
         public static final int buttonpress=0x7f040002;
-        public static final int enemy_destroy=0x7f040003;
-        public static final int enemy_hit=0x7f040004;
-        public static final int hhavok=0x7f040005;
-        public static final int hit=0x7f040006;
-        public static final int laser=0x7f040007;
-        public static final int missile=0x7f040008;
-        public static final int player_destroy=0x7f040009;
-        public static final int warning=0x7f04000a;
+        public static final int defeat=0x7f040003;
+        public static final int enemy_destroy=0x7f040004;
+        public static final int enemy_hit=0x7f040005;
+        public static final int hhavok=0x7f040006;
+        public static final int hit=0x7f040007;
+        public static final int laser=0x7f040008;
+        public static final int missile=0x7f040009;
+        public static final int player_destroy=0x7f04000a;
+        public static final int victory=0x7f04000b;
+        public static final int warning=0x7f04000c;
     }
     public static final class string {
         public static final int action_settings=0x7f070001;
