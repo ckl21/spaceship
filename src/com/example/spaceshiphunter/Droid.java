@@ -181,6 +181,9 @@ public class Droid {
 			}
 			
 			xSpeed = xSpeed - (xRecoilHolder * Math.cos(angle)) + xKnockback;
+			if (charging){
+				xSpeed = xSpeed/1.3;
+			}
 			if (dying){
 				xSpeed = 0;
 			}
@@ -188,6 +191,9 @@ public class Droid {
 			xRecoilHolder = 0;
 			xKnockback = 0;
 			ySpeed =  ySpeed - (yRecoilHolder * Math.sin(angle)) + yKnockback;
+			if (charging){
+				ySpeed = ySpeed/1.3;
+			}
 			if (dying){
 				ySpeed = 0;
 			}
