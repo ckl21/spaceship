@@ -206,15 +206,8 @@ public class Score extends Activity implements OnTouchListener {
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
-<<<<<<< HEAD
-		if (v.getId() == 27){
-			if(event.getAction() == MotionEvent.ACTION_DOWN){
-=======
 		if (v.getId() == 27) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
-				Intent i = new Intent(this, Mission.class);
-				startActivity(i);
->>>>>>> d7369ae1c2c862150a84bab9436d078f91c4e0cb
 				nextb.setBackgroundResource(R.drawable.next_pressed);
 				finish();
 			}
@@ -246,7 +239,6 @@ public class Score extends Activity implements OnTouchListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.battle);
 		mPlayer.setVolume(Game.volume, Game.volume);
 		mPlayer.setLooping(true);
 		mPlayer.start();

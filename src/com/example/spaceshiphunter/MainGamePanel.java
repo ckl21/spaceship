@@ -127,13 +127,10 @@ public class MainGamePanel extends SurfaceView implements
 	public double scaleFactor = 0;
 	boolean loaded = false;
 	int defaultDPI = 220;
-<<<<<<< HEAD
 	private long previousTimeCharge;
 	private float chargeModifier = 1;
 	private int chargeLevel = 0;
-=======
-	
->>>>>>> d7369ae1c2c862150a84bab9436d078f91c4e0cb
+
 
 	
 	
@@ -629,77 +626,77 @@ public class MainGamePanel extends SurfaceView implements
 				chargeLevel = 1;
 				previousTimeCharge = System.currentTimeMillis();
 			}
-			else if (chargeLevel == 1 && System.currentTimeMillis() > previousTimeCharge + 150){
+			else if (chargeLevel == 1 && System.currentTimeMillis() > previousTimeCharge + 100){
 				droid.charge = charge02;
 				chargeLevel = 2;
 				previousTimeCharge = System.currentTimeMillis();
 			}
-			else if (chargeLevel == 2 && System.currentTimeMillis() > previousTimeCharge + 150){
+			else if (chargeLevel == 2 && System.currentTimeMillis() > previousTimeCharge + 100){
 				droid.charge = charge03;
 				chargeLevel = 3;
 				previousTimeCharge = System.currentTimeMillis();
 			}
-			else if (chargeLevel == 3 && System.currentTimeMillis() > previousTimeCharge + 150){
+			else if (chargeLevel == 3 && System.currentTimeMillis() > previousTimeCharge + 100){
 				droid.charge = charge04;
 				chargeLevel = 4;
 				previousTimeCharge = System.currentTimeMillis();
 			}
-			else if (chargeLevel == 4 && System.currentTimeMillis() > previousTimeCharge + 150){
+			else if (chargeLevel == 4 && System.currentTimeMillis() > previousTimeCharge + 100){
 				droid.charge = charge05;
 				chargeLevel = 5;
 				previousTimeCharge = System.currentTimeMillis();
 			}
-			else if (chargeLevel == 5 && System.currentTimeMillis() > previousTimeCharge + 150){
+			else if (chargeLevel == 5 && System.currentTimeMillis() > previousTimeCharge + 100){
 				droid.charge = charge06;
 				chargeLevel = 6;
 				previousTimeCharge = System.currentTimeMillis();
 			}
-			else if (chargeLevel == 6 && System.currentTimeMillis() > previousTimeCharge + 150){
+			else if (chargeLevel == 6 && System.currentTimeMillis() > previousTimeCharge + 100){
 				droid.charge = charge07;
 				chargeLevel = 7;
 				previousTimeCharge = System.currentTimeMillis();
 			}
-			else if (chargeLevel == 7 && System.currentTimeMillis() > previousTimeCharge + 150){
+			else if (chargeLevel == 7 && System.currentTimeMillis() > previousTimeCharge + 100){
 				droid.charge = charge08;
 				chargeLevel = 8;
 				previousTimeCharge = System.currentTimeMillis();
 			}
-			else if (chargeLevel == 8 && System.currentTimeMillis() > previousTimeCharge + 100){
+			else if (chargeLevel == 8 && System.currentTimeMillis() > previousTimeCharge + 50){
 				droid.charge = charge09;
 				chargeLevel = 9;
 				previousTimeCharge = System.currentTimeMillis();
 			}
-			else if (chargeLevel == 9 && System.currentTimeMillis() > previousTimeCharge + 100){
+			else if (chargeLevel == 9 && System.currentTimeMillis() > previousTimeCharge + 50){
 				droid.charge = charge10;
 				chargeLevel = 10;
 				previousTimeCharge = System.currentTimeMillis();
 			}
-			else if (chargeLevel == 10 && System.currentTimeMillis() > previousTimeCharge + 100){
+			else if (chargeLevel == 10 && System.currentTimeMillis() > previousTimeCharge + 50){
 				droid.charge = charge11;
 				chargeLevel = 11;
 				previousTimeCharge = System.currentTimeMillis();
 			}
-			else if (chargeLevel == 11 && System.currentTimeMillis() > previousTimeCharge + 100){
+			else if (chargeLevel == 11 && System.currentTimeMillis() > previousTimeCharge + 50){
 				droid.charge = charge12;
 				chargeLevel = 12;
 				previousTimeCharge = System.currentTimeMillis();
 			}
-			else if (chargeLevel == 12 && System.currentTimeMillis() > previousTimeCharge + 100){
+			else if (chargeLevel == 12 && System.currentTimeMillis() > previousTimeCharge + 50){
 				droid.charge = charge13;
 				chargeLevel = 13;
 				previousTimeCharge = System.currentTimeMillis();
 			}
-			else if (chargeLevel == 13 && System.currentTimeMillis() > previousTimeCharge + 100){
+			else if (chargeLevel == 13 && System.currentTimeMillis() > previousTimeCharge + 50){
 				droid.charge = charge14;
 				chargeLevel = 14;
 				previousTimeCharge = System.currentTimeMillis();
 			}
-			else if (chargeLevel == 14 && System.currentTimeMillis() > previousTimeCharge + 100){
+			else if (chargeLevel == 14 && System.currentTimeMillis() > previousTimeCharge + 50){
 				droid.charge = charge15;
 				chargeLevel = 15;
 				previousTimeCharge = System.currentTimeMillis();
 			}
-			else if (chargeLevel == 15 && System.currentTimeMillis() > previousTimeCharge + 100){
+			else if (chargeLevel == 15 && System.currentTimeMillis() > previousTimeCharge + 50){
 				droid.charge = charge15;
 				chargeLevel = 16;
 				droid.charging = false;
@@ -801,10 +798,10 @@ public class MainGamePanel extends SurfaceView implements
 				droid.removegLaser(i);
 			}
 			else if(droid.glasers.get(i).exploded == false && eDroid.dying == false){ 
-				if(droid.glasers.get(i).getX() + droid.glasers.get(i).getBitmap().getWidth()/2 > eDroid.getX() - eDroid.getBitmap().getWidth()/2 && 
-					droid.glasers.get(i).getX() - droid.glasers.get(i).getBitmap().getWidth()/2 < eDroid.getX() + eDroid.getBitmap().getWidth()/2 && 
-					droid.glasers.get(i).getY() + droid.glasers.get(i).getBitmap().getHeight()/2 > eDroid.getY() - eDroid.getBitmap().getHeight()/2 && 
-					droid.glasers.get(i).getY() - droid.glasers.get(i).getBitmap().getHeight()/2 < eDroid.getY() + eDroid.getBitmap().getHeight()/2 ){
+				if(droid.glasers.get(i).getX() > eDroid.getX() - eDroid.getBitmap().getWidth()/2  - droid.glasers.get(i).getBitmap().getWidth()/2 && 
+					droid.glasers.get(i).getX() < eDroid.getX() + eDroid.getBitmap().getWidth()/2 + droid.glasers.get(i).getBitmap().getWidth()/2 && 
+					droid.glasers.get(i).getY() > eDroid.getY() - eDroid.getBitmap().getHeight()/2  - droid.glasers.get(i).getBitmap().getHeight()/2 && 
+					droid.glasers.get(i).getY() < eDroid.getY() + eDroid.getBitmap().getHeight()/2 + droid.glasers.get(i).getBitmap().getHeight()/2 ){
 				droid.glasers.get(i).setExploded();
 				eDroid.knockback(droid.glasers.get(i), 5);
 				eDroid.fireHit(20);

@@ -83,7 +83,7 @@
         android:layout_alignLeft="@+id/statusText"
         android:layout_below="@+id/statusText"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="85dp"
         android:text="Shots Fired" />
 
     <TextView

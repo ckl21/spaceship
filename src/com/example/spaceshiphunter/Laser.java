@@ -59,13 +59,13 @@ public class Laser {
 		this.bitmap = bitmap;
 	}
 	public float getX() {
-		return x - (rotatedbitmap.getWidth() / 2) + (float) (offsetX * Math.cos(angle+1.57)) + (float) (offsetY * Math.cos(angle));
+		return x  + (float) (offsetX * Math.cos(angle+1.57)) + (float) (offsetY * Math.cos(angle));
 	}
 	public void setX(int x) {
 		this.x = x;
 	}
 	public float getY() {
-		return y - (rotatedbitmap.getHeight() / 2) + (float) (offsetX * Math.sin(angle+1.57) + (float) (offsetY * Math.sin(angle)));
+		return y  + (float) (offsetX * Math.sin(angle+1.57) + (float) (offsetY * Math.sin(angle)));
 	}
 	public void setY(int y) {
 		this.y = y;
