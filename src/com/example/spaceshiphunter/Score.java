@@ -1,8 +1,9 @@
 package com.example.spaceshiphunter;
 
-
 import java.util.concurrent.TimeUnit;
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
@@ -10,6 +11,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.hardware.SensorManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -22,7 +24,7 @@ import android.widget.TextView;
 import android.widget.RelativeLayout.LayoutParams;
 
 @SuppressLint("NewApi")
-public class Score extends Activity implements OnTouchListener{
+public class Score extends Activity implements OnTouchListener {
 
 	TextView status;
 	TextView shotsFiredText;
@@ -40,158 +42,159 @@ public class Score extends Activity implements OnTouchListener{
 	TextView timeElapsedLabel;
 	TextView gameScoreLabel;
 	Button nextb;
-	
-	
 
-	
-	
-	
-	
+	MediaPlayer mPlayer;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
+
 		setContentView(R.layout.activity_score);
 		super.onCreate(savedInstanceState);
+
+		AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+
 		
+
 		nextb = new Button(this);
 		nextb.setId(27);
 		nextb.setBackgroundResource(R.drawable.next);
-		
-		
-		
+
 		RelativeLayout.LayoutParams nextButton = new LayoutParams(
 				RelativeLayout.LayoutParams.WRAP_CONTENT,
 				RelativeLayout.LayoutParams.WRAP_CONTENT);
-		nextButton.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+		nextButton.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,
+				RelativeLayout.TRUE);
 		nextButton.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,
 				RelativeLayout.TRUE);
 		nextButton.rightMargin = 0;
 		nextButton.bottomMargin = 0;
-		
+
 		nextb.setLayoutParams(nextButton);
 		nextb.setOnTouchListener(this);
-		
-		
-		RelativeLayout mLayout = (RelativeLayout)findViewById(R.id.scoreLayout);
+
+		RelativeLayout mLayout = (RelativeLayout) findViewById(R.id.scoreLayout);
 		mLayout.addView(nextb);
-		
-		
-		
-	
-		
-		Typeface PostPixel = Typeface.createFromAsset(this.getAssets(),"fonts/postpixel.ttf");
-		
+
+		Typeface PostPixel = Typeface.createFromAsset(this.getAssets(),
+				"fonts/postpixel.ttf");
+
 		String winner = getIntent().getExtras().getString("Winner");
 		int shotsFired = getIntent().getExtras().getInt("ShotsFired");
 		int shotsHit = getIntent().getExtras().getInt("ShotsHit");
 		int healthRemaining = getIntent().getExtras().getInt("HealthRemaining");
 		int maxHealth = getIntent().getExtras().getInt("MaxHealth");
 		long timeElapsed = getIntent().getExtras().getLong("TimeElapsed");
-		
-		status = (TextView)findViewById(R.id.statusText);
+
+		status = (TextView) findViewById(R.id.statusText);
 		status.setTypeface(PostPixel);
-		
-		shotsFiredText = (TextView)findViewById(R.id.shotsFiredText);
-		
-			
-		
-		shotsFiredLabel = (TextView)findViewById(R.id.shotsFiredLabel);
+
+		shotsFiredText = (TextView) findViewById(R.id.shotsFiredText);
+
+		shotsFiredLabel = (TextView) findViewById(R.id.shotsFiredLabel);
 		shotsFiredLabel.setTypeface(PostPixel);
 		shotsFiredLabel.setTextSize(14f);
-		
-		
-		accuracyLabel = (TextView)findViewById(R.id.accuracyLabel);
+
+		accuracyLabel = (TextView) findViewById(R.id.accuracyLabel);
 		accuracyLabel.setTextSize(14f);
 		accuracyLabel.setTypeface(PostPixel);
-		accuracyText = (TextView)findViewById(R.id.accuracyText);
-		
+		accuracyText = (TextView) findViewById(R.id.accuracyText);
+
 		timeElapsedLabel = (TextView) findViewById(R.id.TimeElapsedLabel);
 		timeElapsedLabel.setTypeface(PostPixel);
 		timeElapsedLabel.setTextSize(14f);
-		
-		gameScoreLabel = (TextView)findViewById(R.id.scoreLabel);
+
+		gameScoreLabel = (TextView) findViewById(R.id.scoreLabel);
 		gameScoreLabel.setTypeface(PostPixel);
 		gameScoreLabel.setTextSize(14f);
-		
-		healthRemainingLabel = (TextView)findViewById(R.id.healthRemainingLabel);
+
+		healthRemainingLabel = (TextView) findViewById(R.id.healthRemainingLabel);
 		healthRemainingLabel.setTypeface(PostPixel);
 		healthRemainingLabel.setTextSize(14f);
-		
-		
-		healthRemainingText = (TextView)findViewById(R.id.healthRemainingText);
-		timeElapsedText = (TextView)findViewById(R.id.timeElapsedText);
-		scoreText = (TextView)findViewById(R.id.scoreText);
-		healthPercentage = ((double)healthRemaining/maxHealth)*100;
-		accuracy = ((double)shotsHit/shotsFired)*100;
-		
-		
-	
-		if (winner.equals("player")){
+
+		healthRemainingText = (TextView) findViewById(R.id.healthRemainingText);
+		timeElapsedText = (TextView) findViewById(R.id.timeElapsedText);
+		scoreText = (TextView) findViewById(R.id.scoreText);
+		healthPercentage = ((double) healthRemaining / maxHealth) * 100;
+		accuracy = ((double) shotsHit / shotsFired) * 100;
+
+		if (winner.equals("player")) {
 			status.setText("Victory!");
 			healthRemainingLabel.setText("Health Remaining (Player)");
-			
-			
-		}else{
+			mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.victory);
+			mPlayer.setVolume(Game.volume, Game.volume);
+			mPlayer.setLooping(false);
+			mPlayer.start();
+
+		} else {
 			status.setText("Defeat!");
-			
+			mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.defeat);
+			mPlayer.setVolume(Game.volume, Game.volume);
+			mPlayer.setLooping(false);
+			mPlayer.start();
+
+
 			healthRemainingLabel.setText("Health Remaining (Enemy)");
 		}
-		
+
 		status.setTextSize(30f);
-		
-		shotsFiredText.setText(String.format("%d",shotsFired));
+
+		shotsFiredText.setText(String.format("%d", shotsFired));
 		shotsFiredText.setTypeface(PostPixel);
 		shotsFiredText.setTextSize(18f);
-	
-		accuracyText.setText(String.format("%d", (int)accuracy) + " %");
+
+		accuracyText.setText(String.format("%d", (int) accuracy) + " %");
 		accuracyText.setTypeface(PostPixel);
 		accuracyText.setTextSize(18f);
-		
-		healthRemainingText.setText(String.format("%d", (int)healthPercentage) + " %");
+
+		healthRemainingText.setText(String.format("%d", (int) healthPercentage)
+				+ " %");
 		healthRemainingText.setTypeface(PostPixel);
 		healthRemainingText.setTextSize(18f);
-		
-		finalScore = (int) accuracy + (int) healthPercentage - (int)((timeElapsed/1000)/2);
+
+		finalScore = (int) accuracy + (int) healthPercentage
+				- (int) ((timeElapsed / 1000) / 2);
 		Log.d("Game", "score = " + finalScore);
-		
-		if(finalScore <= -200){
+
+		if (finalScore <= -200) {
 			letterGrade = "C";
-		}else if (finalScore <= -30){
+		} else if (finalScore <= -30) {
 			letterGrade = "C+";
-		}else if (finalScore <= -10){
+		} else if (finalScore <= -10) {
 			letterGrade = "B-";
-		}else if (finalScore <= 10){
+		} else if (finalScore <= 10) {
 			letterGrade = "B";
-		}else if (finalScore <= 30){
+		} else if (finalScore <= 30) {
 			letterGrade = "B+";
-		}else if (finalScore <= 50){
+		} else if (finalScore <= 50) {
 			letterGrade = "A-";
-		}else if (finalScore <= 70){
+		} else if (finalScore <= 70) {
 			letterGrade = "A";
-		}else if (finalScore <= 90){
+		} else if (finalScore <= 90) {
 			letterGrade = "A+";
-		}else{
+		} else {
 			letterGrade = "S";
 		}
-	
-		timeElapsedText.setText(String.format("%d min, %d sec", 
-			    TimeUnit.MILLISECONDS.toMinutes(timeElapsed),
-			    TimeUnit.MILLISECONDS.toSeconds(timeElapsed) - 
-			    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timeElapsed)))
-			    
-			);
-			timeElapsedText.setTypeface(PostPixel);
-			timeElapsedText.setTextSize(18f);
-		if(winner.equals("player")){
-				scoreText.setText(letterGrade);
-				scoreText.setTypeface(PostPixel);
-				
-		}else{
+
+		timeElapsedText.setText(String.format(
+				"%d min, %d sec",
+				TimeUnit.MILLISECONDS.toMinutes(timeElapsed),
+				TimeUnit.MILLISECONDS.toSeconds(timeElapsed)
+						- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS
+								.toMinutes(timeElapsed)))
+
+		);
+		timeElapsedText.setTypeface(PostPixel);
+		timeElapsedText.setTextSize(18f);
+		if (winner.equals("player")) {
+			scoreText.setText(letterGrade);
+			scoreText.setTypeface(PostPixel);
+
+		} else {
 			scoreText.setText("F");
 			scoreText.setTypeface(PostPixel);
 		}
 		scoreText.setTextSize(30f);
-		
+
 	}
 
 	@Override
@@ -203,17 +206,56 @@ public class Score extends Activity implements OnTouchListener{
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
+<<<<<<< HEAD
 		if (v.getId() == 27){
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
+=======
+		if (v.getId() == 27) {
+			if (event.getAction() == MotionEvent.ACTION_DOWN) {
+				Intent i = new Intent(this, Mission.class);
+				startActivity(i);
+>>>>>>> d7369ae1c2c862150a84bab9436d078f91c4e0cb
 				nextb.setBackgroundResource(R.drawable.next_pressed);
 				finish();
 			}
-			
-			if (event.getAction() == MotionEvent.ACTION_UP){
+
+			if (event.getAction() == MotionEvent.ACTION_UP) {
 				nextb.setBackgroundResource(R.drawable.next);
 			}
 		}
 		return false;
+	}
+
+	@Override
+	protected void onDestroy() {
+		finish();
+		super.onDestroy();
+	}
+
+	@Override
+	protected void onStop() {
+
+		if (mPlayer != null) {
+			super.onStop();
+			mPlayer.stop();
+			mPlayer.release();
+			mPlayer = null;
+		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.battle);
+		mPlayer.setVolume(Game.volume, Game.volume);
+		mPlayer.setLooping(true);
+		mPlayer.start();
+
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
 	}
 
 }

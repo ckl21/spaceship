@@ -127,9 +127,13 @@ public class MainGamePanel extends SurfaceView implements
 	public double scaleFactor = 0;
 	boolean loaded = false;
 	int defaultDPI = 220;
+<<<<<<< HEAD
 	private long previousTimeCharge;
 	private float chargeModifier = 1;
 	private int chargeLevel = 0;
+=======
+	
+>>>>>>> d7369ae1c2c862150a84bab9436d078f91c4e0cb
 
 	
 	
@@ -211,7 +215,6 @@ public class MainGamePanel extends SurfaceView implements
 		cMarker2 = new Marker(centerMarker,0,0, 6);
 		cMarker3 = new Marker(centerMarker,0,0, 7);
 		cMarker4 = new Marker(centerMarker,0,0, 8);
-		
 		
 		background = BitmapFactory.decodeResource(getResources(), R.drawable.battleground2);
 		
@@ -419,10 +422,12 @@ public class MainGamePanel extends SurfaceView implements
 			droidFrame = 2;
 			}
 		if (droid.healthPoints <= 50 && droidFrame == 2){
+			Game.spool.play(Game.lowhealth, Game.volume,Game.volume, 5, 0, 1);
 			if (player3 == null){
 				player3 = BitmapFactory.decodeResource(getResources(), R.drawable.player3);
 				player3 = Bitmap.createScaledBitmap (player3, (int)(player3.getWidth()/scaleFactor), (int)(player3.getHeight()/scaleFactor), true);
-				player2.recycle();
+				player2.recycle();	
+				
 			}
 			droid.changeBaseBitmap(player3);
 			droidFrame = 3;
@@ -469,6 +474,7 @@ public class MainGamePanel extends SurfaceView implements
 				droid.changeBaseBitmap(playerd0);
 				droidTimer = System.currentTimeMillis();
 				droidFrame++;
+				
 				
 				Game.spool.play(Game.playerdeathsfx,Game.volume,Game.volume, 1, 0, 1);
 				Game.vb.vibrate(1000);

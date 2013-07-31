@@ -50,6 +50,7 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
 	static int enemydeathsfx;
 	static int playerdeathsfx;
 	static int enemyhitsfx;
+	static int lowhealth;
 	static float volume;
 	
     @SuppressLint("NewApi")
@@ -62,7 +63,7 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
         
         gamePanel = new MainGamePanel(this);
         game = new FrameLayout(this);
-        //game.setBackground(getResources().getDrawable(R.drawable.battleground));
+        
        	weaponLayout = new RelativeLayout(this);   	
        	vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
        
@@ -77,6 +78,9 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
         enemydeathsfx = spool.load(this, R.raw.enemy_destroy, 5);
         playerdeathsfx =spool.load(this, R.raw.player_destroy, 5);
         enemyhitsfx = spool.load(this, R.raw.enemy_hit, 5);
+        lowhealth = spool.load(this, R.raw.warning, 5);
+        
+        
         if (MainActivity.silent == true){
         	volume = 0f;
         }
