@@ -77,7 +77,8 @@ public class MainGamePanel extends SurfaceView implements
 	Bitmap ebooster2;
 	Bitmap marker;
 	Bitmap centerMarker;
-	Bitmap background;
+	Bitmap background1;
+	Bitmap background2;
 	Bitmap charge01;
 	Bitmap charge02;
 	Bitmap charge03;
@@ -123,6 +124,8 @@ public class MainGamePanel extends SurfaceView implements
 	private long startTime = 0;
 	float parX;
 	float parY;
+	float parX2;
+	float parY2;
 	
 	public double scaleFactor = 0;
 	boolean loaded = false;
@@ -213,7 +216,17 @@ public class MainGamePanel extends SurfaceView implements
 		cMarker3 = new Marker(centerMarker,0,0, 7);
 		cMarker4 = new Marker(centerMarker,0,0, 8);
 		
-		background = BitmapFactory.decodeResource(getResources(), R.drawable.battleground2);
+		double bgdecide = Math.random();
+		
+		if (bgdecide <=0.5){
+			background1 = BitmapFactory.decodeResource(getResources(), R.drawable.bg1);
+		}
+		
+		else{
+			background1 = BitmapFactory.decodeResource(getResources(), R.drawable.battleground2);
+		}
+		
+		background2 = BitmapFactory.decodeResource(getResources(), R.drawable.bg2);
 		
 		// create the game loop thread
 		thread = new MainThread(getHolder(), this);
@@ -326,7 +339,13 @@ public class MainGamePanel extends SurfaceView implements
 		canvas.drawColor(Color.BLACK);
 		parX= (float) (((Mission.dispXY.x)/2 - 360)  + ((0-droid.x)*0.3));
 		parY = (float) (((Mission.dispXY.y)/2 - 216) + ((0-droid.y)*0.3));
-		canvas.drawBitmap(background, parX, parY, null);
+		
+		parX2= (float) (((Mission.dispXY.x)/2 + 310)  + ((0-droid.x)*0.4));
+		parY2= (float) (((Mission.dispXY.y)/2 - 50) + ((0-droid.y)*0.4));
+	
+		
+		canvas.drawBitmap(background1, parX, parY, null);
+		canvas.drawBitmap(background2,parX2, parY2, null);
 		
 		eDroid.draw(canvas);
 		for ( int i = 0; i < droid.lasers.size(); i++ ) {
