@@ -78,6 +78,28 @@ public class MainGamePanel extends SurfaceView implements
 	Bitmap marker;
 	Bitmap centerMarker;
 	Bitmap background;
+	Bitmap charge01;
+	Bitmap charge02;
+	Bitmap charge03;
+	Bitmap charge04;
+	Bitmap charge05;
+	Bitmap charge06;
+	Bitmap charge07;
+	Bitmap charge08;
+	Bitmap charge09;
+	Bitmap charge10;
+	Bitmap charge11;
+	Bitmap charge12;
+	Bitmap charge13;
+	Bitmap charge14;
+	Bitmap charge15;
+	Bitmap glaser;
+	Bitmap gle01;
+	Bitmap gle02;
+	Bitmap gle03;
+	Bitmap gle04;
+	Bitmap gle05;
+	Bitmap gle06;
 	long previousTime = 0;
 	long enemyDelay = 3000;
 	int droidFrame = 0;
@@ -105,6 +127,9 @@ public class MainGamePanel extends SurfaceView implements
 	public double scaleFactor = 0;
 	boolean loaded = false;
 	int defaultDPI = 220;
+	private long previousTimeCharge;
+	private float chargeModifier = 1;
+	private int chargeLevel = 0;
 
 	
 	
@@ -154,6 +179,29 @@ public class MainGamePanel extends SurfaceView implements
 		missile3 = BitmapFactory.decodeResource(getResources(), R.drawable.missile3);
 		missile4 = BitmapFactory.decodeResource(getResources(), R.drawable.missile4);
 		marker = BitmapFactory.decodeResource(getResources(), R.drawable.marker);
+		charge01 = BitmapFactory.decodeResource(getResources(), R.drawable.gl01);
+		charge02 = BitmapFactory.decodeResource(getResources(), R.drawable.gl02);
+		charge03 = BitmapFactory.decodeResource(getResources(), R.drawable.gl03);
+		charge04 = BitmapFactory.decodeResource(getResources(), R.drawable.gl04);
+		charge05 = BitmapFactory.decodeResource(getResources(), R.drawable.gl05);
+		charge06 = BitmapFactory.decodeResource(getResources(), R.drawable.gl06);
+		charge07 = BitmapFactory.decodeResource(getResources(), R.drawable.gl07);
+		charge08 = BitmapFactory.decodeResource(getResources(), R.drawable.gl08);
+		charge09 = BitmapFactory.decodeResource(getResources(), R.drawable.gl09);
+		charge10 = BitmapFactory.decodeResource(getResources(), R.drawable.gl10);
+		charge11 = BitmapFactory.decodeResource(getResources(), R.drawable.gl11);
+		charge12 = BitmapFactory.decodeResource(getResources(), R.drawable.gl12);
+		charge13 = BitmapFactory.decodeResource(getResources(), R.drawable.gl13);
+		charge14 = BitmapFactory.decodeResource(getResources(), R.drawable.gl14);
+		charge15 = BitmapFactory.decodeResource(getResources(), R.drawable.gl15);
+		glaser = BitmapFactory.decodeResource(getResources(), R.drawable.greenlaser);
+		gle01 = BitmapFactory.decodeResource(getResources(), R.drawable.gle01);
+		gle02 = BitmapFactory.decodeResource(getResources(), R.drawable.gle02);
+		gle03 = BitmapFactory.decodeResource(getResources(), R.drawable.gle03);
+		gle04 = BitmapFactory.decodeResource(getResources(), R.drawable.gle04);
+		gle05 = BitmapFactory.decodeResource(getResources(), R.drawable.gle05);
+		gle06 = BitmapFactory.decodeResource(getResources(), R.drawable.gle06);
+		
 		centerMarker = BitmapFactory.decodeResource(getResources(), R.drawable.centermark);
 		marker3 = new Marker(marker,0, 0, 3);
 		marker1 = new Marker(marker,0, 0, 1);
@@ -222,6 +270,27 @@ public class MainGamePanel extends SurfaceView implements
 		booster2 = Bitmap.createScaledBitmap (booster2, (int)(booster2.getWidth()/scaleFactor), (int)(booster2.getHeight()/scaleFactor), true);
 		ebooster1 = Bitmap.createScaledBitmap (ebooster1, (int)(ebooster1.getWidth()/scaleFactor), (int)(ebooster1.getHeight()/scaleFactor), true);
 		ebooster2 = Bitmap.createScaledBitmap (ebooster2, (int)(ebooster2.getWidth()/scaleFactor), (int)(ebooster2.getHeight()/scaleFactor), true);
+		charge01 = Bitmap.createScaledBitmap (charge01, (int)(charge01.getWidth()/scaleFactor), (int)(charge01.getHeight()/scaleFactor), true);
+		charge02 = Bitmap.createScaledBitmap (charge02, (int)(charge02.getWidth()/scaleFactor), (int)(charge02.getHeight()/scaleFactor), true);
+		charge03 = Bitmap.createScaledBitmap (charge03, (int)(charge03.getWidth()/scaleFactor), (int)(charge03.getHeight()/scaleFactor), true);
+		charge04 = Bitmap.createScaledBitmap (charge04, (int)(charge04.getWidth()/scaleFactor), (int)(charge04.getHeight()/scaleFactor), true);
+		charge05 = Bitmap.createScaledBitmap (charge05, (int)(charge05.getWidth()/scaleFactor), (int)(charge05.getHeight()/scaleFactor), true);
+		charge06 = Bitmap.createScaledBitmap (charge06, (int)(charge06.getWidth()/scaleFactor), (int)(charge06.getHeight()/scaleFactor), true);
+		charge07 = Bitmap.createScaledBitmap (charge07, (int)(charge07.getWidth()/scaleFactor), (int)(charge07.getHeight()/scaleFactor), true);
+		charge08 = Bitmap.createScaledBitmap (charge08, (int)(charge08.getWidth()/scaleFactor), (int)(charge08.getHeight()/scaleFactor), true);
+		charge09 = Bitmap.createScaledBitmap (charge09, (int)(charge09.getWidth()/scaleFactor), (int)(charge09.getHeight()/scaleFactor), true);
+		charge10 = Bitmap.createScaledBitmap (charge10, (int)(charge10.getWidth()/scaleFactor), (int)(charge10.getHeight()/scaleFactor), true);
+		charge11 = Bitmap.createScaledBitmap (charge11, (int)(charge11.getWidth()/scaleFactor), (int)(charge11.getHeight()/scaleFactor), true);
+		charge12 = Bitmap.createScaledBitmap (charge12, (int)(charge12.getWidth()/scaleFactor), (int)(charge12.getHeight()/scaleFactor), true);
+		charge13 = Bitmap.createScaledBitmap (charge13, (int)(charge13.getWidth()/scaleFactor), (int)(charge13.getHeight()/scaleFactor), true);
+		charge14 = Bitmap.createScaledBitmap (charge14, (int)(charge14.getWidth()/scaleFactor), (int)(charge14.getHeight()/scaleFactor), true);
+		glaser = Bitmap.createScaledBitmap (glaser, (int)(glaser.getWidth()/scaleFactor), (int)(glaser.getHeight()/scaleFactor), true);
+		gle01 = Bitmap.createScaledBitmap (gle01, (int)(glaser.getWidth()/scaleFactor), (int)(gle01.getHeight()/scaleFactor), true);
+		gle02 = Bitmap.createScaledBitmap (gle02, (int)(glaser.getWidth()/scaleFactor), (int)(gle02.getHeight()/scaleFactor), true);
+		gle03 = Bitmap.createScaledBitmap (gle03, (int)(glaser.getWidth()/scaleFactor), (int)(gle03.getHeight()/scaleFactor), true);
+		gle04 = Bitmap.createScaledBitmap (gle04, (int)(glaser.getWidth()/scaleFactor), (int)(gle04.getHeight()/scaleFactor), true);
+		gle05 = Bitmap.createScaledBitmap (gle05, (int)(glaser.getWidth()/scaleFactor), (int)(gle05.getHeight()/scaleFactor), true);
+		gle06 = Bitmap.createScaledBitmap (gle06, (int)(glaser.getWidth()/scaleFactor), (int)(gle06.getHeight()/scaleFactor), true);
 		droid.booster1 = booster1;
 		droid.booster2 = booster2;
 		droid.leftFlash = leftFlash;
@@ -262,6 +331,10 @@ public class MainGamePanel extends SurfaceView implements
 		eDroid.draw(canvas);
 		for ( int i = 0; i < droid.lasers.size(); i++ ) {
 			droid.lasers.get(i).draw(canvas);
+			
+		}
+		for ( int i = 0; i < droid.glasers.size(); i++ ) {
+			droid.glasers.get(i).draw(canvas);
 			
 		}
 		droid.draw(canvas);
@@ -543,12 +616,100 @@ public class MainGamePanel extends SurfaceView implements
 		}else{
 			eDroid.update();
 		}
-		if (firing1 && droid.healthPoints > 0){
-			droid.fireLaser(laser);
-			
+		if (firing2 && droid.healthPoints > 0){
+			if (chargeLevel == 0){
+				droid.charge = charge01;
+				droid.charging = true;
+				chargeLevel = 1;
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 1 && System.currentTimeMillis() > previousTimeCharge + 150){
+				droid.charge = charge02;
+				chargeLevel = 2;
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 2 && System.currentTimeMillis() > previousTimeCharge + 150){
+				droid.charge = charge03;
+				chargeLevel = 3;
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 3 && System.currentTimeMillis() > previousTimeCharge + 150){
+				droid.charge = charge04;
+				chargeLevel = 4;
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 4 && System.currentTimeMillis() > previousTimeCharge + 150){
+				droid.charge = charge05;
+				chargeLevel = 5;
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 5 && System.currentTimeMillis() > previousTimeCharge + 150){
+				droid.charge = charge06;
+				chargeLevel = 6;
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 6 && System.currentTimeMillis() > previousTimeCharge + 150){
+				droid.charge = charge07;
+				chargeLevel = 7;
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 7 && System.currentTimeMillis() > previousTimeCharge + 150){
+				droid.charge = charge08;
+				chargeLevel = 8;
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 8 && System.currentTimeMillis() > previousTimeCharge + 100){
+				droid.charge = charge09;
+				chargeLevel = 9;
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 9 && System.currentTimeMillis() > previousTimeCharge + 100){
+				droid.charge = charge10;
+				chargeLevel = 10;
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 10 && System.currentTimeMillis() > previousTimeCharge + 100){
+				droid.charge = charge11;
+				chargeLevel = 11;
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 11 && System.currentTimeMillis() > previousTimeCharge + 100){
+				droid.charge = charge12;
+				chargeLevel = 12;
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 12 && System.currentTimeMillis() > previousTimeCharge + 100){
+				droid.charge = charge13;
+				chargeLevel = 13;
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 13 && System.currentTimeMillis() > previousTimeCharge + 100){
+				droid.charge = charge14;
+				chargeLevel = 14;
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 14 && System.currentTimeMillis() > previousTimeCharge + 100){
+				droid.charge = charge15;
+				chargeLevel = 15;
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 15 && System.currentTimeMillis() > previousTimeCharge + 100){
+				droid.charge = charge15;
+				chargeLevel = 16;
+				droid.charging = false;
+				droid.fireGLaser(glaser);
+				previousTimeCharge = System.currentTimeMillis();
+			}
+			else if (chargeLevel == 16){
+				chargeLevel = 0;
+			}
+		}else{
+			droid.charging = false;
+			droid.charge = charge01;
+			chargeLevel = 0;
 		}
 		
-		if(firing2 && droid.healthPoints > 0){
+		if(firing1 && droid.healthPoints > 0 && firing2 == false){
 			droid.fireLaser(laser);
 		}
 		// check collision with right wall if heading right
@@ -622,6 +783,49 @@ public class MainGamePanel extends SurfaceView implements
 						droid.lasers.get(i).animState ++;
 					}
 					droid.lasers.get(i).laserTimer = System.currentTimeMillis();
+				}
+			}
+			
+		}
+		for (int i = 0; i < droid.glasers.size(); i++){
+			if (droid.glasers.get(i).animState >= 6){
+				droid.removegLaser(i);
+			}
+			else if (droid.glasers.get(i).getX() > getWidth()+50 || droid.glasers.get(i).getX() < -50 || droid.glasers.get(i).getY() < -50 || droid.glasers.get(i).getY() > getHeight() + 50){
+				droid.removegLaser(i);
+			}
+			else if(droid.glasers.get(i).exploded == false && eDroid.dying == false){ 
+				if(droid.glasers.get(i).getX() + droid.glasers.get(i).getBitmap().getWidth()/2 > eDroid.getX() - eDroid.getBitmap().getWidth()/2 && 
+					droid.glasers.get(i).getX() - droid.glasers.get(i).getBitmap().getWidth()/2 < eDroid.getX() + eDroid.getBitmap().getWidth()/2 && 
+					droid.glasers.get(i).getY() + droid.glasers.get(i).getBitmap().getHeight()/2 > eDroid.getY() - eDroid.getBitmap().getHeight()/2 && 
+					droid.glasers.get(i).getY() - droid.glasers.get(i).getBitmap().getHeight()/2 < eDroid.getY() + eDroid.getBitmap().getHeight()/2 ){
+				droid.glasers.get(i).setExploded();
+				eDroid.knockback(droid.glasers.get(i), 5);
+				eDroid.fireHit(20);
+				shotsHit++;
+				}
+			}
+			else if (droid.glasers.get(i).exploded){
+				if (System.currentTimeMillis() > droid.glasers.get(i).laserTimer + droid.glasers.get(i).laserTimerDelay){
+					if (droid.glasers.get(i).animState == 0){
+						droid.glasers.get(i).changeBitmap(gle01);
+						droid.glasers.get(i).animState ++;
+					}else if (droid.glasers.get(i).animState == 1){
+						droid.glasers.get(i).changeBitmap(gle02);
+						droid.glasers.get(i).animState ++;
+					}else if (droid.glasers.get(i).animState == 2){
+						droid.glasers.get(i).changeBitmap(gle03);
+						droid.glasers.get(i).animState ++;
+					}else if (droid.glasers.get(i).animState == 3){
+						droid.glasers.get(i).changeBitmap(gle04);
+						droid.glasers.get(i).animState ++;
+					}else if (droid.glasers.get(i).animState == 4){
+						droid.glasers.get(i).changeBitmap(gle05);
+						droid.glasers.get(i).animState ++;
+					}else if (droid.glasers.get(i).animState == 5){
+						droid.glasers.get(i).animState ++;
+					}
+					droid.glasers.get(i).laserTimer = System.currentTimeMillis();
 				}
 			}
 			

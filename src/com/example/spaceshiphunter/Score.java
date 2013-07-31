@@ -205,9 +205,8 @@ public class Score extends Activity implements OnTouchListener{
 	public boolean onTouch(View v, MotionEvent event) {
 		if (v.getId() == 27){
 			if(event.getAction() == MotionEvent.ACTION_DOWN){
-				Intent i = new Intent(this, Mission.class );
-				startActivity(i);
 				nextb.setBackgroundResource(R.drawable.next_pressed);
+				finish();
 			}
 			
 			if (event.getAction() == MotionEvent.ACTION_UP){

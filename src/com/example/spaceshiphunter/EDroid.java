@@ -228,13 +228,13 @@ public class EDroid {
 		Laser laser;
 		if (onCD == false){
 			if (firingSide == false){
-				laser = new Laser(bitmapL, x, y, 50/scaleFactor,60/scaleFactor, (Math.random()*10)-5, 20, 2, 1.04);
+				laser = new Laser(bitmapL, x, y, 50/scaleFactor,60/scaleFactor, (Math.random()*10)-5, 20, 2, 1.04, 2);
 				Game.spool.play(Game.missilesfx, Game.volume, Game.volume, 0, 0,0.8f);
 				firingSide = true;
 				rightFlashing = true;
 			}else{
 			
-				laser = new Laser(bitmapL, x, y, -50/scaleFactor,60/scaleFactor, (Math.random()*10)-5, 20, 2, 1.04);
+				laser = new Laser(bitmapL, x, y, -50/scaleFactor,60/scaleFactor, (Math.random()*10)-5, 20, 2, 1.04, 2);
 
 				firingSide = false;
 				leftFlashing = true;

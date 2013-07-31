@@ -29,6 +29,7 @@ public class Laser {
 	public long laserTimer;
 	public long laserTimerDelay = 100;
 	public int animState = 0;
+	private int explodedSpeed = 2;
 	
 
 	
@@ -37,7 +38,7 @@ public class Laser {
 	
 
 	
-	public Laser(Bitmap bitmap, float x, float y, double offsetX, double offsetY, double offsetR, double speed, double iSpeed, double accel) {
+	public Laser(Bitmap bitmap, float x, float y, double offsetX, double offsetY, double offsetR, double speed, double iSpeed, double accel, int exploded) {
 		this.bitmap = bitmap;
 		this.x = x;
 		this.y = y;
@@ -47,6 +48,7 @@ public class Laser {
 		this.maxSpeed = speed;
 		this.speed = iSpeed;
 		this.accel = accel;
+		explodedSpeed = exploded;
 
 	}
 	
@@ -114,7 +116,7 @@ public class Laser {
 			speed = speed*accel;
 		}
 		if (exploded){
-			speed = 2;
+			speed = explodedSpeed;
 			rotatedbitmap = RotateBitmap(bitmap,rotation + 90 + (float)offsetR);
 		}
 		
