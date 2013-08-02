@@ -60,7 +60,7 @@ public class Game extends Activity implements SensorEventListener, OnTouchListen
         super.onCreate(savedInstanceState);// requesting to turn the title OFF
         requestWindowFeature(Window.FEATURE_NO_TITLE);// making it full screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);// set our MainGamePanel as the View
-        
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         gamePanel = new MainGamePanel(this);
         game = new FrameLayout(this);
         

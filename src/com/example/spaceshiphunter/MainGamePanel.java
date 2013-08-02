@@ -320,6 +320,7 @@ public class MainGamePanel extends SurfaceView implements
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		Log.d(TAG, "Surface is being destroyed");
+		
 		// tell the thread to shut down and wait for it to finish
 		// this is a clean shutdown
 		boolean retry = true;
@@ -331,6 +332,50 @@ public class MainGamePanel extends SurfaceView implements
 				// try again shutting down the thread
 			}
 		}
+		laser.recycle();
+		missile.recycle();
+		missile1.recycle();
+		missile2.recycle();
+		missile3.recycle();
+		missile4.recycle();
+		leftFlash.recycle();
+		rightFlash.recycle();
+		eleftFlash.recycle();
+		erightFlash.recycle();
+		laser.recycle();
+		laser2.recycle();
+		laser3.recycle();
+		laser4.recycle();
+		booster1.recycle();
+		booster2.recycle();
+		ebooster1.recycle();
+		ebooster2.recycle();
+		marker.recycle();
+		centerMarker.recycle();
+		background1.recycle();
+		background2.recycle();
+		charge01.recycle();
+		charge02.recycle();
+		charge03.recycle();
+		charge04.recycle();
+		charge05.recycle();
+		charge06.recycle();
+		charge07.recycle();
+		charge08.recycle();
+		charge09.recycle();
+		charge10.recycle();
+		charge11.recycle();
+		charge12.recycle();
+		charge13.recycle();
+		charge14.recycle();
+		charge15.recycle();
+		glaser.recycle();
+		gle01.recycle();
+		gle02.recycle();
+		gle03.recycle();
+		gle04.recycle();
+		gle05.recycle();
+		gle06.recycle();
 		Log.d(TAG, "Thread was shut down cleanly");
 	}
 	
